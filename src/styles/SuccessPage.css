@@ -1,0 +1,33 @@
+.success-container {
+  max-width: 600px;
+  margin: 100px auto;
+  text-align: center;
+  padding: 30px;
+  border-radius: 12px;
+  background: #f0f4ff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.success-container h1 {
+  color: #3366ff;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.success-container p {
+  margin: 10px 0;
+  color: #333;
+  font-size: 1.05rem;
+}
+
+.btn-retour {
+  display: inline-block;
+  margin-top: 20px;
+  background: #3366ff;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
