@@ -25,19 +25,19 @@ const LandingPage = () => {
       nom: "Sophie M.",
       message:
         "Rapide, clair, très pro. L’audit nous a aidés à corriger 3 failles critiques dès la première semaine.",
-      societe: "CEO – WebGuard"
+      societe: "CEO "
     },
     {
       nom: "Yanis T.",
       message:
         "Une IA qui fait le travail d’un pentester expérimenté, et en 24h ? Bluffant. Rapport très complet.",
-      societe: "CTO – NovaTech"
+      societe: "CTO "
     },
     {
       nom: "Julie L.",
       message:
-        "Merci VIREON ! Votre audit nous a évité un gros incident. L’équipe a adoré le format du rapport PDF.",
-      societe: "Responsable Sécu – MondoTV"
+        "Merci Velnor ! Votre audit nous a évité un gros incident. L’équipe a adoré le format du rapport PDF.",
+      societe: "Responsable Sécu "
     }
   ];
 
@@ -45,7 +45,7 @@ const LandingPage = () => {
     <div className="landing">
       {/* NAVBAR */}
       <nav className="navbar">
-        <div className="logo">🧠 VIREON</div>
+        <div className="logo">🧠 VELNOR</div>
         <ul className="nav-links">
           <li><a href="#fonctionnement">Fonctionnement</a></li>
           <li><a href="#tarifs">Offres</a></li>
@@ -73,7 +73,7 @@ const LandingPage = () => {
 
       {/* POURQUOI NOUS */}
       <section className="why-us">
-        <h2>Pourquoi choisir VIREON ?</h2>
+        <h2>Pourquoi choisir Velnor ?</h2>
         <div className="features">
           <div><span>🧠</span><p>Analyse IA complète</p></div>
           <div><span>📄</span><p>Rapport PDF stratégique</p></div>
@@ -156,12 +156,12 @@ const LandingPage = () => {
       {/* CONTACT */}
       <section className="contact" id="contact">
         <h2>📬 Contact</h2>
-        <p>Besoin d’aide ? Écrivez-nous à <a href="mailto:assistance.vireon@outlook.fr">assistance.vireon@outlook.fr</a></p>
+        <p>Besoin d’aide ? Écrivez-nous à <a href="mailto:assistance.velnor@outlook.fr">assistance.velnor@outlook.fr</a></p>
       </section>
 
       {/* FOOTER */}
       <footer>
-        <p>© {new Date().getFullYear()} VIREON – Tous droits réservés</p>
+        <p>© {new Date().getFullYear()} Velnor – Tous droits réservés</p>
         <p><a href="/mentions-legales">Mentions légales</a></p>
       </footer>
     </div>

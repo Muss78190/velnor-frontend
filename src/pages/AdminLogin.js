@@ -7,7 +7,7 @@ const AdminLogin = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (password === "adminvireon") {
+    if (password === "adminvelnor") {
       localStorage.setItem("auth", "ok");
       navigate("/admin");
     } else {
