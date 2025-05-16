@@ -39,7 +39,7 @@ const LandingPageAudit = () => {
 
   return (
     <div className="audit-container">
-      <h1>🔍 Audit Cybersécurité IA – VIREON</h1>
+      <h1>🔍 Audit Cybersécurité IA – Velnor</h1>
       <p>Recevez un rapport PDF d’analyse IA en 48h.</p>
       <form onSubmit={handleSubmit}>
         <input type="text" name="name" placeholder="Votre nom" value={formData.name} onChange={handleChange} required />
