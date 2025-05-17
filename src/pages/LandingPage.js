@@ -2,169 +2,108 @@ import React from "react";
 import "../styles/LandingPage.css";
 
 const LandingPage = () => {
-  const faq = [
-    {
-      question: "Comment fonctionne l’audit IA ?",
-      answer:
-        "Notre IA simule un hacker éthique et détecte les failles de votre site. Elle analyse ports, CMS, fichiers sensibles, JS, headers, et plus encore."
-    },
-    {
-      question: "Que contient le rapport PDF ?",
-      answer:
-        "Un rapport classe et professionnel avec le score de sécurité, les vulnérabilités détectées, les recommandations IA, et les technologies analysées."
-    },
-    {
-      question: "Pourquoi faire un audit régulier ?",
-      answer:
-        "Même les grands sites sont vulnérables. Un audit préventif évite les fuites de données, protège vos clients et votre réputation."
-    }
-  ];
-
-  const avisClients = [
-    {
-      nom: "Sophie M.",
-      message:
-        "Rapport très pro, l’équipe a pu corriger plusieurs failles rapidement. On recommande VELNOR !",
-      societe: "CEO – WebGuard"
-    },
-    {
-      nom: "Yanis T.",
-      message:
-        "L’audit IA nous a bluffés. Délai respecté, rapport clair, interface stylée.",
-      societe: "CTO – NovaTech"
-    },
-    {
-      nom: "Julie L.",
-      message:
-        "On a reçu le rapport en moins de 24h. Super utile pour rassurer nos clients.",
-      societe: "Responsable Sécu – MondoTV"
-    }
-  ];
-
   return (
-    <div className="landing">
+    <div className="velnor-landing">
+      <div className="background-animation"></div>
 
-      {/* HEADER AVEC LOGO */}
-      <header style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '15px',
-        padding: '20px',
-        backgroundColor: '#0b0b0e',
-        borderBottom: '1px solid #1a1a1a'
-      }}>
-        <img src="/velnor-logo.png" alt="VELNOR Logo" style={{ height: '50px' }} />
-        <h1 style={{ color: '#ff0040', fontSize: '1.8rem', margin: 0 }}>VELNOR</h1>
+      {/* HEADER */}
+      <header className="velnor-header">
+        <img src="/velnor-logo.png" alt="VELNOR Logo" className="logo-banner" />
+        <h1 className="site-title">VELNOR</h1>
+        <nav>
+          <a href="#fonctionnement">Fonctionnement</a>
+          <a href="#offres">Offres</a>
+          <a href="#temoignages">Témoignages</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+          <a href="/admin-login" className="admin-button">Admin</a>
+        </nav>
       </header>
-
-      {/* NAVBAR */}
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><a href="#fonctionnement">Fonctionnement</a></li>
-          <li><a href="#tarifs">Offres</a></li>
-          <li><a href="#avis">Témoignages</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a href="/admin-login" className="cta-nav">Admin</a>
-      </nav>
 
       {/* HERO */}
-      <header className="hero">
-        <div className="hero-text">
-          <h1>Audit IA Cybersécurité Ultra-Puissant</h1>
-          <p>
-            VELNOR détecte toutes les failles de votre site web comme un expert pentester. Rapport PDF livré sous 48h ou 24h.
-          </p>
-          <a href="#tarifs" className="btn-main">🚀 Je veux un audit</a>
-        </div>
-      </header>
-
-      {/* POURQUOI NOUS */}
-      <section className="why-us">
-        <h2>Pourquoi choisir VELNOR ?</h2>
-        <div className="features">
-          <div><span>🤖</span><p>Analyse IA avancée</p></div>
-          <div><span>📄</span><p>Rapport PDF stratégique</p></div>
-          <div><span>⚡</span><p>Livraison express</p></div>
-          <div><span>🔐</span><p>Badge sécurité offert</p></div>
-        </div>
+      <section className="hero-section">
+        <h2>🔐 L’Audit IA le plus avancé du marché</h2>
+        <p>Notre intelligence artificielle analyse toutes les failles de votre site, génère un rapport PDF professionnel et stratégique livré en 24h ou 48h.</p>
+        <a href="#offres" className="cta-main">🚀 Je veux un audit IA</a>
       </section>
 
-      {/* FONCTIONNEMENT */}
-      <section id="fonctionnement">
-        <h2>Comment ça marche ?</h2>
-        <div className="steps">
-          <div><h3>1</h3><p>Vous commandez votre audit</p></div>
-          <div><h3>2</h3><p>L’IA scanne votre site</p></div>
-          <div><h3>3</h3><p>Vous recevez le rapport PDF</p></div>
+      {/* POURQUOI VELNOR */}
+      <section className="features-section" id="fonctionnement">
+        <h3>Pourquoi choisir VELNOR ?</h3>
+        <div className="features">
+          <div><span>🤖</span><p>Audit IA ultra-précis</p></div>
+          <div><span>⚡</span><p>Livraison 24h ou 48h</p></div>
+          <div><span>📄</span><p>Rapport PDF stratégique</p></div>
+          <div><span>🎖</span><p>Badge Sécurité Inclus</p></div>
         </div>
       </section>
 
       {/* OFFRES */}
-      <section id="tarifs">
-        <h2>Nos Offres</h2>
-        <div className="pricing-cards">
-          <div className="offer-card">
-            <h3>Audit IA – 48h</h3>
-            <h2>499 € HT</h2>
+      <section className="offers-section" id="offres">
+        <h3>Nos Offres</h3>
+        <div className="offers">
+          <div className="offer">
+            <h4>Audit IA – 48h</h4>
+            <p className="price">499 € HT</p>
             <ul>
-              <li>✅ Rapport complet</li>
-              <li>✅ Score & Recommandations</li>
-              <li>⏱ Livraison en 48h</li>
+              <li>Rapport complet PDF</li>
+              <li>Score de sécurité IA</li>
+              <li>Recommandations stratégiques</li>
+              <li>Livraison en 48h</li>
             </ul>
-            <a href="/paiement-48h" className="btn-main">Je commande</a>
+            <a href="/paiement-48h" className="btn-offer">Commander</a>
           </div>
-          <div className="offer-card">
-            <h3>Audit Express – 24h</h3>
-            <h2>699 € HT</h2>
+          <div className="offer">
+            <h4>Audit Express – 24h</h4>
+            <p className="price">699 € HT</p>
             <ul>
-              <li>🚀 Traitement prioritaire</li>
-              <li>✅ Rapport + Badge</li>
-              <li>⚡ Livraison en 24h</li>
+              <li>Traitement prioritaire</li>
+              <li>Rapport PDF complet + Badge</li>
+              <li>Livraison en 24h</li>
             </ul>
-            <a href="/paiement-24h" className="btn-main">Je commande</a>
+            <a href="/paiement-24h" className="btn-offer">Commander</a>
           </div>
         </div>
       </section>
 
-      {/* AVIS */}
-      <section id="avis">
-        <h2>Témoignages</h2>
-        <div className="testimonial-cards">
-          {avisClients.map((avis, i) => (
-            <div key={i} className="testimonial">
-              <p>“{avis.message}”</p>
-              <strong>{avis.nom}</strong>
-              <span>{avis.societe}</span>
-            </div>
-          ))}
+      {/* TEMOIGNAGES */}
+      <section className="testimonials-section" id="temoignages">
+        <h3>Témoignages Clients</h3>
+        <div className="testimonials">
+          <blockquote>
+            <p>“VELNOR a trouvé 6 failles critiques en moins de 48h. On a pu corriger tout de suite.”</p>
+            <footer>— Sophie, WebGuard</footer>
+          </blockquote>
+          <blockquote>
+            <p>“Le rapport est classe, utile, et précis. L’IA nous a bluffés.”</p>
+            <footer>— Yanis, CTO NovaTech</footer>
+          </blockquote>
         </div>
       </section>
 
       {/* FAQ */}
-      <section id="faq">
-        <h2>FAQ – Questions Fréquentes</h2>
-        <div className="faq-list">
-          {faq.map((item, i) => (
-            <div key={i} className="faq-item">
-              <h4>{item.question}</h4>
-              <p>{item.answer}</p>
-            </div>
-          ))}
+      <section className="faq-section" id="faq">
+        <h3>FAQ</h3>
+        <div className="faq-item">
+          <h4>Quels types de failles l’IA détecte ?</h4>
+          <p>Ports, fichiers sensibles, CMS, JS, headers, chemins exposés et +.</p>
+        </div>
+        <div className="faq-item">
+          <h4>Est-ce que le rapport est compréhensible ?</h4>
+          <p>Oui. Il est clair, structuré, illustré et accessible même aux non-techs.</p>
         </div>
       </section>
 
       {/* CONTACT */}
-      <section className="contact" id="contact">
-        <h2>Contact</h2>
-        <p>Une question ? Écrivez-nous à <a href="mailto:contact@velnor.fr">contact@velnor.fr</a></p>
+      <section className="contact-section" id="contact">
+        <h3>Une question ?</h3>
+        <p>Écrivez-nous à <a href="mailto:contact@velnor.fr">contact@velnor.fr</a></p>
       </section>
 
       {/* FOOTER */}
       <footer>
-        <p>© {new Date().getFullYear()} VELNOR – Tous droits réservés</p>
-        <p><a href="/mentions-legales">Mentions légales</a></p>
+        <p>© {new Date().getFullYear()} VELNOR — Tous droits réservés</p>
+        <a href="/mentions-legales">Mentions légales</a>
       </footer>
     </div>
   );
