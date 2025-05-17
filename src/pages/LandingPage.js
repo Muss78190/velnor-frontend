@@ -7,8 +7,10 @@ const LandingPage = () => {
       <div className="animated-bg"></div>
 
       <header className="velnor-header">
-        <img src="/velnor-logo.png" alt="VELNOR Logo" className="logo-banner" />
-        <h1 className="site-title">VELNOR</h1>
+        <div className="header-left">
+          <img src="/velnor-logo.png" alt="VELNOR Logo" className="logo-banner" />
+          <h1 className="site-title">VELNOR</h1>
+        </div>
         <nav>
           <a href="#fonctionnement">Fonctionnement</a>
           <a href="#offres">Offres</a>
@@ -20,9 +22,11 @@ const LandingPage = () => {
       </header>
 
       <section className="hero-section">
-        <h2>🔐 L’Audit IA le plus avancé du marché</h2>
-        <p>Notre intelligence artificielle détecte toutes les failles, génère un rapport PDF professionnel et stratégique livré en 24h ou 48h.</p>
-        <a href="#offres" className="cta-main">🚀 Je veux un audit IA</a>
+        <h2 className="hero-title">Audit IA Cybersécurité<br />Ultra-Puissant</h2>
+        <p className="hero-subtitle">
+          VELNOR détecte toutes les failles de votre site web comme un expert pentester. Rapport PDF livré sous 48h ou 24h.
+        </p>
+        <a href="#offres" className="cta-main">🧠 Je veux un audit</a>
       </section>
 
       <section className="features-section" id="fonctionnement">
@@ -89,7 +93,7 @@ const LandingPage = () => {
 
       <section className="contact-section" id="contact">
         <h3>Une question ?</h3>
-        <p>Écrivez-nous à <a href="mailto:contact@velnor.fr">contact@velnor.fr</a></p>
+        <p>Écrivez-nous à <a href="mailto:assistance.velnor@outlook.fr">assistance.velnor@outlook.fr</a></p>
       </section>
 
       <footer>
