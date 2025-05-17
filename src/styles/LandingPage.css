@@ -1,114 +1,145 @@
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background-color: #0a0a0a;
-  color: #fff;
-}
-
-.velnor-landing {
-  position: relative;
-  overflow-x: hidden;
-}
-
-.background-animation {
+/* Arrière-plan animé */
+.animated-bg {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 0, 100, 0.1), transparent),
-              radial-gradient(circle at 80% 80%, rgba(104, 0, 255, 0.15), transparent);
+  background: linear-gradient(135deg, #0d0d0d, #1a001a, #330033, #1a0000);
+  background-size: 400% 400%;
+  animation: bgAnim 20s ease infinite;
   z-index: -1;
-  animation: moveBg 12s infinite alternate;
 }
 
-@keyframes moveBg {
-  0% { background-position: 0 0, 100% 100%; }
-  100% { background-position: 100% 0, 0 100%; }
+@keyframes bgAnim {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* Général */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  background-color: #000;
+}
+
+/* Structure principale */
+.velnor-landing {
+  position: relative;
+  padding: 0;
+}
+
+/* HEADER */
 .velnor-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 25px 50px;
-  background: #0f0f0f;
-  border-bottom: 1px solid #222;
+  justify-content: space-between;
+  padding: 20px 50px;
+  background: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid #333;
 }
 
 .logo-banner {
-  height: 48px;
-  margin-right: 15px;
+  height: 45px;
 }
 
 .site-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #ff0066;
-  margin: 0;
+  color: #ff0055;
+  margin-left: 15px;
 }
 
-nav a {
-  color: #fff;
+.velnor-header nav a {
+  margin: 0 12px;
   text-decoration: none;
-  margin: 0 15px;
+  color: #fff;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 
-nav a:hover {
-  color: #ff0066;
+.velnor-header nav a:hover {
+  color: #ff0077;
 }
 
 .admin-button {
-  background: #ff0066;
-  padding: 8px 16px;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
+  background: #ff0055;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: #fff;
   text-decoration: none;
-  margin-left: 30px;
+  font-weight: bold;
+  margin-left: 20px;
 }
 
+/* HERO */
 .hero-section {
   text-align: center;
-  padding: 100px 30px;
-  background: linear-gradient(145deg, #1a001a, #0a001a);
+  padding: 100px 20px 80px;
 }
 
 .hero-section h2 {
   font-size: 2.5rem;
   color: #ff0066;
+  margin-bottom: 20px;
 }
 
 .hero-section p {
-  font-size: 1.2rem;
-  margin: 20px auto;
-  max-width: 700px;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #ccc;
+  max-width: 800px;
+  margin: 0 auto 40px;
 }
 
 .cta-main {
-  margin-top: 30px;
   display: inline-block;
-  padding: 12px 24px;
-  font-weight: bold;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #ff0066, #9900ff);
-  color: white;
+  background: linear-gradient(90deg, #ff0055, #9900ff);
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-size: 1rem;
   text-decoration: none;
-  transition: transform 0.3s;
+  font-weight: bold;
+  transition: transform 0.2s ease;
 }
 
 .cta-main:hover {
   transform: scale(1.05);
 }
 
-.features-section, .offers-section, .testimonials-section, .faq-section, .contact-section {
-  padding: 80px 40px;
+/* SECTIONS */
+.features-section, .offers-section, .testimonials-section,
+.faq-section, .contact-section {
+  padding: 60px 30px;
   text-align: center;
-  background-color: #0b0b0b;
 }
 
-.features, .offers {
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.features div {
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.features div span {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* OFFERS */
+.offers {
   display: flex;
   justify-content: center;
   gap: 40px;
@@ -116,64 +147,88 @@ nav a:hover {
   margin-top: 30px;
 }
 
-.features div, .offer {
-  background: #131313;
-  padding: 25px;
+.offer {
+  background: #1a1a1a;
+  padding: 30px;
   border-radius: 12px;
-  width: 260px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 0 10px #550055;
 }
 
-.offer .price {
-  font-size: 1.5rem;
-  color: #ff0066;
-  margin: 10px 0;
+.offer h4 {
+  color: #ff0077;
+}
+
+.price {
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 15px 0;
 }
 
 .offer ul {
   list-style: none;
   padding: 0;
-  margin: 20px 0;
-  line-height: 1.8;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.offer li {
+  margin-bottom: 8px;
 }
 
 .btn-offer {
-  background: #ff0066;
+  background: linear-gradient(90deg, #ff0055, #9900ff);
+  padding: 12px 24px;
   color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
   text-decoration: none;
-  display: inline-block;
-  margin-top: 10px;
+  border-radius: 25px;
+  font-weight: bold;
 }
 
+/* TESTIMONIALS */
 .testimonials blockquote {
-  background: #141414;
-  padding: 20px;
-  border-left: 5px solid #ff0066;
-  margin: 20px;
-  border-radius: 10px;
-}
-
-.faq-item {
   background: #1a1a1a;
   padding: 20px;
+  margin: 20px auto;
   border-radius: 10px;
-  margin-bottom: 20px;
-  text-align: left;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-footer {
-  padding: 30px;
-  background-color: #0f0f0f;
-  text-align: center;
-  color: #777;
-  border-top: 1px solid #222;
-}
-
-footer a {
+  width: 80%;
+  max-width: 600px;
+  font-style: italic;
   color: #ccc;
-  text-decoration: underline;
+}
+
+.testimonials footer {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* FAQ */
+.faq-item {
+  background: #141414;
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 700px;
+  border-radius: 8px;
+  color: #ccc;
+}
+
+.faq-item h4 {
+  color: #ff0099;
+}
+
+/* Contact */
+.contact-section a {
+  color: #ff66cc;
+  font-weight: bold;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px;
+  font-size: 0.9rem;
+  color: #aaa;
 }
