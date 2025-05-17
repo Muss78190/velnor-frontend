@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/LandingPage.css";
+import { FaRocket, FaShieldAlt, FaBrain, FaClock } from "react-icons/fa";
 
 const LandingPage = () => {
+  useEffect(() => {
+    const reveals = document.querySelectorAll(".reveal");
+    const onScroll = () => {
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        } else {
+          reveals[i].classList.remove("active");
+        }
+      }
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="velnor-landing">
       <div className="animated-bg"></div>
@@ -24,22 +43,22 @@ const LandingPage = () => {
       <section className="hero-section">
         <h2 className="hero-title">Audit IA Cybersécurité<br />Ultra-Puissant</h2>
         <p className="hero-subtitle">
-          VELNOR détecte toutes les failles de votre site web comme un expert pentester. Rapport PDF livré sous 48h ou 24h.
+          Entrez dans une nouvelle ère. VELNOR détecte toutes les failles critiques de votre site web grâce à une IA d’élite. Rapport livré sous 24h ou 48h.
         </p>
-        <a href="#offres" className="cta-main">🧠 Je veux un audit</a>
+        <a href="#offres" className="cta-main">🚀 Je veux un audit IA</a>
       </section>
 
-      <section className="features-section" id="fonctionnement">
+      <section className="features-section reveal" id="fonctionnement">
         <h3>Pourquoi choisir VELNOR ?</h3>
         <div className="features">
-          <div><span>🤖</span><p>Analyse IA ultra-puissante</p></div>
-          <div><span>⚡</span><p>Livraison express 24h/48h</p></div>
-          <div><span>📄</span><p>Rapport PDF stratégique</p></div>
-          <div><span>🎖</span><p>Badge de sécurité offert</p></div>
+          <div><FaBrain /><p>IA Évolutive Ultra-Précise</p></div>
+          <div><FaClock /><p>Rapport livré en 24h ou 48h</p></div>
+          <div><FaShieldAlt /><p>Badge Sécurité Offert</p></div>
+          <div><FaRocket /><p>Design & Rapport Premium</p></div>
         </div>
       </section>
 
-      <section className="offers-section" id="offres">
+      <section className="offers-section reveal" id="offres">
         <h3>Nos Offres</h3>
         <div className="offers">
           <div className="offer">
@@ -65,35 +84,35 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="testimonials-section" id="temoignages">
-        <h3>Témoignages Clients</h3>
+      <section className="testimonials-section reveal" id="temoignages">
+        <h3>Ils nous ont fait confiance</h3>
         <div className="testimonials">
           <blockquote>
-            <p>“VELNOR a repéré 7 failles critiques. Rapport clair, livraison rapide.”</p>
+            <p>“VELNOR a identifié plusieurs failles critiques. Rapport clair, livrable rapide, top qualité.”</p>
             <footer>— Sophie, WebGuard</footer>
           </blockquote>
           <blockquote>
-            <p>“Le rapport est professionnel, utile et bien présenté. IA très efficace.”</p>
+            <p>“Le rapport était visuellement incroyable. L'IA a même trouvé des failles que je ne connaissais pas.”</p>
             <footer>— Yanis, CTO NovaTech</footer>
           </blockquote>
         </div>
       </section>
 
-      <section className="faq-section" id="faq">
+      <section className="faq-section reveal" id="faq">
         <h3>FAQ</h3>
         <div className="faq-item">
           <h4>Quels types de failles sont détectées ?</h4>
-          <p>Ports ouverts, fichiers sensibles, CMS, JS, headers, chemins vulnérables et +.</p>
+          <p>Ports ouverts, CMS vulnérables, headers, fichiers JS, chemins sensibles, failles CVE, etc.</p>
         </div>
         <div className="faq-item">
-          <h4>Le rapport est-il compréhensible ?</h4>
-          <p>Oui, il est clair, bien structuré et accessible même aux non-techniciens.</p>
+          <h4>À qui s’adresse ce service ?</h4>
+          <p>À toute entreprise ou entrepreneur souhaitant sécuriser son site web sans expertise technique.</p>
         </div>
       </section>
 
-      <section className="contact-section" id="contact">
+      <section className="contact-section reveal" id="contact">
         <h3>Une question ?</h3>
-        <p>Écrivez-nous à <a href="mailto:assistance.velnor@outlook.fr">assistance.velnor@outlook.fr</a></p>
+        <p>Écrivez-nous à <a href="mailto:contact@velnor.fr">contact@velnor.fr</a></p>
       </section>
 
       <footer>
