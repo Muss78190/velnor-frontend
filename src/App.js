@@ -12,13 +12,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/paiement-48h" element={<Paiement48h />} />
         <Route path="/paiement-24h" element={<Paiement24h />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminPayments />} />
         <Route path="/success" element={<Success />} />
+        <Route path="/mentions-legales" element={<MentionsLegales />} />
       </Routes>
     </Router>
   );
