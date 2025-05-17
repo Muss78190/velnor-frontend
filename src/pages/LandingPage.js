@@ -4,6 +4,7 @@ import "../styles/LandingPage.css";
 const LandingPage = () => {
   return (
     <div className="velnor-landing">
+      {/* Animation de fond */}
       <div className="background-animation"></div>
 
       {/* HEADER */}
