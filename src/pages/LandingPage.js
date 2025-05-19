@@ -26,10 +26,7 @@ const LandingPage = () => {
       <div className="animated-bg"></div>
 
       <header className="velnor-header">
-        <div className="header-left">
-          <img src="/velnor-logo.png" alt="VELNOR Logo" className="logo-banner" />
-          <h1 className="site-title">VELNOR</h1>
-        </div>
+        <h1 className="site-title">VELNOR</h1>
         <nav>
           <a href="#fonctionnement">Fonctionnement</a>
           <a href="#fonctionnalites">Fonctionnalités</a>
@@ -37,6 +34,7 @@ const LandingPage = () => {
           <a href="#temoignages">Avis</a>
           <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
+          <a href="/admin-login" className="admin-button">Admin</a>
         </nav>
       </header>
 
@@ -137,7 +135,7 @@ const LandingPage = () => {
 
       <section className="contact-section reveal" id="contact">
         <h3>Contact</h3>
-        <p>Une question ? Écrivez-nous à <a href="mailto:contact@velnor.fr">contact@velnor.fr</a></p>
+        <p>Une question ? Écrivez-nous à <a href="mailto:assistance.velnor@outlook.fr">assistance.velnor@outlook.fr</a></p>
       </section>
 
       <footer>
