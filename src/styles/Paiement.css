@@ -1,52 +1,69 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
 
-.paiement-page {
-  max-width: 600px;
-  margin: 100px auto;
+.paiement-container {
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.paiement-box {
+  background: #111;
   padding: 40px;
-  background-color: #111;
-  border-radius: 15px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px #9900ff;
+  max-width: 450px;
+  width: 100%;
   text-align: center;
-  color: #fff;
-  box-shadow: 0 0 20px #ff00cc;
 }
 
-.paiement-page h1 {
+.paiement-box h1 {
   font-size: 2rem;
-  margin-bottom: 10px;
-  color: #ff66cc;
-}
-
-.paiement-page .price {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #fff;
   margin-bottom: 20px;
+  color: #ff33cc;
 }
 
-.paiement-page ul {
+.paiement-box p.price {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.paiement-box ul {
   list-style: none;
   padding: 0;
+  text-align: left;
+  color: #ccc;
   margin-bottom: 30px;
 }
 
-.paiement-page li {
+.paiement-box ul li {
+  margin-bottom: 12px;
   font-size: 1rem;
-  margin: 10px 0;
 }
 
-.paiement-page button {
-  background: linear-gradient(90deg, #ff0055, #9900ff);
-  border: none;
-  padding: 14px 30px;
-  font-size: 1rem;
+button {
+  padding: 14px 28px;
+  background: linear-gradient(90deg, #ff0066, #9900ff);
   color: white;
-  border-radius: 30px;
   font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
   cursor: pointer;
-  box-shadow: 0 0 15px #ff00cc;
-  transition: transform 0.2s ease;
+  box-shadow: 0 0 18px #ff33cc;
+  transition: transform 0.3s ease;
 }
 
-.paiement-page button:hover {
+button:hover {
   transform: scale(1.05);
 }
