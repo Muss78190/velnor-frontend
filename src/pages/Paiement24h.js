@@ -1,39 +1,35 @@
 import React from "react";
-import "../styles/Paiement.css";
 
 const Paiement24h = () => {
   const handlePayment = async () => {
     try {
-      const res = await fetch("https://your-backend-domain.com/create-checkout-session", {
+      const response = await fetch("https://velnor-backend.onrender.com/create-checkout-session/24h", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ price_id: "price_1RPNODIbmxThmcuLyqMDzhWG" }),
       });
-
-      const data = await res.json();
+      const data = await response.json();
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert("Erreur de redirection vers Stripe.");
+        alert("Erreur de paiement.");
       }
     } catch (error) {
-      console.error("Erreur paiement :", error);
-      alert("Erreur de paiement.");
+      alert("Erreur serveur.");
+      console.error(error);
     }
   };
 
   return (
-    <div className="paiement-page">
-      <h1>Audit Express IA – 24h</h1>
+    <div className="payment-container">
+      <h2>Audit Express IA – 24h</h2>
       <p className="price">699 € HT</p>
       <ul>
-        <li>⏱️ Livraison garantie sous 24h</li>
+        <li>🚀 Livraison garantie sous 24h</li>
         <li>🧠 Rapport PDF + Badge de Sécurité</li>
         <li>📩 Envoi par email automatisé</li>
       </ul>
-      <button onClick={handlePayment}>Payer avec Stripe</button>
+      <button className="btn-pay" onClick={handlePayment}>
+        Payer avec Stripe
+      </button>
     </div>
   );
 };
