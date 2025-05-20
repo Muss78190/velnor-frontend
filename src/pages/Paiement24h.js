@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/paiement.css";
 
 const Paiement24h = () => {
   const handlePayment = async () => {
