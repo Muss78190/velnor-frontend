@@ -1,0 +1,15 @@
+{
+  "name": "VELNOR",
+  "short_name": "VELNOR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0c1c60",
+  "icons": [
+    {
+      "src": "/velnor-logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
