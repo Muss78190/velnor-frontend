@@ -6,6 +6,7 @@ import SuccessPage from "./pages/success";
 import CancelPage from "./pages/cancel";
 import AdminPayments from "./pages/AdminPayments";
 import MentionsLegales from "./pages/MentionsLegales";
+import LandingPageAudit from "./pages/LandingPageAudit";
 
 function App() {
   return (
