@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import LandingPageAudit from "./pages/LandingPageAudit";
 import Paiement24h from "./pages/paiement-24h";
-import Paiement48h from "./pages/paiement48h";
+import Paiement48h from "./pages/paiement-48h";
 import SuccessPage from "./pages/success";
 import CancelPage from "./pages/cancel";
 import AdminPayments from "./pages/AdminPayments";
