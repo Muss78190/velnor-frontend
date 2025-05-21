@@ -7,6 +7,8 @@ const AdminPayments = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const API_BASE = "https://velnor-backend.onrender.com"; // ✅ CORRECT BACKEND URL
+
   const lancerAudit = async () => {
     if (!url) return;
     setLoading(true);
@@ -14,7 +16,7 @@ const AdminPayments = () => {
     setResult(null);
 
     try {
-      const res = await fetch("http://localhost:8000/scan", {
+      const res = await fetch(`${API_BASE}/scan`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
@@ -66,7 +68,7 @@ const AdminPayments = () => {
           </ul>
 
           <a
-            href={`http://localhost:8000${result.pdf}`}
+            href={`${API_BASE}${result.pdf}`}
             target="_blank"
             rel="noopener noreferrer"
             className="admin-btn"
