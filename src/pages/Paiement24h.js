@@ -1,3 +1,4 @@
+
 import React from "react";
 import "../styles/Paiement.css";
 
@@ -7,17 +8,15 @@ const Paiement24h = () => {
       const response = await fetch("https://velnor-backend.onrender.com/create-checkout-session-24h", {
         method: "POST",
       });
-
       const data = await response.json();
-
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert("Erreur de paiement.");
+        alert("Erreur lors de la redirection vers Stripe.");
       }
     } catch (error) {
-      console.error("Erreur:", error);
       alert("Erreur de connexion au serveur.");
+      console.error(error);
     }
   };
 
@@ -28,7 +27,7 @@ const Paiement24h = () => {
         <p className="prix">699 € HT</p>
         <ul className="liste-options">
           <li>⚡ Traitement prioritaire</li>
-          <li>📄 Rapport PDF + Badge de Sécurité</li>
+          <li>📄 Rapport PDF + Badge Sécurité</li>
           <li>📬 Livraison garantie sous 24h</li>
         </ul>
         <button className="btn-stripe" onClick={handlePaiement}>

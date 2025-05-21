@@ -1,3 +1,4 @@
+
 import React from "react";
 import "../styles/Paiement.css";
 
@@ -7,17 +8,15 @@ const Paiement48h = () => {
       const response = await fetch("https://velnor-backend.onrender.com/create-checkout-session-48h", {
         method: "POST",
       });
-
       const data = await response.json();
-
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert("Erreur de paiement.");
+        alert("Erreur lors de la redirection vers Stripe.");
       }
     } catch (error) {
-      console.error("Erreur:", error);
       alert("Erreur de connexion au serveur.");
+      console.error(error);
     }
   };
 

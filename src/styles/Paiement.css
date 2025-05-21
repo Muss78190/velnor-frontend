@@ -1,20 +1,20 @@
+
 .paiement-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #000000;
+  background: #000;
   padding: 20px;
 }
 
 .paiement-card {
-  background: #1a1a1a;
-  border: 1px solid #330033;
-  border-radius: 15px;
-  padding: 40px 30px;
-  max-width: 450px;
+  background: #111;
+  padding: 50px 40px;
+  border-radius: 20px;
+  width: 420px;
   text-align: center;
-  box-shadow: 0 0 30px #770077;
+  box-shadow: 0 0 35px #9900ff;
 }
 
 .titre-paiement {

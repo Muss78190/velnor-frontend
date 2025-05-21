@@ -7,11 +7,15 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminPayments from "./pages/AdminPayments";
 import SuccessPage from "./pages/SuccessPage";
 import MentionsLegales from "./pages/MentionsLegales";
+import Success from "./pages/success";
+import Cancel from "./pages/cancel";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />   
         <Route path="/" element={<LandingPage />} />
         <Route path="/paiement-48h" element={<Paiement48h />} />
         <Route path="/paiement-24h" element={<Paiement24h />} />
