@@ -7,8 +7,6 @@ const AdminPayments = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const API_BASE = "https://velnor-backend.onrender.com"; // ✅ CORRECT BACKEND URL
-
   const lancerAudit = async () => {
     if (!url) return;
     setLoading(true);
@@ -16,7 +14,7 @@ const AdminPayments = () => {
     setResult(null);
 
     try {
-      const res = await fetch(`${API_BASE}/scan`, {
+      const res = await fetch("https://velnor-backend.onrender.com/scan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
@@ -37,9 +35,9 @@ const AdminPayments = () => {
 
   return (
     <div className="admin-container">
-      <h1>🧠 Lancer un audit IA</h1>
+      <h1 className="admin-title">🧠 Audit IA • VELNOR</h1>
 
-      <div className="admin-audit-box">
+      <div className="admin-input-box">
         <input
           type="text"
           placeholder="https://monsite.com"
@@ -55,26 +53,46 @@ const AdminPayments = () => {
 
       {result && (
         <div className="admin-result">
-          <h2>✅ Audit terminé</h2>
-          <p><strong>URL :</strong> {result.url}</p>
-          <p><strong>Score :</strong> {result.score}/100</p>
-          <p><strong>Résumé :</strong> {result.resume}</p>
+          <div className="admin-section">
+            <h2>✅ Résultat d’audit</h2>
+            <p><strong>🌐 URL :</strong> {result.url}</p>
+            <p><strong>🔒 Score :</strong> {result.score}/100</p>
+            <p><strong>📄 Résumé :</strong> {result.resume}</p>
+          </div>
 
-          <h3>💡 Recommandations :</h3>
-          <ul>
-            {result.recommendations.map((r, i) => (
-              <li key={i}>{r}</li>
-            ))}
-          </ul>
+          <div className="admin-section">
+            <h3>⚠️ Anomalies détectées :</h3>
+            {result.anomalies && result.anomalies.length > 0 ? (
+              <ul>
+                {result.anomalies.map((a, i) => (
+                  <li key={i}>{a}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>Aucune anomalie détectée.</p>
+            )}
+          </div>
+
+          <div className="admin-section">
+            <h3>💡 Recommandations IA :</h3>
+            {result.recommendations && result.recommendations.length > 0 ? (
+              <ul>
+                {result.recommendations.map((r, i) => (
+                  <li key={i}>{r}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>Aucune recommandation disponible.</p>
+            )}
+          </div>
 
           <a
-            href={`${API_BASE}${result.pdf}`}
+            href={`https://velnor-backend.onrender.com${result.pdf}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="admin-btn"
-            style={{ marginTop: "10px", display: "inline-block" }}
+            className="admin-download"
           >
-            📄 Télécharger le rapport PDF
+            📥 Télécharger le rapport PDF
           </a>
         </div>
       )}
