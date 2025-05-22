@@ -1,17 +1,52 @@
-import React from "react";
-import "../styles/LandingPage.css";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+// src/pages/LandingPage.js
+import React, { useEffect, useRef } from 'react';
+import '../styles/LandingPage.css';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import GalaxyCanvas from '../components/GalaxyCanvas';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const sectionsRef = useRef([]);
+
+  useEffect(() => {
+    sectionsRef.current.forEach((section) => {
+      gsap.fromTo(
+        section,
+        { autoAlpha: 0, y: 50 },
+        {
+          duration: 1,
+          autoAlpha: 1,
+          y: 0,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    });
+  }, []);
+
+  const setSectionRef = (el, idx) => {
+    sectionsRef.current[idx] = el;
+  };
 
   return (
     <div className="velnor-landing">
-      <div className="galaxy-background" />
+      {/* Fond 3D galaxie */}
+      <GalaxyCanvas />
 
-      {/* SECTION 1 - HERO */}
-      <section className="section hero">
+      {/* --- HERO --- */}
+      <section
+        className="section hero"
+        ref={(el) => setSectionRef(el, 0)}
+      >
         <motion.div
           className="hero-content"
           initial={{ opacity: 0, y: 50 }}
@@ -19,19 +54,27 @@ const LandingPage = () => {
           transition={{ duration: 1 }}
         >
           <h1>🛡️ VELNOR</h1>
-          <h2>L’IA de cybersécurité<br /><span>venue d'une autre dimension</span></h2>
+          <h2>
+            L’IA de cybersécurité<br />
+            <span>venue d'une autre dimension</span>
+          </h2>
           <p>
-            Auditez votre site web grâce à une intelligence artificielle conçue pour détecter les failles critiques, 
-            générer des rapports stratégiques et vous livrer un badge de sécurité en 24h ou 48h.
+            Auditez votre site web grâce à une intelligence artificielle conçue pour détecter 
+            les failles critiques, générer des rapports stratégiques et vous livrer un badge 
+            de sécurité en 24h ou 48h.
           </p>
-          <button onClick={() => navigate("/paiement-24h")}>
+          <button onClick={() => navigate('/paiement-24h')}>
             🚀 Lancer un audit IA
           </button>
         </motion.div>
       </section>
 
-      {/* SECTION 2 - COMMENT ÇA MARCHE */}
-      <section className="section how-it-works" id="fonctionnement">
+      {/* --- COMMENT ÇA MARCHE --- */}
+      <section
+        className="section how-it-works"
+        id="fonctionnement"
+        ref={(el) => setSectionRef(el, 1)}
+      >
         <motion.h3
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -46,8 +89,12 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* SECTION 3 - TECHNOLOGIE */}
-      <section className="section tech" id="technologie">
+      {/* --- TECHNOLOGIE --- */}
+      <section
+        className="section tech"
+        id="technologie"
+        ref={(el) => setSectionRef(el, 2)}
+      >
         <motion.h3
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -57,14 +104,18 @@ const LandingPage = () => {
         </motion.h3>
         <ul className="features">
           <li>✅ Détection de XSS, SQLi, .env, ports ouverts</li>
-          <li>📄 Rapport PDF professionnel généré par APEX™</li>
+          <li>📄 Rapport PDF pro généré par APEX™</li>
           <li>🛡️ Score de sécurité + Badge IA certifié</li>
           <li>⚡ Livraison garantie en 24h ou 48h</li>
         </ul>
       </section>
 
-      {/* SECTION 4 - OFFRES */}
-      <section className="section pricing" id="offres">
+      {/* --- OFFRES --- */}
+      <section
+        className="section pricing"
+        id="offres"
+        ref={(el) => setSectionRef(el, 3)}
+      >
         <motion.h3
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,18 +128,18 @@ const LandingPage = () => {
             <h4>Audit IA – 48h</h4>
             <p>Rapport PDF complet, score IA, recommandations</p>
             <p className="price">499€ HT</p>
-            <button onClick={() => navigate("/paiement48h")}>Choisir</button>
+            <button onClick={() => navigate('/paiement48h')}>Choisir</button>
           </div>
           <div className="card">
             <h4>Audit Express – 24h</h4>
             <p>Analyse prioritaire, badge sécurité, livraison rapide</p>
             <p className="price">699€ HT</p>
-            <button onClick={() => navigate("/paiement-24h")}>Choisir</button>
+            <button onClick={() => navigate('/paiement-24h')}>Choisir</button>
           </div>
         </div>
       </section>
 
-      {/* SECTION 5 - FOOTER */}
+      {/* --- FOOTER --- */}
       <footer className="footer" id="footer">
         <p>© {new Date().getFullYear()} VELNOR — Propulsé par l’IA galactique</p>
         <a href="/mentions-legales">Mentions légales</a>

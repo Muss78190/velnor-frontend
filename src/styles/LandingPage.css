@@ -1,7 +1,6 @@
-/* ===== GLOBAL SETUP ===== */
+/* ===== GLOBAL ===== */
 body, html {
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
   font-family: 'Segoe UI', sans-serif;
   scroll-behavior: smooth;
   background: #050510;
@@ -11,27 +10,23 @@ body, html {
 .velnor-landing {
   position: relative;
   overflow-x: hidden;
-  z-index: 1;
 }
 
-.galaxy-background {
+/* Canvas full-screen */
+canvas {
+  display: block;
   position: fixed;
   top: 0; left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   z-index: 0;
-  background: radial-gradient(ellipse at center, #0a0a1a 0%, #050510 100%);
-  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-  opacity: 0.06;
-  pointer-events: none;
 }
 
-/* ===== SECTION BASE ===== */
+/* Section de base */
 .section {
-  padding: 100px 20px;
-  text-align: center;
   position: relative;
   z-index: 1;
+  padding: 100px 20px;
+  text-align: center;
 }
 
 .section h3 {
@@ -41,7 +36,7 @@ body, html {
   margin-bottom: 30px;
 }
 
-/* ===== HERO ===== */
+/* HERO */
 .hero {
   background: linear-gradient(to bottom, #0f0f2d, #1c0b3a);
 }
@@ -61,7 +56,6 @@ body, html {
 .hero h2 {
   font-size: 2.5rem;
   margin-top: 20px;
-  color: white;
 }
 
 .hero span {
@@ -71,17 +65,19 @@ body, html {
 
 .hero p {
   margin: 30px auto;
-  font-size: 1.2rem;
+  max-width: 700px;
   color: #ddd;
+  font-size: 1.2rem;
 }
 
 .hero button {
-  background: linear-gradient(to right, #ff00cc, #3333ff);
-  color: white;
+  margin-top: 30px;
   padding: 14px 30px;
   font-size: 1rem;
+  font-weight: bold;
   border: none;
   border-radius: 10px;
+  background: linear-gradient(to right, #ff00cc, #3333ff);
   box-shadow: 0 0 20px #ff00cc88;
   cursor: pointer;
   transition: transform 0.3s;
@@ -89,10 +85,9 @@ body, html {
 
 .hero button:hover {
   transform: scale(1.05);
-  background: linear-gradient(to right, #e600b8, #2222cc);
 }
 
-/* ===== HOW IT WORKS ===== */
+/* HOW-IT-WORKS */
 .steps {
   display: flex;
   flex-direction: column;
@@ -102,32 +97,32 @@ body, html {
 }
 
 .step {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255,255,255,0.05);
   padding: 18px;
   border-radius: 10px;
   font-size: 1.2rem;
-  box-shadow: 0 0 10px rgba(255, 0, 255, 0.1);
+  box-shadow: 0 0 10px rgba(255,0,255,0.1);
 }
 
-/* ===== TECHNOLOGIE ===== */
+/* TECHNOLOGIE */
 .features {
   list-style: none;
   padding: 0;
-  margin-top: 30px;
+  margin: 30px auto;
+  max-width: 600px;
 }
 
 .features li {
-  background: rgba(255, 255, 255, 0.04);
-  margin: 10px auto;
+  background: rgba(255,255,255,0.04);
   padding: 12px 20px;
+  margin: 10px auto;
   border-radius: 10px;
-  max-width: 600px;
-  font-size: 1.1rem;
   backdrop-filter: blur(4px);
-  box-shadow: 0 0 6px rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 6px rgba(0,255,255,0.1);
+  font-size: 1.1rem;
 }
 
-/* ===== PRICING ===== */
+/* PRICING */
 .pricing-cards {
   display: flex;
   flex-wrap: wrap;
@@ -137,18 +132,18 @@ body, html {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255,255,255,0.03);
   backdrop-filter: blur(6px);
   padding: 30px 20px;
   width: 280px;
   border-radius: 15px;
   border: 1px solid #333;
-  box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+  box-shadow: 0 0 15px rgba(255,0,255,0.2);
+  text-align: center;
 }
 
 .card h4 {
   font-size: 1.4rem;
-  color: #fff;
   margin-bottom: 10px;
 }
 
@@ -164,26 +159,26 @@ body, html {
 }
 
 .card button {
+  padding: 10px 20px;
   background: #ff00cc;
   color: white;
-  padding: 10px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
 
 .card button:hover {
   background: #e600b8;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 .footer {
-  text-align: center;
   padding: 40px 20px;
-  font-size: 0.9rem;
   background: #000;
   color: #888;
+  text-align: center;
+  font-size: 0.9rem;
   border-top: 1px solid #111;
 }
 
@@ -193,24 +188,16 @@ body, html {
   margin-left: 10px;
 }
 
-/* ===== ANIMATION ===== */
+/* ANIMATIONS */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== RESPONSIVE ===== */
+/* RESPONSIVE */
 @media screen and (max-width: 768px) {
-  .pricing-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero h1, .hero h2 {
-    font-size: 2rem;
-  }
-
-  .features li, .step {
-    font-size: 1rem;
-  }
+  .pricing-cards { flex-direction: column; }
+  .hero h1 { font-size: 2rem; }
+  .hero h2 { font-size: 1.8rem; }
+  .step, .features li { font-size: 1rem; }
 }
