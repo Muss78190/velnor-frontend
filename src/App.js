@@ -1,4 +1,8 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import ScrollToTop from "./components/ScrollToTop";
+
 import LandingPage from "./pages/LandingPage";
 import Paiement24h from "./pages/paiement-24h";
 import Paiement48h from "./pages/paiement-48h";
@@ -7,7 +11,7 @@ import CancelPage from "./pages/cancel";
 import AdminPayments from "./pages/AdminPayments";
 import MentionsLegales from "./pages/MentionsLegales";
 import LandingPageAudit from "./pages/LandingPageAudit";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 function App() {
   return (
