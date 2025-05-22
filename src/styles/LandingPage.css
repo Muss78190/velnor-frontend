@@ -1,143 +1,196 @@
-.landing-container {
-  background: #0b0b0e;
-  color: white;
+/* Fond galaxie animé */
+.landing {
   font-family: 'Segoe UI', sans-serif;
+  color: white;
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, #050509, #0a0a1a);
+  scroll-behavior: smooth;
+  min-height: 100vh;
 }
 
+/* Fond étoilé en overlay */
+.stars-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* HEADER */
 .landing-header {
+  z-index: 10;
+  position: relative;
+  padding: 25px 40px;
   display: flex;
   justify-content: space-between;
-  padding: 20px 40px;
-  background: black;
   align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid #222;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: white;
+  color: #ff00cc;
+  text-shadow: 0 0 10px #ff00cc88;
 }
 
 nav a {
   margin: 0 15px;
-  color: white;
+  color: #fff;
   text-decoration: none;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #ff00cc;
 }
 
 .admin-btn {
   background: transparent;
   color: #fff;
   border: 1px solid #fff;
-  padding: 8px 12px;
+  padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.landing-hero {
-  padding: 80px 20px;
+/* HERO SECTION */
+.hero {
+  z-index: 1;
+  position: relative;
+  padding: 120px 20px 100px;
   text-align: center;
-  background: linear-gradient(to bottom, #0b0b0e, #1a1a1f);
+  background: linear-gradient(to bottom, #0a0a1f, #101024);
 }
 
-.landing-hero h2 {
-  font-size: 3.5rem;
+.hero h2 {
+  font-size: 3.2rem;
   color: #ff00cc;
   text-shadow: 0 0 20px #ff00cc66;
 }
 
-.landing-hero span {
-  display: block;
-  color: #ff00cc;
-}
-
-.landing-hero p {
-  max-width: 700px;
+.hero p {
+  max-width: 720px;
   margin: 20px auto;
+  font-size: 1.2rem;
   color: #ccc;
-  font-size: 1.1rem;
 }
 
-.landing-hero button {
+.hero button {
   margin-top: 30px;
-  padding: 14px 30px;
+  padding: 14px 34px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
   background: linear-gradient(to right, #ff00cc, #3333ff);
   color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 10px;
   box-shadow: 0 0 20px #ff00cc88;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-.landing-section {
-  padding: 60px 20px;
+.hero button:hover {
+  background: linear-gradient(to right, #e600b8, #2222cc);
+}
+
+/* SECTIONS COMMUNES */
+.scroll-section {
+  padding: 80px 20px;
   text-align: center;
+  z-index: 1;
+  position: relative;
 }
 
-.landing-section h3 {
-  font-size: 1.8rem;
-  color: #ff00cc;
-  margin-bottom: 20px;
+.scroll-section h3 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #00e5ff;
+  text-shadow: 0 0 10px #00e5ff99;
 }
 
-.landing-section ol,
-.landing-section ul {
+.scroll-section ol,
+.scroll-section ul {
   list-style: none;
   padding: 0;
+  max-width: 700px;
+  margin: auto;
 }
 
-.landing-section li {
-  margin: 10px 0;
-  font-size: 1.1rem;
-  color: #ccc;
+.scroll-section li {
+  font-size: 1.2rem;
+  margin: 15px 0;
+  color: #ddd;
 }
 
+/* OFFRES */
 .offres {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
+  gap: 40px;
+  margin-top: 40px;
 }
 
-.offre {
-  border: 1px solid #444;
-  padding: 30px;
-  border-radius: 12px;
-  background-color: #121212;
+.offre-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+  border: 1px solid #333;
+  border-radius: 16px;
+  padding: 30px 20px;
   width: 280px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(255, 0, 204, 0.2);
 }
 
-.offre h4 {
-  color: white;
+.offre-card h4 {
+  font-size: 1.4rem;
+  color: #fff;
   margin-bottom: 10px;
 }
 
-.offre p {
+.offre-card p {
   color: #bbb;
-  margin: 5px 0;
+  margin: 8px 0;
 }
 
-.offre .prix {
-  font-size: 1.3rem;
-  color: #fff;
+.offre-card .prix {
+  font-size: 1.5rem;
+  color: #ff00cc;
   margin: 15px 0;
 }
 
-.offre button {
+.offre-card button {
   padding: 10px 20px;
   background: #ff00cc;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
+.offre-card button:hover {
+  background: #e600b8;
+}
+
+/* FOOTER */
 .landing-footer {
-  background: #000;
-  padding: 30px;
+  padding: 30px 20px;
   text-align: center;
+  background: #000;
   color: #888;
+  font-size: 0.9rem;
+  z-index: 2;
+  position: relative;
+  border-top: 1px solid #111;
 }
 
 .landing-footer a {
