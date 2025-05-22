@@ -1,169 +1,98 @@
-.audit-body {
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-  position: relative;
-  overflow-x: hidden;
-  padding: 0;
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to bottom, #050505, #0b0c1a);
+  color: #fff;
 }
 
-.galaxy-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 20% 30%, #330066, #000000 80%);
-  background-size: 400% 400%;
-  animation: galaxy 25s ease infinite;
-  z-index: -1;
-}
-
-@keyframes galaxy {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.hero-section {
-  text-align: center;
-  padding: 120px 20px 80px;
-  background: rgba(0, 0, 0, 0.7);
-  border-bottom: 1px solid #333;
-}
-
-.hero-section h1 {
-  font-size: 2.8rem;
-  color: #ff66cc;
-  text-shadow: 0 0 12px #ff33aa;
-}
-
-.hero-section p {
-  max-width: 700px;
-  margin: 20px auto;
-  font-size: 1.2rem;
-  color: #ddd;
-}
-
-.cta-btn {
-  background: linear-gradient(to right, #ff0077, #7700ff);
-  padding: 14px 30px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  text-decoration: none;
-  transition: 0.3s ease;
-}
-
-.cta-btn:hover {
-  transform: scale(1.05);
-  background: linear-gradient(to right, #ff33aa, #9900ff);
-}
-
-.section {
-  padding: 80px 30px;
+.landing-audit {
+  padding: 60px 20px;
   text-align: center;
 }
 
-.steps {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-
-.step {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px 30px;
+.hero-audit {
+  animation: fadeInUp 1.4s ease-in-out;
+  padding: 50px 20px;
   border-radius: 10px;
-  border: 1px solid #444;
-  min-width: 200px;
+  background: linear-gradient(to right, #0f0f3d, #1a0640);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
 }
 
-.features {
+.hero-audit h1 {
+  font-size: 42px;
+  color: #ff00cc;
+  text-shadow: 0 0 8px #ff00cc;
+}
+
+.hero-audit p {
+  font-size: 18px;
+  margin-top: 10px;
+  opacity: 0.85;
+}
+
+.cta-button {
+  display: inline-block;
+  margin-top: 30px;
+  background: #ff00cc;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 0 10px #ff00cc;
+  transition: 0.3s;
+}
+
+.cta-button:hover {
+  background: #e600b8;
+}
+
+.features-audit {
+  margin-top: 60px;
+}
+
+.features-audit h2,
+.faq-audit h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #00e5ff;
+}
+
+.features-audit ul {
   list-style: none;
   padding: 0;
-  margin: 30px auto;
-  max-width: 700px;
 }
 
-.features li {
-  background: rgba(255, 255, 255, 0.04);
-  margin-bottom: 12px;
-  padding: 14px;
-  border-radius: 8px;
-}
-
-.offers {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 30px;
-}
-
-.offer {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 30px;
-  border-radius: 10px;
-  width: 280px;
-  box-shadow: 0 0 10px #660066;
-  border: 1px solid #444;
-}
-
-.offer.highlight {
-  border: 2px solid #ff33aa;
-}
-
-.offer h3 {
-  color: #ff66cc;
+.features-audit li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
   margin-bottom: 10px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
 }
 
-.offer a {
-  display: inline-block;
-  margin-top: 12px;
-  background: #ff0077;
-  padding: 10px 20px;
-  border-radius: 20px;
-  color: white;
-  text-decoration: none;
+.faq-audit {
+  margin-top: 60px;
 }
 
-.offer a:hover {
-  background: #ff3399;
-}
-
-details {
-  background: rgba(255, 255, 255, 0.03);
+.faq-audit details {
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.05);
   padding: 14px 20px;
-  margin: 10px auto;
-  max-width: 700px;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
+  color: white;
 }
 
-details summary {
-  font-weight: bold;
-  color: #ff66cc;
-  margin-bottom: 8px;
-}
-
-.footer {
-  text-align: center;
-  padding: 40px 20px;
-  font-size: 0.9rem;
-  color: #aaa;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s ease;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
