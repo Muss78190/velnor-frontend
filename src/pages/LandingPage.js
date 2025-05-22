@@ -4,7 +4,7 @@ import '../styles/LandingPage.css';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import GalaxyCanvas from '../components/GalaxyCanvas';
 
 gsap.registerPlugin(ScrollTrigger);
