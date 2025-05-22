@@ -7,6 +7,7 @@ import CancelPage from "./pages/cancel";
 import AdminPayments from "./pages/AdminPayments";
 import MentionsLegales from "./pages/MentionsLegales";
 import LandingPageAudit from "./pages/LandingPageAudit";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
