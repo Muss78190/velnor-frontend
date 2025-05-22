@@ -7,36 +7,22 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="landing">
-      <div className="stars-bg" />
+    <div className="velnor-landing">
+      <div className="galaxy-background" />
 
-      <header className="landing-header">
-        <motion.h1
-          className="logo"
-          initial={{ opacity: 0, y: -30 }}
+      {/* SECTION 1 - HERO */}
+      <section className="section hero">
+        <motion.div
+          className="hero-content"
+          initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          🛡️ VELNOR
-        </motion.h1>
-        <nav>
-          <a href="#fonctionnement">Fonctionnement</a>
-          <a href="#fonctions">Fonctionnalités</a>
-          <a href="#offres">Offres</a>
-          <a href="#footer">Contact</a>
-          <button onClick={() => navigate("/admin")} className="admin-btn">Admin</button>
-        </nav>
-      </header>
-
-      <section className="hero">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 1 }}
-        >
-          <h2>IA Galactique de Cybersécurité</h2>
+          <h1>🛡️ VELNOR</h1>
+          <h2>L’IA de cybersécurité<br /><span>venue d'une autre dimension</span></h2>
           <p>
-            VELNOR audite votre site comme un satellite d’élite : détection, analyse, rapport PDF pro livré en 24h ou 48h.
+            Auditez votre site web grâce à une intelligence artificielle conçue pour détecter les failles critiques, 
+            générer des rapports stratégiques et vous livrer un badge de sécurité en 24h ou 48h.
           </p>
           <button onClick={() => navigate("/paiement-24h")}>
             🚀 Lancer un audit IA
@@ -44,38 +30,41 @@ const LandingPage = () => {
         </motion.div>
       </section>
 
-      <section className="scroll-section" id="fonctionnement">
+      {/* SECTION 2 - COMMENT ÇA MARCHE */}
+      <section className="section how-it-works" id="fonctionnement">
         <motion.h3
-          initial={{ opacity: 0, x: -40 }}
+          initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          🛠 Comment ça marche
+          🛠 Fonctionnement
         </motion.h3>
-        <ol>
-          <li>1. Vous entrez l’URL de votre site</li>
-          <li>2. L’IA VELNOR scanne et analyse les failles</li>
-          <li>3. Vous recevez un rapport PDF pro avec score et recommandations</li>
-        </ol>
+        <div className="steps">
+          <div className="step">1️⃣ Entrez l’URL de votre site</div>
+          <div className="step">2️⃣ L’IA analyse, scanne et identifie les failles</div>
+          <div className="step">3️⃣ Vous recevez un PDF stratégique en 24h ou 48h</div>
+        </div>
       </section>
 
-      <section className="scroll-section" id="fonctions">
+      {/* SECTION 3 - TECHNOLOGIE */}
+      <section className="section tech" id="technologie">
         <motion.h3
-          initial={{ opacity: 0, x: 40 }}
+          initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          🧠 Fonctionnalités Avancées
+          🧠 Technologie VELNOR
         </motion.h3>
-        <ul>
-          <li>🔍 Détection de XSS, SQLi, .env, ports ouverts</li>
-          <li>📄 Rapport PDF personnalisé généré par IA</li>
-          <li>🛡️ Badge IA & score de sécurité</li>
+        <ul className="features">
+          <li>✅ Détection de XSS, SQLi, .env, ports ouverts</li>
+          <li>📄 Rapport PDF professionnel généré par APEX™</li>
+          <li>🛡️ Score de sécurité + Badge IA certifié</li>
           <li>⚡ Livraison garantie en 24h ou 48h</li>
         </ul>
       </section>
 
-      <section className="scroll-section" id="offres">
+      {/* SECTION 4 - OFFRES */}
+      <section className="section pricing" id="offres">
         <motion.h3
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,24 +72,25 @@ const LandingPage = () => {
         >
           💼 Nos Offres
         </motion.h3>
-        <div className="offres">
-          <div className="offre-card">
+        <div className="pricing-cards">
+          <div className="card">
             <h4>Audit IA – 48h</h4>
-            <p>Audit complet + Rapport PDF pro + Score</p>
-            <p className="prix">499€ HT</p>
+            <p>Rapport PDF complet, score IA, recommandations</p>
+            <p className="price">499€ HT</p>
             <button onClick={() => navigate("/paiement48h")}>Choisir</button>
           </div>
-          <div className="offre-card">
+          <div className="card">
             <h4>Audit Express – 24h</h4>
-            <p>Audit prioritaire + Badge IA + Livraison rapide</p>
-            <p className="prix">699€ HT</p>
+            <p>Analyse prioritaire, badge sécurité, livraison rapide</p>
+            <p className="price">699€ HT</p>
             <button onClick={() => navigate("/paiement-24h")}>Choisir</button>
           </div>
         </div>
       </section>
 
-      <footer id="footer" className="landing-footer">
-        <p>© {new Date().getFullYear()} VELNOR – Tous droits réservés</p>
+      {/* SECTION 5 - FOOTER */}
+      <footer className="footer" id="footer">
+        <p>© {new Date().getFullYear()} VELNOR — Propulsé par l’IA galactique</p>
         <a href="/mentions-legales">Mentions légales</a>
       </footer>
     </div>
