@@ -1,0 +1,123 @@
+body, html, #root, .velnor-app {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  background: #0a0520;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* FOND GALAXIE */
+.galaxy-bg {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  background: radial-gradient(ellipse at 60% 40%, #1a0933 60%, #0a0520 100%);
+}
+.galaxy-bg::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.25;
+}
+
+/* NAVBAR */
+.velnor-navbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 60px 16px 60px;
+  background: rgba(12, 5, 40, 0.6);
+  backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: 10;
+  border-bottom: 1px solid #30215444;
+}
+.velnor-logo {
+  font-size: 2rem; font-weight: 700;
+  color: #ff00cc;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #ff00cc77;
+  display: flex; align-items: center; gap: 8px;
+}
+.velnor-navbar ul {
+  list-style: none; display: flex; gap: 32px; margin: 0; padding: 0;
+  align-items: center;
+}
+.velnor-navbar li {
+  display: inline;
+}
+.velnor-navbar a, .velnor-navbar a:visited {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.velnor-navbar a:hover {
+  color: #ff00cc;
+}
+.cta-btn {
+  background: linear-gradient(90deg, #791ee1 10%, #ff00cc 90%);
+  border: none; color: #fff; font-weight: bold; border-radius: 25px;
+  padding: 10px 32px; font-size: 1.1rem;
+  box-shadow: 0 2px 14px #ff00cc33;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.cta-btn:hover {
+  background: linear-gradient(90deg, #ff00cc 10%, #791ee1 90%);
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* HERO */
+.velnor-hero {
+  text-align: center;
+  margin-top: 120px;
+  z-index: 2;
+  position: relative;
+}
+.velnor-hero h1 {
+  font-size: 4rem;
+  margin: 0 0 24px 0;
+  letter-spacing: 2px;
+}
+.neon {
+  color: #ff00cc;
+  text-shadow:
+    0 0 8px #ff00cc, 0 0 40px #ff00cc55,
+    0 0 20px #fff;
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+  0% { text-shadow: 0 0 12px #ff00cc, 0 0 40px #ff00cc44; }
+  100% { text-shadow: 0 0 32px #ff00cc, 0 0 80px #ff00cc99; }
+}
+.velnor-hero h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.highlight {
+  color: #fff900;
+  background: linear-gradient(90deg, #ff00cc 40%, #fff900 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+.velnor-hero p {
+  font-size: 1.25rem;
+  margin-bottom: 40px;
+}
+.cta-main {
+  font-size: 1.3rem;
+  padding: 16px 42px;
+  margin-top: 14px;
+}
+
+@media (max-width: 850px) {
+  .velnor-navbar { flex-direction: column; padding: 18px 18px; }
+  .velnor-navbar ul { gap: 16px; }
+  .velnor-hero h1 { font-size: 2.2rem; }
+  .velnor-hero h2 { font-size: 1.2rem; }
+  .cta-btn, .cta-main { padding: 8px 18px; font-size: 1rem; }
+}
