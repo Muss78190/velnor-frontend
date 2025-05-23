@@ -1,123 +1,219 @@
-body, html, #root, .velnor-app {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
-  background: #0a0520;
+body, html, #root, .app-bg {
+  margin: 0; padding: 0;
+  background: #101930;
   color: #fff;
-  overflow-x: hidden;
+  font-family: 'Inter', Arial, sans-serif;
+  min-height: 100vh;
 }
 
-/* FOND GALAXIE */
-.galaxy-bg {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: 0;
-  background: radial-gradient(ellipse at 60% 40%, #1a0933 60%, #0a0520 100%);
-}
-.galaxy-bg::before {
-  content: "";
-  position: absolute; inset: 0;
-  background: url('https://www.transparenttextures.com/patterns/stardust.png');
-  opacity: 0.25;
+.app-bg {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 65% 10%, #222c47 40%, #101930 100%);
 }
 
-/* NAVBAR */
 .velnor-navbar {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 24px 60px 16px 60px;
-  background: rgba(12, 5, 40, 0.6);
-  backdrop-filter: blur(8px);
+  padding: 32px 72px 18px 72px;
+  background: rgba(16,25,48,0.88);
+  border-bottom: 1px solid #23304b;
+  box-shadow: 0 2px 16px -8px #26e5ff22;
   position: sticky; top: 0; z-index: 10;
-  border-bottom: 1px solid #30215444;
 }
 .velnor-logo {
-  font-size: 2rem; font-weight: 700;
-  color: #ff00cc;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px #ff00cc77;
-  display: flex; align-items: center; gap: 8px;
+  font-weight: 800; font-size: 2rem; letter-spacing: 2px; color: #26e5ff;
 }
 .velnor-navbar ul {
-  list-style: none; display: flex; gap: 32px; margin: 0; padding: 0;
+  display: flex; gap: 32px; margin: 0; list-style: none;
   align-items: center;
 }
 .velnor-navbar li {
   display: inline;
 }
 .velnor-navbar a, .velnor-navbar a:visited {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.1rem;
-  transition: color 0.2s;
+  color: #fff; text-decoration: none; font-weight: 500; font-size: 1.08rem;
+  transition: color .17s;
 }
-.velnor-navbar a:hover {
-  color: #ff00cc;
-}
+.velnor-navbar a:hover { color: #26e5ff; }
 .cta-btn {
-  background: linear-gradient(90deg, #791ee1 10%, #ff00cc 90%);
-  border: none; color: #fff; font-weight: bold; border-radius: 25px;
-  padding: 10px 32px; font-size: 1.1rem;
-  box-shadow: 0 2px 14px #ff00cc33;
+  background: linear-gradient(90deg, #26e5ff, #7927ff);
+  border: none; color: #101930; font-weight: 700; border-radius: 16px;
+  padding: 10px 30px; font-size: 1.1rem;
+  box-shadow: 0 2px 14px #26e5ff33;
   cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
+  transition: background 0.2s, color .16s;
 }
 .cta-btn:hover {
-  background: linear-gradient(90deg, #ff00cc 10%, #791ee1 90%);
-  transform: translateY(-2px) scale(1.04);
+  background: #26e5ff;
+  color: #fff;
 }
-
-/* HERO */
 .velnor-hero {
   text-align: center;
-  margin-top: 120px;
+  margin-top: 90px;
   z-index: 2;
   position: relative;
 }
 .velnor-hero h1 {
-  font-size: 4rem;
-  margin: 0 0 24px 0;
+  font-size: 3.8rem;
+  margin: 0 0 18px 0;
   letter-spacing: 2px;
+  color: #26e5ff;
+  font-weight: 900;
 }
-.neon {
-  color: #ff00cc;
-  text-shadow:
-    0 0 8px #ff00cc, 0 0 40px #ff00cc55,
-    0 0 20px #fff;
-  animation: glow 2s infinite alternate;
-}
-@keyframes glow {
-  0% { text-shadow: 0 0 12px #ff00cc, 0 0 40px #ff00cc44; }
-  100% { text-shadow: 0 0 32px #ff00cc, 0 0 80px #ff00cc99; }
+.velnor-glow {
+  color: #26e5ff;
+  text-shadow: 0 0 22px #26e5ff66;
 }
 .velnor-hero h2 {
   font-size: 2rem;
+  color: #c3c8e6;
   font-weight: 600;
-  margin-bottom: 20px;
 }
-.highlight {
-  color: #fff900;
-  background: linear-gradient(90deg, #ff00cc 40%, #fff900 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
+.subtitle {
+  color: #7927ff;
+  font-weight: 600;
+  letter-spacing: .5px;
 }
 .velnor-hero p {
-  font-size: 1.25rem;
-  margin-bottom: 40px;
+  color: #c8d1e6;
+  margin-bottom: 36px;
+  font-size: 1.18rem;
+  max-width: 520px;
+  margin-left: auto; margin-right: auto;
 }
 .cta-main {
-  font-size: 1.3rem;
-  padding: 16px 42px;
-  margin-top: 14px;
+  background: #26e5ff;
+  color: #101930;
+  border: none;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: 16px 46px;
+  margin-top: 16px;
+  box-shadow: 0 4px 24px -8px #26e5ff44;
+  transition: background .2s, color .2s;
+}
+.cta-main:hover { background: #18b3c7; color: #fff; }
+.section {
+  max-width: 1050px; margin: 0 auto; padding: 4.5rem 1.5rem 3rem 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.steps {
+  display: flex; justify-content: center; gap: 2.7vw;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+.step {
+  background: #1c2540;
+  padding: 2rem 1.6rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 20px -6px #26e5ff22;
+  font-size: 1.17rem;
+  font-weight: 500;
+  color: #26e5ff;
+  border-left: 4px solid #7927ff;
+  min-width: 210px;
+  margin-bottom: 1rem;
 }
 
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin: 2rem 0 0 0;
+  list-style: none; padding: 0;
+}
+.features li {
+  background: #1c2540;
+  padding: 1.1rem 1.4rem;
+  border-radius: 1.1rem;
+  color: #fff;
+  font-size: 1.12rem;
+  font-weight: 500;
+  box-shadow: 0 2px 18px -10px #26e5ff22;
+  border-left: 3px solid #26e5ff;
+}
+
+.pricing-cards {
+  display: flex; justify-content: center; gap: 2.7vw; margin-top: 3.2rem;
+  flex-wrap: wrap;
+}
+.card {
+  background: #191e34;
+  border-radius: 1.2rem;
+  padding: 2.2rem 2rem 2.3rem 2rem;
+  min-width: 250px; max-width: 320px;
+  box-shadow: 0 2px 18px -8px #7927ff33;
+  display: flex; flex-direction: column; align-items: center;
+  margin-bottom: 1.5rem;
+  border: 1.6px solid #222c47bb;
+  transition: transform 0.18s, box-shadow 0.13s;
+}
+.card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 6px 44px -13px #7927ff55; }
+.card h4 { color: #7927ff; font-size: 1.35rem; margin: 0 0 1rem 0; }
+.card .price {
+  font-size: 2.2rem;
+  color: #26e5ff;
+  margin-bottom: 1.1rem;
+  font-weight: 800;
+}
+.card button {
+  background: linear-gradient(90deg, #26e5ff, #7927ff);
+  color: #101930;
+  border: none;
+  border-radius: 1.2rem;
+  font-weight: 700;
+  font-size: 1.09rem;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+  transition: background 0.16s;
+}
+.card button:hover { background: #26e5ff; color: #fff; }
+
+.faq-list {
+  max-width: 730px; margin: 2.7rem auto 0 auto;
+}
+.faq-item {
+  background: #191e34;
+  border-radius: 1.2rem;
+  margin-bottom: 1.15rem;
+  box-shadow: 0 2px 18px -8px #7927ff33;
+  border-left: 3px solid #26e5ff;
+  padding: 0.2rem 0.7rem;
+}
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #7927ff;
+  padding: 1rem 0 1rem 0.2rem;
+  outline: none;
+  transition: color 0.15s;
+}
+.faq-item[open] summary {
+  color: #26e5ff;
+}
+.faq-item p {
+  color: #c8d1e6;
+  padding: 0 0 1.1rem 0.7rem;
+}
+
+.footer {
+  width: 100%;
+  background: #181e30;
+  color: #c2bbff;
+  text-align: center;
+  font-size: 1rem;
+  padding: 1.8rem 0 1.5rem 0;
+  margin-top: 5rem;
+  border-radius: 2.4rem 2.4rem 0 0;
+  border-top: 1.7px solid #23304b;
+  box-shadow: 0 -3px 14px -7px #7927ff33;
+  z-index: 2;
+  position: relative;
+}
+.footer a { color: #26e5ff; margin-left: 1rem; text-decoration: none; }
 @media (max-width: 850px) {
-  .velnor-navbar { flex-direction: column; padding: 18px 18px; }
-  .velnor-navbar ul { gap: 16px; }
-  .velnor-hero h1 { font-size: 2.2rem; }
-  .velnor-hero h2 { font-size: 1.2rem; }
-  .cta-btn, .cta-main { padding: 8px 18px; font-size: 1rem; }
+  .section { padding: 4rem 0.5rem 2rem 0.5rem; }
+  .steps, .features, .pricing-cards { flex-direction: column; grid-template-columns: 1fr; }
 }
