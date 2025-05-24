@@ -1,14 +1,21 @@
 import React from "react";
 import "../styles/LandingPage.css";
 
-const NAV_LINKS = [
-  { href: "#fonctionnement", label: "Fonctionnement" },
-  { href: "#technologie", label: "Technologie" },
-  { href: "#offres", label: "Offres" },
-  { href: "#temoignages", label: "Témoignages" },
-  { href: "#faq", label: "FAQ" },
+// Exemple de témoignages (à personnaliser)
+const testimonials = [
+  {
+    name: "Ludovic M.",
+    text: "Audit IA reçu en 24h, ultra détaillé, j’ai sécurisé tout mon site. Rapport professionnel et recommandations faciles à suivre.",
+    job: "CEO - Start-Up SaaS"
+  },
+  {
+    name: "Amine B.",
+    text: "La meilleure expérience d’audit cybersécurité ! Rapport clair, badge IA, tout livré rapidement. Je recommande à 100%.",
+    job: "CTO - Agence Web"
+  }
 ];
 
+// FAQ
 const FAQ = [
   { q: "Comment fonctionne l’audit IA ?", a: "Notre IA analyse votre site, détecte les failles, et génère un rapport complet sous 24h ou 48h." },
   { q: "Quels types de failles sont détectées ?", a: "XSS, SQLi, .env, ports ouverts, et d’autres vulnérabilités critiques." },
@@ -16,46 +23,36 @@ const FAQ = [
   { q: "Les rapports sont-ils confidentiels ?", a: "Oui, chaque audit est traité en toute confidentialité et sécurité." }
 ];
 
-const TEMOIGNAGES = [
-  {
-    name: "Paul, CTO",
-    avis: "Velnor nous a permis de détecter en 48h des failles critiques, service ultra pro et rapide."
-  },
-  {
-    name: "Nadia, Fondatrice SaaS",
-    avis: "Le rapport PDF IA, c’est ce qui m’a rassurée pour mon lancement. Indispensable."
-  },
-  {
-    name: "Ali, CEO PME",
-    avis: "Un vrai audit de cybersécurité premium, j’ai reçu mon score de sécurité + badge IA en 24h."
-  }
-];
-
 export default function LandingPage() {
   return (
-    <div className="velnor-bg">
+    <div className="velnor-landing">
+
       {/* NAVBAR */}
-      <nav className="velnor-navbar">
-        <div className="velnor-logo">🛡️ VELNOR</div>
-        <ul>
-          {NAV_LINKS.map(link => (
-            <li key={link.href}><a href={link.href}>{link.label}</a></li>
-          ))}
-          <li>
-            <a href="#offres"><button className="cta-btn">Audit IA</button></a>
-          </li>
-        </ul>
+      <nav className="navbar">
+        <div className="logo">🛡️ <span>VELNOR</span></div>
+        <div className="nav-links">
+          <a href="#fonctionnement">Fonctionnement</a>
+          <a href="#technologie">Technologie</a>
+          <a href="#offres">Offres</a>
+          <a href="#temoignages">Témoignages</a>
+          <a href="#faq">FAQ</a>
+          <a href="#offres" className="nav-cta">Audit IA</a>
+        </div>
       </nav>
 
       {/* HERO */}
-      <section className="velnor-hero">
-        <h1><span className="velnor-glow">VELNOR</span></h1>
-        <h2>L’IA de cybersécurité <span className="subtitle">premium pour votre entreprise</span></h2>
-        <p>
-          Protégez vos actifs avec un audit IA nouvelle génération.<br />
-          Rapport détaillé, score sécurité, plan d’action – en 24h ou 48h.
-        </p>
-        <a href="#offres"><button className="cta-main">Demander un audit IA</button></a>
+      <section className="hero" id="hero">
+        <div className="hero-content">
+          <h1><span className="velnor-glow">VELNOR</span></h1>
+          <h2>L’IA de cybersécurité <span className="subtitle">premium pour votre entreprise</span></h2>
+          <p>
+            Protégez vos actifs avec un audit IA nouvelle génération.<br />
+            Rapport détaillé, score sécurité, plan d’action – en 24h ou 48h.
+          </p>
+          <a href="#offres">
+            <button className="cta-btn">Demander un audit IA</button>
+          </a>
+        </div>
       </section>
 
       {/* FONCTIONNEMENT */}
@@ -100,12 +97,15 @@ export default function LandingPage() {
 
       {/* TEMOIGNAGES */}
       <section className="section" id="temoignages">
-        <h3>✨ Ils ont choisi VELNOR</h3>
-        <div className="temoignages-list">
-          {TEMOIGNAGES.map((t, i) => (
-            <div className="temoignage" key={i}>
-              <div className="avis">"{t.avis}"</div>
-              <div className="auteur">— {t.name}</div>
+        <h3>🗣️ Ils ont audité leur site avec VELNOR</h3>
+        <div className="testimonials">
+          {testimonials.map((item, i) => (
+            <div className="testimonial" key={i}>
+              <div className="testimonial-text">“{item.text}”</div>
+              <div className="testimonial-author">
+                <strong>{item.name}</strong><br />
+                <span>{item.job}</span>
+              </div>
             </div>
           ))}
         </div>
