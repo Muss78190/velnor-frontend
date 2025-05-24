@@ -1,18 +1,42 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Import de toutes les pages existantes
 import LandingPage from "./pages/LandingPage";
-import AuditPage from "./pages/AuditPage";
-import AdminPage from "./pages/AdminPage";
-// Ajoute ici tes autres pages si besoin
+import LandingPageAudit from "./pages/LandingPageAudit";
+import AdminLogin from "./pages/AdminLogin";
+import AdminPayments from "./pages/AdminPayments";
+import MentionsLegales from "./pages/MentionsLegales";
+import Paiement24h from "./pages/paiement-24h";
+import Paiement48h from "./pages/paiement-48h";
+import Cancel from "./pages/cancel";
+import Success from "./pages/success";
+
+// CSS global (si besoin)
+import "./styles/App.css";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/audit" element={<AuditPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        {/* Ajoute tes autres routes ici */}
+        {/* Audit, si c'est une landing spéciale */}
+        <Route path="/audit" element={<LandingPageAudit />} />
+
+        {/* Admin */}
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/payments" element={<AdminPayments />} />
+
+        {/* Paiement */}
+        <Route path="/paiement-24h" element={<Paiement24h />} />
+        <Route path="/paiement-48h" element={<Paiement48h />} />
+
+        {/* Pages spéciales */}
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
+        <Route path="/mentions-legales" element={<MentionsLegales />} />
+
+        {/* 404 : tu peux ajouter une page NotFound si tu veux */}
       </Routes>
     </Router>
   );
