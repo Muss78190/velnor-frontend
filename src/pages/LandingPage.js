@@ -1,71 +1,81 @@
-import React, { useRef, useEffect } from "react";
-import "../styles/LandingPage.css";
+import React from "react";
 
-const faq = [
-  { q: "Comment fonctionne l’audit IA ?", a: "L’IA analyse votre site, détecte les failles critiques et vous délivre un rapport stratégique PDF." },
-  { q: "Quels types de failles sont détectées ?", a: "XSS, SQLi, .env, ports ouverts, failles d’authentification, erreurs de configuration, etc." },
-  { q: "Mon site est-il compatible ?", a: "Tout site accessible publiquement (WordPress, Laravel, Node, etc.)." },
-  { q: "Le rapport est-il confidentiel ?", a: "Oui, confidentialité et sécurité garanties par VELNOR." }
+const NAV_LINKS = [
+  { href: "#fonctionnement", label: "Fonctionnement" },
+  { href: "#technologie", label: "Technologie" },
+  { href: "#offres", label: "Offres" },
+  { href: "#temoignages", label: "Témoignages" },
+  { href: "#faq", label: "FAQ" },
 ];
 
-const steps = [
-  "Entrez l’URL de votre site.",
-  "L’IA scanne & détecte les failles.",
-  "Recevez votre rapport PDF stratégique en 24h/48h."
+const FAQ = [
+  { q: "Comment fonctionne l’audit IA ?", a: "Notre IA analyse votre site, détecte les failles, et génère un rapport complet sous 24h ou 48h." },
+  { q: "Quels types de failles sont détectées ?", a: "XSS, SQLi, .env, ports ouverts, et d’autres vulnérabilités critiques." },
+  { q: "Mon site est-il compatible ?", a: "Tout site accessible publiquement (WordPress, Laravel, Node, etc.) est compatible." },
+  { q: "Les rapports sont-ils confidentiels ?", a: "Oui, chaque audit est traité en toute confidentialité et sécurité." }
 ];
 
-const techs = [
-  "Détection XSS, SQLi, .env, ports ouverts…",
-  "Rapport PDF professionnel, score sécurité, badge IA.",
-  "Analyse automatisée par APEX™.",
-  "Livraison garantie en 24h/48h."
+const TEMOIGNAGES = [
+  {
+    name: "Paul, CTO",
+    avis: "Velnor nous a permis de détecter en 48h des failles critiques, service ultra pro et rapide."
+  },
+  {
+    name: "Nadia, Fondatrice SaaS",
+    avis: "Le rapport PDF IA, c’est ce qui m’a rassurée pour mon lancement. Indispensable."
+  },
+  {
+    name: "Ali, CEO PME",
+    avis: "Un vrai audit de cybersécurité premium, j’ai reçu mon score de sécurité + badge IA en 24h."
+  }
 ];
 
 export default function LandingPage() {
-  const sectionsRef = useRef([]);
-
-  useEffect(() => {
-    // Optionnel : ajoute animations GSAP/Framer si tu veux, mais déjà c’est carré sans
-  }, []);
-
   return (
-    <div className="velnor-landing">
+    <div className="velnor-bg">
       {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="logo"> {/* Mets ici le SVG premium si tu veux */ }
-          <span className="logo-shield"></span>
-          <span>VELNOR</span>
-        </div>
-        <div className="nav-links">
-          <a href="#fonctionnement">Fonctionnement</a>
-          <a href="#offres">Offres</a>
-          <a href="#techno">Technologie</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <a href="#audit" className="cta-nav">Audit IA</a>
+      <nav className="velnor-navbar">
+        <div className="velnor-logo">🛡️ VELNOR</div>
+        <ul>
+          {NAV_LINKS.map(link => (
+            <li key={link.href}><a href={link.href}>{link.label}</a></li>
+          ))}
+          <li>
+            <a href="#offres"><button className="cta-btn">Audit IA</button></a>
+          </li>
+        </ul>
       </nav>
 
       {/* HERO */}
-      <section className="section hero">
-        <div className="hero-content">
-          <h1>VELNOR</h1>
-          <h2>L’IA de cybersécurité <span className="premium">premium pour votre entreprise</span></h2>
-          <p>
-            Protégez vos actifs avec un audit IA nouvelle génération.<br />
-            Rapport détaillé, score sécurité, plan d’action – en 24h ou 48h.
-          </p>
-          <a href="#audit" className="cta-main">Demander un audit IA</a>
-        </div>
+      <section className="velnor-hero">
+        <h1><span className="velnor-glow">VELNOR</span></h1>
+        <h2>L’IA de cybersécurité <span className="subtitle">premium pour votre entreprise</span></h2>
+        <p>
+          Protégez vos actifs avec un audit IA nouvelle génération.<br />
+          Rapport détaillé, score sécurité, plan d’action – en 24h ou 48h.
+        </p>
+        <a href="#offres"><button className="cta-main">Demander un audit IA</button></a>
       </section>
 
       {/* FONCTIONNEMENT */}
       <section className="section" id="fonctionnement">
         <h3>🛠 Fonctionnement</h3>
         <div className="steps">
-          {steps.map((step, i) => (
-            <div className="step" key={i}>{step}</div>
-          ))}
+          <div className="step">1️⃣ Entrez l’URL de votre site</div>
+          <div className="step">2️⃣ L’IA analyse, scanne et identifie les failles</div>
+          <div className="step">3️⃣ Recevez un PDF stratégique en 24h ou 48h</div>
         </div>
+      </section>
+
+      {/* TECHNOLOGIE */}
+      <section className="section" id="technologie">
+        <h3>🧠 Technologie VELNOR</h3>
+        <ul className="features">
+          <li>✅ Détection XSS, SQLi, .env, ports ouverts</li>
+          <li>📄 Rapport PDF pro généré par IA</li>
+          <li>🛡️ Score sécurité + Badge IA</li>
+          <li>⚡ Livraison garantie en 24h/48h</li>
+        </ul>
       </section>
 
       {/* OFFRES */}
@@ -74,40 +84,37 @@ export default function LandingPage() {
         <div className="pricing-cards">
           <div className="card">
             <h4>Audit IA – 48h</h4>
-            <ul>
-              <li>✔ Rapport PDF professionnel</li>
-              <li>✔ Score sécurité & badge IA</li>
-              <li>✔ Recommandations stratégiques</li>
-            </ul>
+            <p>Rapport PDF, score IA, recommandations</p>
             <p className="price">499€ HT</p>
             <button>Choisir</button>
           </div>
-          <div className="card card-express">
+          <div className="card">
             <h4>Audit Express – 24h</h4>
-            <ul>
-              <li>✔ Livraison prioritaire</li>
-              <li>✔ Analyse complète IA</li>
-              <li>✔ Support prioritaire</li>
-            </ul>
+            <p>Analyse prioritaire, badge sécurité, livraison rapide</p>
             <p className="price">699€ HT</p>
             <button>Choisir</button>
           </div>
         </div>
       </section>
 
-      {/* TECHNOLOGIE */}
-      <section className="section" id="techno">
-        <h3>🧠 Technologie</h3>
-        <ul className="features">
-          {techs.map((tech, i) => <li key={i}>{tech}</li>)}
-        </ul>
+      {/* TEMOIGNAGES */}
+      <section className="section" id="temoignages">
+        <h3>✨ Ils ont choisi VELNOR</h3>
+        <div className="temoignages-list">
+          {TEMOIGNAGES.map((t, i) => (
+            <div className="temoignage" key={i}>
+              <div className="avis">"{t.avis}"</div>
+              <div className="auteur">— {t.name}</div>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* FAQ */}
       <section className="section" id="faq">
         <h3>❓ FAQ</h3>
         <div className="faq-list">
-          {faq.map((item, i) => (
+          {FAQ.map((item, i) => (
             <details key={i} className="faq-item">
               <summary>{item.q}</summary>
               <p>{item.a}</p>
@@ -118,7 +125,7 @@ export default function LandingPage() {
 
       {/* FOOTER */}
       <footer className="footer">
-        <span>© {new Date().getFullYear()} VELNOR — Cybersécurité Premium</span>
+        <span>© {new Date().getFullYear()} VELNOR — Cybersécurité premium</span>
         <a href="/mentions-legales">Mentions légales</a>
       </footer>
     </div>
