@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "../styles/LandingPage.css";
 
 const NAV_LINKS = [
@@ -8,6 +7,27 @@ const NAV_LINKS = [
   { href: "#offres", label: "Offres" },
   { href: "#temoignages", label: "Témoignages" },
   { href: "#faq", label: "FAQ" },
+];
+
+const testimonies = [
+  {
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    name: "Marc L.",
+    company: "CyberCorp",
+    quote: "Un audit IA bluffant, rapport clair et actionnable. Je recommande à 200% !"
+  },
+  {
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    name: "Sarah P.",
+    company: "FinTechPro",
+    quote: "Service premium, résultat pro et hyper rapide. Merci VELNOR !"
+  },
+  {
+    avatar: "https://randomuser.me/api/portraits/men/88.jpg",
+    name: "Julien C.",
+    company: "WebSafe",
+    quote: "L’IA a trouvé des failles que nos experts avaient ratées. Impressionnant."
+  }
 ];
 
 const FAQ = [
@@ -20,16 +40,14 @@ const FAQ = [
 function Navbar() {
   return (
     <nav className="velnor-navbar">
-      <div className="velnor-logo">
-        <img src="/logo192.png" alt="Logo" className="logo-img" /> VELNOR
-      </div>
+      <div className="velnor-logo">VELNOR</div>
       <ul>
         {NAV_LINKS.map(link => (
           <li key={link.href}><a href={link.href}>{link.label}</a></li>
         ))}
         <li>
-          <a href="#offres">
-            <button className="cta-btn">Audit IA</button>
+          <a href="/admin">
+            <button className="cta-btn">Admin</button>
           </a>
         </li>
       </ul>
@@ -40,8 +58,10 @@ function Navbar() {
 function Hero() {
   return (
     <section className="velnor-hero">
-      <h1><span className="velnor-glow">VELNOR</span></h1>
-      <h2>L’IA de cybersécurité <span className="subtitle">premium pour votre entreprise</span></h2>
+      <h1 className="neon-glow">VELNOR</h1>
+      <h2>
+        L’IA de cybersécurité <span className="highlight">premium pour votre entreprise</span>
+      </h2>
       <p>
         Protégez vos actifs avec un audit IA nouvelle génération.<br />
         Rapport détaillé, score sécurité, plan d’action – en 24h ou 48h.
@@ -81,7 +101,6 @@ function Technologie() {
 }
 
 function Offres() {
-  const navigate = useNavigate();
   return (
     <section className="section" id="offres">
       <h3>💼 Nos Offres</h3>
@@ -90,36 +109,37 @@ function Offres() {
           <h4>Audit IA – 48h</h4>
           <p>Rapport PDF, score IA, recommandations</p>
           <p className="price">499€ HT</p>
-          <button onClick={() => navigate("/paiement-48h")}>Choisir</button>
+          <a href="/paiement-48h">
+            <button>Choisir</button>
+          </a>
         </div>
         <div className="card">
           <h4>Audit Express – 24h</h4>
           <p>Analyse prioritaire, badge sécurité, livraison rapide</p>
           <p className="price">699€ HT</p>
-          <button onClick={() => navigate("/paiement-24h")}>Choisir</button>
+          <a href="/paiement-24h">
+            <button>Choisir</button>
+          </a>
         </div>
       </div>
     </section>
   );
 }
 
-// SECTION TEMOIGNAGES EXEMPLE
-function Temoignages() {
-  // Tu pourras custom plus tard : slider, avatars, logos, etc.
+function Temoinages() {
   return (
     <section className="section" id="temoignages">
       <h3>✨ Témoignages</h3>
-      <div className="testimonials">
-        <div className="testimonial">
-          <span className="avatar">👨‍💼</span>
-          <p>“Audit VELNOR reçu en 24h : précis, pro, je recommande à 100%.”</p>
-          <span className="author">— Julien, CTO SaaS</span>
-        </div>
-        <div className="testimonial">
-          <span className="avatar">👩‍💻</span>
-          <p>“La sécurité de notre site a clairement progressé après leur audit IA.”</p>
-          <span className="author">— Sarah, Start-up</span>
-        </div>
+      <div className="testimony-slider">
+        {testimonies.map((t, i) => (
+          <div className="testimony-card" key={i}>
+            <img src={t.avatar} alt={t.name} className="testimony-avatar" />
+            <blockquote>{t.quote}</blockquote>
+            <div className="testimony-author">
+              <span>{t.name}</span> · <span>{t.company}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -144,33 +164,30 @@ function FAQSection() {
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-links">
-        <div>© {new Date().getFullYear()} VELNOR — Cybersécurité premium</div>
-        <div>
+      <div>
+        <span>© {new Date().getFullYear()} VELNOR — Cybersécurité premium</span>
+        <span className="footer-links">
           <a href="/mentions-legales">Mentions légales</a>
-          <span>·</span>
           <a href="mailto:contact@velnor.fr">Contact</a>
-          <span>·</span>
-          <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </div>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </span>
       </div>
     </footer>
   );
 }
 
-function LandingPage() {
+export default function LandingPage() {
   return (
-    <div className="app-bg">
+    <div className="velnor-app">
+      <div className="galaxy-bg"></div>
       <Navbar />
       <Hero />
       <Fonctionnement />
       <Technologie />
       <Offres />
-      <Temoignages />
+      <Temoinages />
       <FAQSection />
       <Footer />
     </div>
   );
 }
-
-export default LandingPage;
