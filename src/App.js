@@ -12,8 +12,6 @@ import Paiement48h from "./pages/paiement-48h";
 import Cancel from "./pages/cancel";
 import Success from "./pages/success";
 
-// CSS global (si besoin)
-import "./styles/App.css";
 
 function App() {
   return (
