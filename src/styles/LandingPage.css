@@ -1,72 +1,56 @@
 :root {
   --white-bg: #fafdff;
-  --ice-glass: rgba(255,255,255,0.85);
+  --glass-bg: rgba(255,255,255,0.83);
   --main-blue: #8edafd;
-  --accent-blue: #40bfff;
+  --accent-blue: #50a7e6;
   --main-violet: #b7aaff;
   --subtle-violet: #dedbfa;
   --text-main: #222742;
   --text-sub: #58607a;
-  --border-radius: 1.7rem;
-  --shadow: 0 8px 40px 0 rgba(110,180,255,0.13);
+  --border-radius: 1.6rem;
+  --shadow: 0 4px 32px 0 rgba(110,180,255,0.10);
 }
 
-/* ===== FOND & SCROLL ===== */
 html, body {
   min-height: 100vh;
   background: var(--white-bg);
   color: var(--text-main);
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   scroll-behavior: smooth;
-  margin: 0;
 }
+
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
+  background: linear-gradient(110deg, #fafdff 60%, #e5f1fb 100%);
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(110deg, #fafdff 65%, #e7f2fd 100%);
-  /* étoiles subtiles */
   opacity: 1;
 }
-body::after {
-  /* micro étoile en overlay pour le côté tech */
-  content: "";
-  pointer-events: none;
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: 1;
-  background: url('https://www.transparenttextures.com/patterns/stardust.png');
-  opacity: 0.13;
-  animation: stars-move 40s linear infinite alternate;
-}
-@keyframes stars-move {
-  0% { background-position: 0 0; }
-  100% { background-position: 170px 220px; }
-}
 
-/* ===== NAVBAR ===== */
 .velnor-navbar {
-  background: var(--ice-glass);
-  box-shadow: 0 6px 32px -10px var(--main-blue);
-  backdrop-filter: blur(12px);
-  border-bottom: 1.5px solid var(--subtle-violet);
+  background: var(--glass-bg);
+  box-shadow: 0 6px 24px -14px var(--main-blue);
+  backdrop-filter: blur(8px);
+  border-bottom: 1.2px solid var(--subtle-violet);
   border-radius: 0 0 2rem 2rem;
-  padding: 22px 7vw 16px 7vw;
+  padding: 22px 5vw 16px 5vw;
   position: sticky;
-  top: 0; z-index: 10;
+  top: 0; z-index: 20;
   display: flex; justify-content: space-between; align-items: center;
 }
+
 .velnor-title {
-  font-size: 2.3rem;
+  font-size: 2.1rem;
   font-weight: 900;
   color: var(--main-blue);
-  letter-spacing: 2.5px;
-  text-shadow: 0 0 12px var(--main-violet), 0 0 2px #fff;
+  letter-spacing: 2.2px;
+  text-shadow: 0 0 18px var(--main-blue), 0 0 8px #fff;
 }
+
 .velnor-navbar ul {
-  list-style: none; display: flex; gap: 36px;
+  list-style: none; display: flex; gap: 34px;
   margin: 0; padding: 0;
 }
 .velnor-navbar li { display: inline; }
@@ -75,54 +59,51 @@ body::after {
   text-decoration: none;
   font-weight: 500;
   font-size: 1.15rem;
-  border-radius: 1rem;
-  transition: color 0.18s, background 0.18s;
-  padding: 0.5rem 0.95rem;
+  transition: color 0.2s;
 }
 .velnor-navbar a:hover {
-  color: var(--accent-blue);
-  background: var(--subtle-violet);
+  color: var(--main-blue);
 }
 .admin-btn-navbar {
   background: linear-gradient(90deg, var(--main-blue), var(--main-violet));
   color: #fff;
   font-weight: 700;
   border: none;
-  border-radius: 19px;
-  padding: 10px 26px;
-  font-size: 1.05rem;
+  border-radius: 18px;
+  padding: 9px 22px;
+  font-size: 1.04rem;
   box-shadow: 0 1px 14px var(--main-blue);
-  transition: background 0.21s, transform 0.12s;
+  transition: background 0.22s, transform 0.12s;
 }
 .admin-btn-navbar:hover {
   background: linear-gradient(90deg, var(--main-violet), var(--main-blue));
-  transform: translateY(-1px) scale(1.07);
+  transform: translateY(-1px) scale(1.05);
 }
 
-/* ===== HERO ===== */
+/* HERO */
 .velnor-hero {
   text-align: center;
-  margin-top: 100px;
-  position: relative;
-  padding-bottom: 54px;
+  margin-top: 90px;
   z-index: 2;
+  position: relative;
+  padding-bottom: 60px;
 }
 .velnor-hero h1 {
-  font-size: 4.2rem;
+  font-size: 4.3rem;
   font-weight: 900;
   color: var(--main-blue);
-  letter-spacing: 2.6px;
-  margin-bottom: 12px;
-  text-shadow: 0 0 20px var(--main-violet), 0 0 7px #fff;
+  letter-spacing: 2.8px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 22px var(--main-blue), 0 0 9px #fff;
 }
 .velnor-hero h2 {
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 .subtitle-glow {
-  color: var(--main-violet);
+  color: var(--main-blue);
   background: linear-gradient(90deg, var(--main-blue), var(--main-violet));
   background-clip: text;
   -webkit-background-clip: text;
@@ -130,13 +111,13 @@ body::after {
   text-shadow: 0 0 8px var(--main-blue), 0 0 2px #fff;
 }
 .velnor-hero p {
-  font-size: 1.16rem;
+  font-size: 1.18rem;
   color: var(--text-sub);
-  margin-bottom: 34px;
+  margin-bottom: 38px;
 }
 .cta-main {
-  font-size: 1.17rem;
-  padding: 14px 46px;
+  font-size: 1.22rem;
+  padding: 16px 48px;
   border-radius: 2rem;
   background: linear-gradient(90deg, var(--main-blue), var(--main-violet));
   color: #fff;
@@ -146,7 +127,7 @@ body::after {
   cursor: pointer;
   margin-top: 10px;
   transition: background 0.22s, box-shadow 0.16s, transform 0.13s;
-  animation: pulseGlowBtn 1.7s infinite alternate;
+  animation: pulseGlowBtn 1.6s infinite alternate;
 }
 @keyframes pulseGlowBtn {
   0% { box-shadow: 0 2px 12px var(--main-violet); }
@@ -157,69 +138,40 @@ body::after {
   transform: scale(1.04);
 }
 
-/* ===== SECTIONS ===== */
+/* Sections blanches glassy */
 .section {
   max-width: 1020px;
   margin: 0 auto;
-  padding: 3.9rem 1.5rem 2.2rem 1.5rem;
+  padding: 4.2rem 1.4rem 2.5rem 1.4rem;
   border-radius: var(--border-radius);
-  background: var(--ice-glass);
+  background: var(--glass-bg);
   box-shadow: var(--shadow);
-  margin-bottom: 2.1rem;
+  margin-bottom: 2.2rem;
   z-index: 2;
   position: relative;
-  border: 1.2px solid var(--subtle-violet);
+  border: 1px solid var(--subtle-violet);
 }
 
-/* ===== Fonctionnement ===== */
-.fonctionnement .steps {
-  display: flex;
-  justify-content: center;
-  gap: 2.4vw;
-  margin-top: 2.4rem;
-  flex-wrap: wrap;
-}
-.fonctionnement .step {
-  background: var(--subtle-violet);
-  padding: 2rem 1.7rem;
-  border-radius: 1.3rem;
-  box-shadow: 0 2px 20px var(--main-blue);
-  font-size: 1.12rem;
-  font-weight: 600;
-  color: var(--main-blue);
-  border-left: 4px solid var(--main-blue);
-  min-width: 200px;
-  animation: stepAppear 1s both;
-  transition: box-shadow 0.23s;
-}
-@keyframes stepAppear {
-  from { opacity: 0; transform: translateY(60px);}
-  to   { opacity: 1; transform: translateY(0);}
-}
-.fonctionnement .step:hover {
-  box-shadow: 0 7px 44px -13px var(--main-violet);
-}
-
-/* ===== Offres ===== */
+/* Offres */
 .offres .pricing-cards {
   display: flex;
   justify-content: center;
-  gap: 2.4vw;
-  margin-top: 2.4rem;
+  gap: 3vw;
+  margin-top: 2.7rem;
   flex-wrap: wrap;
 }
 .offres .card {
-  background: linear-gradient(120deg, #fafdff 90%, #e4f0fd 100%);
+  background: linear-gradient(120deg, #fafdff 85%, #e4f0fd 100%);
   border-radius: var(--border-radius);
-  padding: 2rem 1.5rem 2.2rem 1.5rem;
-  min-width: 240px;
+  padding: 2rem 2rem 2.3rem 2rem;
+  min-width: 260px;
   max-width: 320px;
   box-shadow: 0 2px 22px var(--main-blue);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1.2rem;
-  border: 1.2px solid var(--main-violet);
+  margin-bottom: 1.4rem;
+  border: 1.5px solid var(--main-violet);
   transition: transform 0.14s, box-shadow 0.15s;
 }
 .offres .card:hover {
@@ -227,141 +179,164 @@ body::after {
   box-shadow: 0 7px 36px var(--main-violet);
 }
 .offres .card h4 {
-  color: var(--accent-blue);
-  font-size: 1.28rem;
+  color: #1f3a5b;
+  font-size: 1.31rem;
   margin-bottom: 1rem;
   font-weight: 800;
   letter-spacing: 0.5px;
 }
 .offres .card .price {
-  font-size: 2.05rem;
-  color: var(--main-violet);
+  font-size: 2.1rem;
+  color: #a675e4;
   margin-bottom: 1.1rem;
   font-weight: 900;
+}
+.offres .card p,
+.offres .card ul {
+  color: #25304a;
+  font-size: 1.1rem;
+  margin-bottom: 0.7rem;
+  margin-top: 0;
+  font-weight: 500;
 }
 .offres .card button {
   background: linear-gradient(90deg, var(--main-blue), var(--main-violet));
   color: #fff;
   border: none;
-  border-radius: 1.05rem;
+  border-radius: 1.15rem;
   font-weight: 700;
-  font-size: 1.07rem;
-  padding: 0.85rem 2.0rem;
+  font-size: 1.11rem;
+  padding: 0.88rem 2.1rem;
   cursor: pointer;
-  margin-top: 18px;
+  margin-top: 22px;
   box-shadow: 0 2px 10px var(--main-violet);
   transition: background 0.14s, transform 0.11s;
-  animation: pulseBtn 2s infinite alternate;
-}
-@keyframes pulseBtn {
-  0% { box-shadow: 0 1px 14px var(--main-blue); }
-  100% { box-shadow: 0 3px 32px var(--main-violet); }
 }
 .offres .card button:hover {
   background: linear-gradient(90deg, var(--main-violet), var(--main-blue));
   transform: scale(1.04);
 }
 
-/* ===== Témoignages ===== */
+/* Steps - Fonctionnement */
+.fonctionnement .steps {
+  display: flex;
+  justify-content: center;
+  gap: 2.8vw;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+.fonctionnement .step {
+  background: #f5f9ff;
+  color: #224269;
+  border-left: 4px solid #89d3ff;
+  font-weight: 600;
+  box-shadow: 0 2px 20px #93d3f122;
+  padding: 2rem 2.2rem;
+  border-radius: 1.5rem;
+  min-width: 220px;
+  margin-bottom: 1rem;
+  font-size: 1.14rem;
+  transition: box-shadow 0.23s;
+}
+.fonctionnement .step:hover {
+  box-shadow: 0 7px 28px #8edafd44;
+}
+
+/* Témoignages */
 .temoignages .testimonials-slider {
   display: flex;
   gap: 2vw;
   overflow-x: auto;
   padding-bottom: 6px;
-  margin-top: 2.0rem;
+  margin-top: 2.2rem;
 }
 .testimonial-card {
-  background: var(--subtle-violet);
-  border-radius: 1.1rem;
-  min-width: 270px;
-  max-width: 330px;
-  padding: 1.8rem 1.4rem 1.4rem 1.4rem;
-  margin-bottom: 1.2rem;
-  margin-right: 0.6rem;
-  box-shadow: 0 2px 20px var(--main-blue);
-  border-left: 4px solid var(--main-violet);
-  position: relative;
-  transition: box-shadow 0.14s, border 0.14s;
+  background: #f8fafd;
+  color: #183255;
+  border-left: 4px solid #b7aaff;
   font-style: italic;
+  font-size: 1.13rem;
+  min-width: 290px;
+  max-width: 340px;
+  padding: 2.1rem 1.5rem 1.7rem 1.5rem;
+  margin-bottom: 1.4rem;
+  margin-right: 0.6rem;
+  box-shadow: 0 2px 22px #dde6f122;
+  border-radius: 1.2rem;
+  transition: box-shadow 0.16s, border 0.17s;
 }
 .testimonial-card:hover {
-  border-left: 4px solid var(--main-blue);
-  box-shadow: 0 2px 28px var(--main-violet);
-}
-.testimonial-text {
-  font-size: 1.07rem;
-  color: var(--text-main);
+  border-left: 4px solid #8edafd;
+  box-shadow: 0 2px 32px #01c8ed33;
 }
 .testimonial-name {
-  font-size: 0.97rem;
-  color: var(--main-blue);
-  margin-top: 15px;
+  color: #50a7e6;
+  margin-top: 17px;
   text-align: right;
   font-weight: bold;
 }
 
-/* ===== FAQ ===== */
+/* FAQ */
 .faq-list {
   max-width: 730px;
-  margin: 2.2rem auto 0 auto;
+  margin: 2.7rem auto 0 auto;
 }
 .faq-item {
-  background: var(--subtle-violet);
-  border-radius: 1.0rem;
-  margin-bottom: 0.95rem;
-  box-shadow: 0 2px 12px var(--main-blue);
-  border-left: 3px solid var(--main-blue);
-  padding: 0.16rem 0.6rem;
-  transition: box-shadow 0.13s, border 0.13s;
+  background: #f5f9ff;
+  border-radius: 1.1rem;
+  margin-bottom: 1.05rem;
+  box-shadow: 0 2px 16px #8edafd15;
+  border-left: 3px solid #b7aaff;
+  padding: 0.18rem 0.7rem;
+  transition: box-shadow 0.18s, border 0.13s;
 }
 .faq-item summary {
   cursor: pointer;
   font-weight: 600;
-  font-size: 1.02rem;
-  color: var(--main-blue);
-  padding: 0.95rem 0 0.95rem 0.19rem;
+  font-size: 1.08rem;
+  color: #25304a;
+  padding: 1rem 0 1rem 0.19rem;
   outline: none;
   transition: color 0.14s;
 }
 .faq-item[open] summary {
-  color: var(--main-violet);
+  color: #8edafd;
 }
 .faq-item p {
-  color: var(--text-sub);
-  padding: 0 0 0.95rem 0.7rem;
+  color: #58607a;
+  padding: 0 0 1.1rem 0.7rem;
 }
 
-/* ===== FOOTER ===== */
+/* Footer */
 .footer {
   width: 100vw;
   background: #fafdff;
   color: #9dbff5;
   text-align: center;
-  font-size: 1.01rem;
-  padding: 2rem 0 1.2rem 0;
-  border-radius: 2.1rem 2.1rem 0 0;
+  font-size: 1.03rem;
+  padding: 2.1rem 0 1.5rem 0;
+  border-radius: 2.4rem 2.4rem 0 0;
   border-top: 1.7px solid var(--main-violet);
-  box-shadow: 0 -4px 15px -6px var(--main-blue);
+  box-shadow: 0 -4px 18px -8px var(--main-blue);
   z-index: 2;
   position: relative;
 }
 .footer a {
   color: var(--main-blue);
-  margin: 0 0.53rem;
+  margin: 0 0.55rem;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.16s;
+  transition: color 0.17s;
 }
 .footer a:hover { color: var(--main-violet); }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-  .velnor-navbar { flex-direction: column; padding: 14px 6vw; }
+  .velnor-navbar { flex-direction: column; padding: 17px 7vw; }
   .velnor-navbar ul { gap: 16px; }
-  .velnor-hero h1 { font-size: 2.4rem; }
-  .velnor-hero h2 { font-size: 1.04rem; }
-  .cta-main, .offres .card button { font-size: 1.01rem; padding: 9px 14px; }
-  .section { padding: 2.1rem 0.7rem 1.1rem 0.7rem; }
+  .velnor-hero h1 { font-size: 2.7rem; }
+  .velnor-hero h2 { font-size: 1.14rem; }
+  .cta-main, .offres .card button { font-size: 1.04rem; padding: 10px 16px; }
+  .section { padding: 2.3rem 0.5rem 1.5rem 0.5rem; }
   .fonctionnement .steps, .offres .pricing-cards, .temoignages .testimonials-slider { flex-direction: column; }
-  .testimonial-card, .offres .card { min-width: 175px; }
+  .testimonial-card, .offres .card { min-width: 210px; }
 }
