@@ -6,7 +6,7 @@ const MentionsLegales = () => {
       <h1 style={{ fontSize: "2rem", marginBottom: "30px" }}>Mentions Légales</h1>
 
       <p><strong>Nom de l'entreprise :</strong> Velnor</p>
-      <p><strong>Responsable de publication :</strong> Mustapha Ben</p>
+      <p><strong>Responsable de publication :</strong> Mustapha</p>
       <p><strong>Adresse e-mail :</strong> assistance.velnor@outlook.fr</p>
       <p><strong>Hébergement :</strong> Scaleway - 8 rue de la Ville l'Évêque, 75008 Paris</p>
       <p><strong>Numéro SIRET :</strong> à compléter si besoin</p>
