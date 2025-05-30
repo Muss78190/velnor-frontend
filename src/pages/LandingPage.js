@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../styles/landingpage.css';
+import '../styles/LandingPage.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useNavigate } from 'react-router-dom';
