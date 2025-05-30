@@ -1,122 +1,105 @@
-import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import "../../styles/LandingPage.css";
-import GalaxyParticles from "../components/GalaxyParticles";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useEffect } from 'react';
+import '../styles/landingpage.css';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const sections = ["hero", "fonctionnement", "technologie", "offres", "faq", "footer"];
-
-const faq = [
-  { q: "Comment fonctionne l’audit IA ?", a: "Notre IA analyse votre site, détecte les failles, et génère un rapport complet sous 24h ou 48h." },
-  { q: "Quels types de failles sont détectées ?", a: "XSS, SQLi, .env, ports ouverts, et autres failles critiques." },
-  { q: "Mon site est-il compatible ?", a: "Oui, tous les sites web accessibles publiquement sont compatibles." },
-  { q: "Est-ce confidentiel ?", a: "Oui, chaque audit est traité de façon sécurisée et confidentielle." }
-];
-
 const LandingPage = () => {
   const navigate = useNavigate();
-  const sectionsRef = useRef([]);
 
   useEffect(() => {
-    sectionsRef.current.forEach((el, i) => {
-      if (!el) return;
-      gsap.fromTo(
-        el,
-        { autoAlpha: 0, y: 50 },
-        {
-          duration: 1,
-          autoAlpha: 1,
-          y: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
+    gsap.utils.toArray('.section').forEach((section) => {
+      gsap.from(section, {
+        opacity: 0,
+        y: 80,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        },
+      });
     });
   }, []);
 
-  const setRef = (el, index) => (sectionsRef.current[index] = el);
-
   return (
-    <div className="velnor-landing">
-      <GalaxyParticles />
-      <nav className="velnor-navbar">
-        <div className="velnor-title">VELNOR</div>
+    <div className="landing-wrapper">
+      <nav className="navbar">
+        <div className="logo">VELNOR</div>
         <ul>
           <li><a href="#fonctionnement">Fonctionnement</a></li>
-          <li><a href="#technologie">Technologie</a></li>
           <li><a href="#offres">Offres</a></li>
+          <li><a href="#technologie">Technologie</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><button className="admin-btn-navbar" onClick={() => navigate("/admin")}>Admin</button></li>
+          <li>
+            <button className="admin-btn" onClick={() => navigate('/admin')}>Admin</button>
+          </li>
         </ul>
       </nav>
 
-      <section ref={(el) => setRef(el, 0)} className="velnor-hero">
-        <h1>VELNOR</h1>
-        <h2>L’IA de cybersécurité <span className="subtitle-glow">venue d’une autre galaxie</span></h2>
-        <p>Auditez votre site avec une IA avancée et recevez un rapport professionnel sous 24h ou 48h.</p>
-        <a href="#offres"><button className="cta-main">Demander un audit IA</button></a>
-      </section>
+      <header className="hero">
+        <div className="hero-content">
+          <h1>Explorez l’IA de demain</h1>
+          <p>Des audits cybersécurité automatisés, rapides et intelligents</p>
+          <button className="cta-btn" onClick={() => navigate('/paiement24')}>Demander un audit IA</button>
+        </div>
+        <div className="hero-visual" />
+      </header>
 
-      <section ref={(el) => setRef(el, 1)} id="fonctionnement" className="section fonctionnement">
-        <h3>🛠 Fonctionnement</h3>
+      <section className="section" id="fonctionnement">
+        <h2>Fonctionnement</h2>
         <div className="steps">
-          <div className="step">1️⃣ Entrez l’URL de votre site</div>
-          <div className="step">2️⃣ L’IA scanne et identifie les failles</div>
-          <div className="step">3️⃣ Recevez un PDF stratégique</div>
+          <div className="step">1. Demande d’audit</div>
+          <div className="step">2. Analyse IA</div>
+          <div className="step">3. Rapport PDF personnalisé</div>
         </div>
       </section>
 
-      <section ref={(el) => setRef(el, 2)} id="technologie" className="section technologie">
-        <h3>🧠 Technologie IA</h3>
-        <ul className="features">
-          <li>🔎 Détection XSS, SQLi, .env, ports ouverts</li>
-          <li>📄 Rapport PDF généré par IA</li>
-          <li>🛡️ Score de sécurité + Badge IA</li>
-          <li>🚀 Livraison express garantie</li>
+      <section className="section" id="offres">
+        <h2>Nos Offres</h2>
+        <div className="cards">
+          <div className="card">
+            <h3>Audit 24H</h3>
+            <p className="price">49€</p>
+            <button onClick={() => navigate('/paiement24')}>Choisir cette offre</button>
+          </div>
+          <div className="card">
+            <h3>Audit 48H</h3>
+            <p className="price">39€</p>
+            <button onClick={() => navigate('/paiement48')}>Choisir cette offre</button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="technologie">
+        <h2>Technologie IA</h2>
+        <p>Notre moteur d’analyse s’appuie sur des modèles d’intelligence artificielle avancés, spécialisés en cybersécurité.</p>
+        <ul className="tech-icons">
+          <li>🔍 Analyse avancée</li>
+          <li>🛡️ Détection de failles</li>
+          <li>📄 Rapport PDF automatique</li>
         </ul>
       </section>
 
-      <section ref={(el) => setRef(el, 3)} id="offres" className="section offres">
-        <h3>💼 Nos Offres</h3>
-        <div className="pricing-cards">
-          <div className="card">
-            <h4>Audit IA – 48h</h4>
-            <p>Analyse approfondie + Rapport PDF</p>
-            <p className="price">499€ HT</p>
-            <button onClick={() => navigate("/paiement-48h")}>Choisir</button>
-          </div>
-          <div className="card">
-            <h4>Audit Express – 24h</h4>
-            <p>Analyse prioritaire + Badge IA</p>
-            <p className="price">699€ HT</p>
-            <button onClick={() => navigate("/paiement-24h")}>Choisir</button>
-          </div>
-        </div>
+      <section className="section" id="faq">
+        <h2>FAQ</h2>
+        <details className="faq-item">
+          <summary>Que contient le rapport d’audit ?</summary>
+          <p>Un score de sécurité, une liste de failles, et des recommandations détaillées générées par notre IA.</p>
+        </details>
+        <details className="faq-item">
+          <summary>Comment est généré le rapport ?</summary>
+          <p>Grâce à une IA propriétaire entraînée sur des millions de données cybersécurité et audit web.</p>
+        </details>
       </section>
 
-      <section ref={(el) => setRef(el, 4)} id="faq" className="section faq">
-        <h3>❓ FAQ</h3>
-        <div className="faq-list">
-          {faq.map((item, i) => (
-            <details key={i} className="faq-item">
-              <summary>{item.q}</summary>
-              <p>{item.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      <footer ref={(el) => setRef(el, 5)} className="footer">
-        <span>© {new Date().getFullYear()} VELNOR — Cybersécurité de demain</span>
+      <footer className="footer">
+        <p>© 2025 VELNOR. Tous droits réservés.</p>
         <div className="footer-links">
-          <a href="/mentions-legales">Mentions légales</a>
+          <a href="#fonctionnement">Fonctionnement</a>
           <a href="#offres">Offres</a>
           <a href="#faq">FAQ</a>
         </div>
