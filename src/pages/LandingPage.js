@@ -16,7 +16,7 @@ import { FiMail } from 'react-icons/fi';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GalaxyParticles from './GalaxyParticles';
-import '../styles/landingpage.css';
+import '../styles/LandingPage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
