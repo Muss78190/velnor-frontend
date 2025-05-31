@@ -15,9 +15,10 @@ const GalaxyParticles = () => {
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.05; // très lente
-      this.vy = (Math.random() - 0.5) * 0.05;
-      this.radius = Math.random() * 1.2 + 0.3;
+      // vitesse un peu plus marquée
+      this.vx = (Math.random() - 0.5) * 0.1;
+      this.vy = (Math.random() - 0.5) * 0.1;
+      this.radius = Math.random() * 1.5 + 0.3;
       this.alpha = Math.random() * 0.4 + 0.3;
     }
     update() {
@@ -56,8 +57,8 @@ const GalaxyParticles = () => {
 
   const initStars = () => {
     stars = [];
-    // Ajustez ce facteur pour plus ou moins d’étoiles
-    const numStars = Math.floor((width * height) / 15000);
+    // densité un peu plus élevée
+    const numStars = Math.floor((width * height) / 10000);
     for (let i = 0; i < numStars; i++) {
       stars.push(new Star());
     }
@@ -71,9 +72,8 @@ const GalaxyParticles = () => {
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 100) {
           ctx.beginPath();
-          // plus la distance est élevée, plus la ligne est transparente
-          ctx.strokeStyle = `rgba(42, 199, 255, ${0.15 - dist / 800})`;
-          ctx.lineWidth = 0.3;
+          ctx.strokeStyle = `rgba(41, 204, 255, ${0.08 - dist / 1500})`;
+          ctx.lineWidth = 0.2;
           ctx.moveTo(stars[i].x, stars[i].y);
           ctx.lineTo(stars[j].x, stars[j].y);
           ctx.stroke();
