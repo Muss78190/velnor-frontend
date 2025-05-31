@@ -33,70 +33,65 @@ const LandingPage = () => {
   const faqRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Gestion de l'affichage du loader
   useEffect(() => {
-    // Simule un court délai de chargement (ici 1s), vous pouvez remplacer par un vrai check d'API si besoin
+    // Gestion du loader (1s de tempo)
     const timeout = setTimeout(() => {
       gsap.to(loaderRef.current, {
         opacity: 0,
-        duration: 0.8,
+        duration: 0.6,
         ease: 'power2.out',
         onComplete: () => setLoading(false),
       });
     }, 1000);
-
     return () => clearTimeout(timeout);
   }, []);
 
   useEffect(() => {
-    // SEO & meta tags
-    document.title = 'VELNOR – IA CyberSécurité Premium & Futuriste';
+    // Meta tags (SEO)
+    document.title = 'VELNOR – IA Cybersécurité Premium & Futuriste';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        "VELNOR : audits cybersécurité pilotés par IA, rapport PDF premium, score de sécurité détaillé, livré en 24h ou 48h."
+        'VELNOR : audits IA haut de gamme, rapport PDF détaillé, badge de confiance, livré en 24h ou 48h.'
       );
     }
 
-    // Animation Hero au chargement
+    // Animation Hero
     gsap.from(heroRef.current, {
       opacity: 0,
-      y: 40,
+      y: 50,
       duration: 1,
       ease: 'power3.out',
-      delay: 1.1,
+      delay: 1,
     });
-
-    // Glow oscillant pour le titre
+    // Titre : on réduit l’intensité du glow (juste un pulse très léger)
     gsap.to(heroTitleRef.current, {
-      textShadow:
-        '0 0 32px var(--blue-main), 0 0 16px var(--purple-main)',
+      textShadow: '0 0 20px var(--blue-main)',
       repeat: -1,
       yoyo: true,
       ease: 'sine.inOut',
-      duration: 2.5,
-      delay: 1.6,
+      duration: 3,
+      delay: 1.5,
     });
-
-    // Pulse pour le mini-CTA
+    // Mini-CTA : pulse plus lent et plus discret
     gsap.fromTo(
       miniCtaRef.current,
-      { boxShadow: '0 0 16px var(--blue-main)' },
+      { boxShadow: '0 0 10px var(--blue-main)' },
       {
-        boxShadow: '0 0 32px var(--purple-main)',
+        boxShadow: '0 0 20px var(--purple-main)',
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut',
-        duration: 4,
-        delay: 2.5,
+        duration: 5,
+        delay: 2,
       }
     );
 
-    // Animation scroll pour les sections
+    // ScrollTrigger pour chaque section
     const animateSection = (el) => {
       gsap.from(el, {
-        y: 40,
+        y: 30,
         opacity: 0,
         duration: 1,
         ease: 'power2.out',
@@ -107,7 +102,6 @@ const LandingPage = () => {
         },
       });
     };
-
     animateSection(funcRef.current);
     animateSection(techRef.current);
     animateSection(offersRef.current);
@@ -115,7 +109,7 @@ const LandingPage = () => {
     animateSection(faqRef.current);
   }, []);
 
-  // Smooth scroll et fermeture du menu mobile
+  // Smooth scroll & fermeture menu mobile
   const handleNavClick = (e, anchor) => {
     e.preventDefault();
     const target = document.querySelector(anchor);
@@ -134,13 +128,14 @@ const LandingPage = () => {
         </div>
       )}
 
+      {/* ===== PARTICULES FOND ===== */}
       <GalaxyParticles />
 
-      {/* ================= NAVBAR ================= */}
+      {/* ===== NAVBAR ===== */}
       <nav
         className="velnor-navbar"
         role="navigation"
-        aria-label="Main navigation"
+        aria-label="Navigation principale"
       >
         <div className="velnor-logo">VELNOR</div>
         <div className={`velnor-menu ${menuOpen ? 'open' : ''}`}>
@@ -188,7 +183,7 @@ const LandingPage = () => {
           </a>
           <button
             className="admin-btn"
-            onClick={() => window.location.href = '/admin-login'}
+            onClick={() => (window.location.href = '/admin-login')}
             aria-label="Aller à la page d’administration"
           >
             Admin
@@ -204,13 +199,13 @@ const LandingPage = () => {
       </nav>
 
       <main>
-        {/* ================= HERO ================= */}
+        {/* ===== HERO ===== */}
         <section
           id="hero"
           className="hero"
           ref={heroRef}
           role="banner"
-          aria-label="Section d’introduction"
+          aria-label="Section d’accueil"
         >
           <div className="hero-content">
             <h1
@@ -218,13 +213,13 @@ const LandingPage = () => {
               ref={heroTitleRef}
               aria-label="L’IA qui audite votre cybersécurité"
             >
-              L’IA qui audite<br />
+              L’IA qui audite <br />
               votre cybersécurité
             </h1>
             <p className="hero-subtitle">
-              Audits automatisés &bull; Rapport PDF complet &bull; Badge de confiance.
+              Audits automatisés &bull; Rapport PDF détaillé &bull; Badge de confiance  
               <br />
-              Livraison en 24h ou 48h.
+              Livraison en <strong>24h</strong> ou <strong>48h</strong>
             </p>
             <button
               className="cta-btn"
@@ -235,7 +230,7 @@ const LandingPage = () => {
             </button>
           </div>
 
-          {/* ===== MINI-CTA (sous-hero, position fixed en bas) ===== */}
+          {/* ===== MINI-CTA (fixé en bas droite) ===== */}
           <button
             className="mini-cta"
             ref={miniCtaRef}
@@ -246,7 +241,7 @@ const LandingPage = () => {
           </button>
         </section>
 
-        {/* ================ FONCTIONNEMENT ================ */}
+        {/* ===== FONCTIONNEMENT ===== */}
         <section
           id="fonctionnement"
           className="section fonctionnement"
@@ -274,7 +269,7 @@ const LandingPage = () => {
           </div>
         </section>
 
-        {/* ================ TECHNOLOGIE ================ */}
+        {/* ===== TECHNOLOGIE ===== */}
         <section
           id="technologie"
           className="section technologie"
@@ -290,22 +285,22 @@ const LandingPage = () => {
             <div className="tech-card">
               <GiSpaceship className="tech-icon" aria-hidden="true" />
               <h3>Analyse AI</h3>
-              <p>Algorithmes de deep learning pour détecter les vulnérabilités.</p>
+              <p>Deep learning pour détecter les vulnérabilités.</p>
             </div>
             <div className="tech-card">
               <MdSecurity className="tech-icon" aria-hidden="true" />
               <h3>Scannage avancé</h3>
-              <p>Détection statique & dynamique de points faibles.</p>
+              <p>Détection statique & dynamique de failles.</p>
             </div>
             <div className="tech-card">
               <FaChartBar className="tech-icon" aria-hidden="true" />
               <h3>Rapport détaillé</h3>
-              <p>Visualisation graphique, score de sécurité et recommandations.</p>
+              <p>Score, graphiques & recommandations claires.</p>
             </div>
           </div>
         </section>
 
-        {/* ================ OFFRES ================ */}
+        {/* ===== OFFRES ===== */}
         <section
           id="offres"
           className="section offres"
@@ -324,7 +319,7 @@ const LandingPage = () => {
               <ul className="offer-features">
                 <li>
                   <AiOutlineFilePdf className="bullet-icon" aria-hidden="true" />
-                  <span>Rapport PDF complet</span>
+                  <span>Rapport PDF détaillé</span>
                 </li>
                 <li>
                   <BsLightningFill className="bullet-icon" aria-hidden="true" />
@@ -332,12 +327,12 @@ const LandingPage = () => {
                 </li>
                 <li>
                   <FiMail className="bullet-icon" aria-hidden="true" />
-                  <span>Envoi autom. par e-mail</span>
+                  <span>Envoi automatique par e-mail</span>
                 </li>
               </ul>
               <button
                 className="offer-btn"
-                onClick={() => window.location.href = '/paiement-48h'}
+                onClick={() => (window.location.href = '/paiement-48h')}
                 aria-label="Choisir Audit IA 48h"
               >
                 Choisir
@@ -353,7 +348,7 @@ const LandingPage = () => {
                 </li>
                 <li>
                   <AiOutlineFilePdf className="bullet-icon" aria-hidden="true" />
-                  <span>Rapport & Badge sécurité</span>
+                  <span>Rapport & Badge</span>
                 </li>
                 <li>
                   <FiMail className="bullet-icon" aria-hidden="true" />
@@ -362,7 +357,7 @@ const LandingPage = () => {
               </ul>
               <button
                 className="offer-btn"
-                onClick={() => window.location.href = '/paiement-24h'}
+                onClick={() => (window.location.href = '/paiement-24h')}
                 aria-label="Choisir Audit Express 24h"
               >
                 Choisir
@@ -371,7 +366,7 @@ const LandingPage = () => {
           </div>
         </section>
 
-        {/* ================ TÉMOIGNAGES ================ */}
+        {/* ===== TÉMOIGNAGES ===== */}
         <section
           id="temoignages"
           className="section temoignages"
@@ -405,7 +400,7 @@ const LandingPage = () => {
           </div>
         </section>
 
-        {/* ================ FAQ ================ */}
+        {/* ===== FAQ ===== */}
         <section
           id="faq"
           className="section faq"
@@ -421,28 +416,29 @@ const LandingPage = () => {
             <details className="faq-item">
               <summary>Qu’est-ce qu’un audit IA ?</summary>
               <p>
-                Un audit piloté par IA analyse automatiquement votre site, détecte points faibles
-                et génère un rapport PDF détaillé pour vos équipes techniques.
+                Un audit piloté par notre IA analyse automatiquement votre site, détecte les vulnérabilités
+                et génère un rapport PDF très détaillé pour vos équipes techniques.
               </p>
             </details>
             <details className="faq-item">
               <summary>Quelle différence entre 24h et 48h ?</summary>
               <p>
                 L’offre 24h inclut un badge sécurité premium & un traitement prioritaire. L’offre 48h reste
-                complète mais sans badge et délai plus long.
+                complète mais sans badge et délai de livraison un peu plus long.
               </p>
             </details>
             <details className="faq-item">
               <summary>Puis-je accéder à un historique des audits ?</summary>
               <p>
-                Oui, via votre espace client (backend), vous retrouverez tous vos audits, rapports et badges générés.
+                Oui, via votre espace client sécurisé, vous retrouverez tous vos audits passés, rapports et
+                badges générés.
               </p>
             </details>
           </div>
         </section>
       </main>
 
-      {/* ================= FOOTER ================= */}
+      {/* ===== FOOTER ===== */}
       <footer className="footer" role="contentinfo">
         <p>© 2025 Velnor – All rights reserved.</p>
         <div className="footer-links">
