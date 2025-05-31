@@ -1,10 +1,10 @@
 // src/pages/paiement-48h.js
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/payment.css';
 
 const Paiement48h = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e) => {
