@@ -1,0 +1,130 @@
+/* src/styles/payment.css */
+
+/* On reprend la même palette de couleurs que la landing page : #010116, bleu néon, violet */
+.payment-page {
+  background: #010116;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Optionnellement, on peut ajouter quelques particules très légères derrière (réutiliser GalaxyParticles) */
+/* Mais si vous préférez un fond uni, vous pouvez commenter la partie <GalaxyParticles /> et laisser #010116 par défaut */
+
+.payment-container {
+  background: rgba(5, 5, 40, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  padding: 2.5rem 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.payment-container h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--blue-main);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px var(--blue-main);
+}
+
+.payment-price {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--purple-main);
+  margin-bottom: 1rem;
+}
+
+.payment-features {
+  text-align: left;
+  margin-bottom: 1.8rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.payment-features li {
+  margin-bottom: 0.6rem;
+}
+.payment-features li::before {
+  content: '• ';
+  color: var(--blue-main);
+  font-size: 1.2rem;
+  vertical-align: middle;
+  margin-right: 0.3rem;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.payment-form label {
+  font-size: 0.95rem;
+  text-align: left;
+  color: var(--text-light);
+}
+
+.payment-form input {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #0a0a1e;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  transition: border var(--transition), box-shadow var(--transition);
+}
+.payment-form input:focus {
+  outline: none;
+  border: 1px solid var(--blue-main);
+  box-shadow: 0 0 8px var(--blue-main);
+}
+
+.payment-btn {
+  background: linear-gradient(100deg, var(--blue-main), var(--purple-main));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 0 14px var(--blue-main);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.payment-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 24px var(--purple-main);
+}
+
+.payment-back {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+.payment-back:hover {
+  color: var(--blue-main);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .payment-container {
+    padding: 2rem 1.5rem;
+  }
+  .payment-container h2 {
+    font-size: 1.6rem;
+  }
+  .payment-price {
+    font-size: 2rem;
+  }
+}

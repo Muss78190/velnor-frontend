@@ -16,7 +16,7 @@ import { FiMail } from 'react-icons/fi';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GalaxyParticles from './GalaxyParticles';
-import '../styles/LandingPage.css';
+import '../styles/landingpage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,7 +25,6 @@ const LandingPage = () => {
   const loaderRef = useRef(null);
   const heroRef = useRef(null);
   const heroTitleRef = useRef(null);
-  const miniCtaRef = useRef(null);
   const funcRef = useRef(null);
   const techRef = useRef(null);
   const offersRef = useRef(null);
@@ -33,8 +32,8 @@ const LandingPage = () => {
   const faqRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Loader
   useEffect(() => {
-    // Gestion du loader (1s de tempo)
     const timeout = setTimeout(() => {
       gsap.to(loaderRef.current, {
         opacity: 0,
@@ -46,8 +45,8 @@ const LandingPage = () => {
     return () => clearTimeout(timeout);
   }, []);
 
+  // Animations & SEO
   useEffect(() => {
-    // Meta tags (SEO)
     document.title = 'VELNOR – IA Cybersécurité Premium & Futuriste';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
@@ -57,7 +56,7 @@ const LandingPage = () => {
       );
     }
 
-    // Animation Hero
+    // Animation du hero
     gsap.from(heroRef.current, {
       opacity: 0,
       y: 50,
@@ -65,7 +64,7 @@ const LandingPage = () => {
       ease: 'power3.out',
       delay: 1,
     });
-    // Titre : on réduit l’intensité du glow (juste un pulse très léger)
+    // Pulse léger sur le titre
     gsap.to(heroTitleRef.current, {
       textShadow: '0 0 20px var(--blue-main)',
       repeat: -1,
@@ -74,19 +73,6 @@ const LandingPage = () => {
       duration: 3,
       delay: 1.5,
     });
-    // Mini-CTA : pulse plus lent et plus discret
-    gsap.fromTo(
-      miniCtaRef.current,
-      { boxShadow: '0 0 10px var(--blue-main)' },
-      {
-        boxShadow: '0 0 20px var(--purple-main)',
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-        duration: 5,
-        delay: 2,
-      }
-    );
 
     // ScrollTrigger pour chaque section
     const animateSection = (el) => {
@@ -221,6 +207,14 @@ const LandingPage = () => {
               <br />
               Livraison en <strong>24h</strong> ou <strong>48h</strong>
             </p>
+
+            {/* ==== INTRODUCTION COURTE ==== */}
+            <p className="hero-intro">
+              VELNOR propose un audit full-stack de votre site web grâce à notre IA de pointe :  
+              détection des vulnérabilités, génération d’un rapport détaillé et délivrance d’un badge  
+              de confiance. En 24 h ou 48 h, soyez sûr de la sécurité de votre infrastructure.
+            </p>
+
             <button
               className="cta-btn"
               onClick={() => document.querySelector('#offres')?.scrollIntoView({ behavior: 'smooth' })}
@@ -229,16 +223,6 @@ const LandingPage = () => {
               Demander un audit IA
             </button>
           </div>
-
-          {/* ===== MINI-CTA (fixé en bas droite) ===== */}
-          <button
-            className="mini-cta"
-            ref={miniCtaRef}
-            onClick={() => document.querySelector('#fonctionnement')?.scrollIntoView({ behavior: 'smooth' })}
-            aria-label="Voir comment ça fonctionne"
-          >
-            Comment ça fonctionne ?
-          </button>
         </section>
 
         {/* ===== FONCTIONNEMENT ===== */}
@@ -264,7 +248,7 @@ const LandingPage = () => {
             </div>
             <div className="step-card">
               <FaStar className="step-icon" aria-hidden="true" />
-              <p>Recevez un PDF premium en 24h ou 48h</p>
+              <p>Recevez un PDF premium en 24 h ou 48 h</p>
             </div>
           </div>
         </section>
@@ -323,7 +307,7 @@ const LandingPage = () => {
                 </li>
                 <li>
                   <BsLightningFill className="bullet-icon" aria-hidden="true" />
-                  <span>Livraison garantie 48h</span>
+                  <span>Livraison garantie 48 h</span>
                 </li>
                 <li>
                   <FiMail className="bullet-icon" aria-hidden="true" />
@@ -333,7 +317,7 @@ const LandingPage = () => {
               <button
                 className="offer-btn"
                 onClick={() => (window.location.href = '/paiement-48h')}
-                aria-label="Choisir Audit IA 48h"
+                aria-label="Choisir Audit IA 48 h"
               >
                 Choisir
               </button>
@@ -352,13 +336,13 @@ const LandingPage = () => {
                 </li>
                 <li>
                   <FiMail className="bullet-icon" aria-hidden="true" />
-                  <span>Livraison garantie 24h</span>
+                  <span>Livraison garantie 24 h</span>
                 </li>
               </ul>
               <button
                 className="offer-btn"
                 onClick={() => (window.location.href = '/paiement-24h')}
-                aria-label="Choisir Audit Express 24h"
+                aria-label="Choisir Audit Express 24 h"
               >
                 Choisir
               </button>
@@ -387,7 +371,7 @@ const LandingPage = () => {
             </div>
             <div className="testi-card">
               <p className="testi-text">
-                “Audit premium, retour en 24h, recommandations actionnables. Vraiment pro.”
+                “Audit premium, retour en 24 h, recommandations actionnables. Vraiment pro.”
               </p>
               <p className="testi-author">— Sarah K., Freelance Web</p>
             </div>
@@ -421,17 +405,17 @@ const LandingPage = () => {
               </p>
             </details>
             <details className="faq-item">
-              <summary>Quelle différence entre 24h et 48h ?</summary>
+              <summary>Quelle différence entre 24 h et 48 h ?</summary>
               <p>
-                L’offre 24h inclut un badge sécurité premium & un traitement prioritaire. L’offre 48h reste
-                complète mais sans badge et délai de livraison un peu plus long.
+                L’offre 24 h inclut un badge sécurité premium & un traitement prioritaire. L’offre 48 h reste
+                complète mais sans badge et un délai de livraison légèrement plus long.
               </p>
             </details>
             <details className="faq-item">
               <summary>Puis-je accéder à un historique des audits ?</summary>
               <p>
-                Oui, via votre espace client sécurisé, vous retrouverez tous vos audits passés, rapports et
-                badges générés.
+                Oui, via votre espace client sécurisé, vous retrouverez tous vos audits passés, vos rapports et
+                vos badges générés.
               </p>
             </details>
           </div>

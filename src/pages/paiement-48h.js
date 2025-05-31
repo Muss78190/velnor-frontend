@@ -1,40 +1,52 @@
-
-import React from "react";
-import "../styles/Paiement.css";
+// src/pages/paiement-48h.js
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import '../styles/payment.css';
 
 const Paiement48h = () => {
-  const handlePaiement = async () => {
-    try {
-      const response = await fetch("https://velnor-backend.onrender.com/create-checkout-session-48h", {
-        method: "POST",
-      });
-      const data = await response.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert("Erreur lors de la redirection vers Stripe.");
-      }
-    } catch (error) {
-      alert("Erreur de connexion au serveur.");
-      console.error(error);
-    }
+  const history = useHistory();
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Ici, on déclenche la logique de paiement 48 h
+    history.push('/success');
   };
 
   return (
-    <div className="paiement-container">
-      <div className="paiement-card">
-        <h2 className="titre-paiement">Audit IA – 48h</h2>
-        <p className="prix">499 € HT</p>
-        <ul className="liste-options">
-          <li>📄 Rapport PDF complet</li>
-          <li>⚡ Livraison garantie sous 48h</li>
-          <li>📬 Envoi automatique par mail</li>
+    <section className="payment-page">
+      <div className="payment-container">
+        <h2>Audit IA – 48 h</h2>
+        <p className="payment-price">499&nbsp;€&nbsp;HT</p>
+        <ul className="payment-features">
+          <li>📄 Rapport PDF détaillé</li>
+          <li>⚡ Livraison garantie 48 h</li>
+          <li>✉ Envoi automatique par e-mail</li>
         </ul>
-        <button className="btn-stripe" onClick={handlePaiement}>
-          Payer avec Stripe
+        <form className="payment-form" onSubmit={handleSubmit}>
+          <label htmlFor="email">Votre e-mail professionnel</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="exemple@entreprise.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            aria-required="true"
+          />
+          <button type="submit" className="payment-btn">
+            Payer maintenant
+          </button>
+        </form>
+        <button
+          className="payment-back"
+          onClick={() => history.push('/')}
+          aria-label="Retour à l’accueil"
+        >
+          ← Retour
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 
