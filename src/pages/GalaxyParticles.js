@@ -8,7 +8,7 @@ const GalaxyParticles = () => {
   let width, height;
   let animationId;
 
-  // Classe d’une étoile/node
+  // Classe pour chaque étoile
   class Star {
     constructor() {
       this.reset();
@@ -57,22 +57,24 @@ const GalaxyParticles = () => {
 
   const initStars = () => {
     stars = [];
-    const numStars = Math.floor((width * height) / 15000); // densité ajustable
+    // Ajustez la densité en changeant ce facteur (ici : 15000)
+    const numStars = Math.floor((width * height) / 15000);
     for (let i = 0; i < numStars; i++) {
       stars.push(new Star());
     }
   };
 
   const connectStars = () => {
-    // On relie chaque étoile à ses voisines proches
+    // On relie chaque paire d’étoiles proches
     for (let i = 0; i < stars.length; i++) {
       for (let j = i + 1; j < stars.length; j++) {
         const dx = stars[i].x - stars[j].x;
         const dy = stars[i].y - stars[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) { // seuil de connexion (px)
+        if (dist < 100) { // seuil de connexion (en px)
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(42, 199, 255, ${0.15 - dist / 800})`; // déclin d’alpha selon la distance
+          // plus la distance est grande, plus l’alpha est faible
+          ctx.strokeStyle = `rgba(42, 199, 255, ${0.15 - dist / 800})`;
           ctx.lineWidth = 0.3;
           ctx.moveTo(stars[i].x, stars[i].y);
           ctx.lineTo(stars[j].x, stars[j].y);
@@ -86,13 +88,13 @@ const GalaxyParticles = () => {
   const animate = () => {
     ctx.clearRect(0, 0, width, height);
 
-    // Dessiner les étoiles
+    // On met à jour chaque étoile, puis on la dessine
     stars.forEach((star) => {
       star.update();
       star.draw();
     });
 
-    // Dessiner le réseau
+    // On connecte les étoiles proches entre elles
     connectStars();
 
     animationId = requestAnimationFrame(animate);
@@ -104,8 +106,7 @@ const GalaxyParticles = () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resize);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // <-- Aucun commentaire ESLint ici
 
   return (
     <canvas
