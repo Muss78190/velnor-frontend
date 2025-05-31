@@ -1,23 +1,24 @@
 /* ==========================================================================
-   landingpage.css  (VERSION FUTURISTE – ÉPURÉE – PROFESSIONNELLE)
+   landingpage.css  (VERSION ULTRA-FUTURISTE – HAUT DE GAMME)
    ========================================================================== */
 
-/* ========== VARIABLES GLOBALES ========== */
+/* ====================== Variables globales ====================== */
 :root {
-  --dark-bg: #0a0c18;             /* Fond global très sombre */
-  --navy-bg: #080a16;             /* Navbar un peu plus foncé */
-  --neon-blue: #2ac7ff;           /* Accent bleu néon */
-  --neon-purple: #b03eff;         /* Accent violet néon */
-  --text-light: #e3e6f0;          /* Texte clair principal */
-  --text-gray: #a8adbe;           /* Texte secondaire/gris */
-  --glass-bg: rgba(15, 17, 29, 0.7); /* Fond “glass” pour navbar & footer */
-  --card-bg: rgba(15, 17, 29, 0.9);   /* Fond des cartes */
-  --border-radius: 1rem;          /* Rayon arrondi pour cartes, boutons, etc. */
+  --dark-bg: #0a0c18;                 /* Fond très sombre */
+  --navy-bg: #080a16;                 /* Navbar / Footer background */
+  --neon-blue: #2ac7ff;               /* Accent néon bleu */
+  --neon-purple: #b03eff;             /* Accent néon violet */
+  --text-light: #e3e6f0;              /* Texte principal clair */
+  --text-gray: #a8adbe;               /* Texte secondaire */
+  --overlay-color: rgba(0, 0, 0, 0.3);/* Overlay sombre pour le fond */
+  --card-bg: rgba(15, 17, 29, 0.9);    /* Fond des cartes (dark glass) */
+  --border-radius: 1rem;              /* Rayon arrondi global */
   --shadow-neon-blue: 0 0 20px var(--neon-blue);
   --shadow-neon-purple: 0 0 20px var(--neon-purple);
+  --transition-speed: 0.2s;           /* Vitesse de transition générique */
 }
 
-/* ========== RESET & GLOBAL ========== */
+/* ====================== Reset & GLOBAL ====================== */
 * {
   margin: 0;
   padding: 0;
@@ -34,11 +35,20 @@ body {
   overflow-x: hidden;
 }
 
-/* ========== NAVBAR ========== */
+/* ====================== OVERLAY NUAGÉ ====================== */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: var(--overlay-color);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ====================== NAVBAR ====================== */
 .velnor-navbar {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   padding: 16px 5vw;
   display: flex;
@@ -60,16 +70,18 @@ body {
   display: flex;
   gap: 2.8rem;
 }
+/* Liens du menu */
 .velnor-menu li a {
   color: var(--text-light);
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
-  transition: color 0.2s;
+  transition: color var(--transition-speed);
 }
 .velnor-menu li a:hover {
   color: var(--neon-blue);
 }
+/* Bouton Admin */
 .admin-btn-navbar {
   background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
   color: #fff;
@@ -79,14 +91,15 @@ body {
   font-weight: 600;
   cursor: pointer;
   box-shadow: var(--shadow-neon-blue);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 .admin-btn-navbar:hover {
   transform: scale(1.04);
   box-shadow: var(--shadow-neon-purple);
 }
 
-/* ========== HERO ========== */
+/* ====================== HERO ====================== */
+/* Le container principal du Hero (sous la navbar) */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -94,15 +107,16 @@ body {
   align-items: center;
   position: relative;
   z-index: 1;
-  padding-top: 70px; /* espace pour la navbar fixe */
+  padding-top: 70px; /* Pour laisser de l’espace à la navbar fixe */
   text-align: center;
-  background: var(--dark-bg);
+  background: none;
 }
 .hero-content {
   max-width: 700px;
   margin: 0 auto;
-  opacity: 0; /* GSAP anim */
+  opacity: 0; /* Apparition avec GSAP */
 }
+/* Titre H1 en gradient néon */
 .hero-content h1 {
   font-size: 3rem;
   font-weight: 900;
@@ -114,11 +128,13 @@ body {
   color: transparent;
   text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-purple);
 }
+/* Sous-texte gris léger */
 .hero-content p {
   font-size: 1.2rem;
   color: var(--text-gray);
   margin-bottom: 2rem;
 }
+/* Bouton CTA néon */
 .cta-btn {
   font-size: 1.1rem;
   padding: 14px 40px;
@@ -129,19 +145,20 @@ body {
   font-weight: 700;
   box-shadow: var(--shadow-neon-blue);
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  opacity: 0; /* Apparition avec GSAP */
 }
 .cta-btn:hover {
   transform: scale(1.05);
   box-shadow: var(--shadow-neon-purple);
 }
 
-/* ========== SECTION COMMUNE ========== */
+/* ====================== SECTION GÉNÉRIQUE ====================== */
 .section {
   max-width: 1100px;
   margin: 0 auto;
   padding: 5rem 2rem;
-  opacity: 0; /* GSAP anim */
+  opacity: 0; /* Apparition avec GSAP */
 }
 .section h2 {
   font-size: 2rem;
@@ -151,7 +168,7 @@ body {
   color: #fff;
 }
 
-/* ========== SECTION FONCTIONNEMENT ========== */
+/* ====================== SECTION FONCTIONNEMENT ====================== */
 .steps {
   display: flex;
   justify-content: center;
@@ -166,7 +183,7 @@ body {
   max-width: 280px;
   text-align: center;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -184,7 +201,7 @@ body {
   font-size: 1rem;
 }
 
-/* ========== SECTION TECHNOLOGIE ========== */
+/* ====================== SECTION TECHNOLOGIE ====================== */
 .technologie .tech-cards {
   display: flex;
   justify-content: center;
@@ -199,7 +216,7 @@ body {
   max-width: 300px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 .tech-card:hover {
   transform: translateY(-6px);
@@ -221,7 +238,7 @@ body {
   line-height: 1.4;
 }
 
-/* ========== SECTION OFFRES ========== */
+/* ====================== SECTION OFFRES ====================== */
 .offres .pricing-cards {
   display: flex;
   justify-content: center;
@@ -236,7 +253,7 @@ body {
   max-width: 320px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed), border var(--transition-speed);
   border: 2px solid transparent;
 }
 .offres .card.popular {
@@ -284,15 +301,14 @@ body {
   border-radius: 1rem;
   cursor: pointer;
   box-shadow: var(--shadow-neon-blue);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 .offres .card-btn:hover {
   transform: scale(1.04);
   box-shadow: var(--shadow-neon-purple);
 }
 
-/* ========== SECTION TÉMOIGNAGES ========== */
-/* On utilise scroll-snap pour un carrousel fluide */
+/* ====================== SECTION TÉMOIGNAGES ====================== */
 .temoignages .testimonials-slider {
   display: flex;
   gap: 1.5rem;
@@ -320,7 +336,7 @@ body {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   flex-shrink: 0;
   scroll-snap-align: start;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 .testimonial-card:hover {
   transform: translateY(-6px);
@@ -340,7 +356,7 @@ body {
   font-weight: 600;
 }
 
-/* ========== SECTION FAQ ========== */
+/* ====================== SECTION FAQ ====================== */
 .faq-list {
   max-width: 800px;
   margin: 0 auto;
@@ -352,7 +368,7 @@ body {
   padding: 0.5rem 0.8rem;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   border-left: 3px solid transparent;
-  transition: box-shadow 0.2s, border-left 0.2s;
+  transition: box-shadow var(--transition-speed), border-left var(--transition-speed);
 }
 .faq-item[open] {
   border-left: 3px solid var(--neon-purple);
@@ -379,7 +395,7 @@ body {
   content: '▶';
   font-size: 1rem;
   transform: rotate(0deg);
-  transition: transform 0.2s;
+  transition: transform var(--transition-speed);
   color: var(--neon-purple);
 }
 .faq-item[open] summary::after {
@@ -392,7 +408,7 @@ body {
   line-height: 1.5;
 }
 
-/* ========== FOOTER ========== */
+/* ====================== FOOTER ====================== */
 .footer {
   width: 100%;
   background: var(--navy-bg);
@@ -402,7 +418,7 @@ body {
   padding: 2rem 1rem;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
   margin-top: 2rem;
-  opacity: 0; /* GSAP anim */
+  opacity: 0; /* Apparition avec GSAP */
 }
 .footer-links {
   margin-top: 0.8rem;
@@ -412,13 +428,13 @@ body {
   text-decoration: none;
   margin: 0 0.6rem;
   font-weight: 500;
-  transition: color 0.2s;
+  transition: color var(--transition-speed);
 }
 .footer-links a:hover {
   color: var(--neon-purple);
 }
 
-/* ========== MEDIA QUERIES ========== */
+/* ====================== MEDIA QUERIES (RESPONSIVE) ====================== */
 @media (max-width: 900px) {
   .velnor-menu { display: none; }
   .hero-content h1 { font-size: 2.3rem; }

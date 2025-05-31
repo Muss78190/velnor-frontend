@@ -3,80 +3,108 @@ import React, { useRef, useEffect } from 'react';
 
 const GalaxyParticles = () => {
   const canvasRef = useRef(null);
+  let ctx;
+  let stars = [];
+  let width, height;
+  let animationId;
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    let animationId;
-
-    // Ajuster la taille du canvas
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Classe pour une étoile
-    class Star {
-      constructor() {
+  // Classe d’une étoile/node
+  class Star {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.05; // vitesse horizontale très lente
+      this.vy = (Math.random() - 0.5) * 0.05; // vitesse verticale très lente
+      this.radius = Math.random() * 1.2 + 0.3;
+      this.alpha = Math.random() * 0.4 + 0.3;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
         this.reset();
       }
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.radius = Math.random() * 1.2; 
-        this.alpha = Math.random() * 0.5 + 0.3; // densité
-        this.speed = Math.random() * 0.03 + 0.01; // réduit pour plus de subtilité
-      }
-      draw() {
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
-        ctx.fill();
-        ctx.closePath();
-        ctx.restore();
-      }
-      update() {
-        this.y -= this.speed;
-        if (this.y < 0) {
-          this.x = Math.random() * canvas.width;
-          this.y = canvas.height;
-          this.radius = Math.random() * 1.2;
-          this.alpha = Math.random() * 0.5 + 0.3;
-          this.speed = Math.random() * 0.03 + 0.01;
+    }
+    draw() {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+      ctx.fill();
+      ctx.closePath();
+      ctx.restore();
+    }
+  }
+
+  const initCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    ctx = canvas.getContext('2d');
+    resize();
+    window.addEventListener('resize', resize);
+    initStars();
+    animate();
+  };
+
+  const resize = () => {
+    const canvas = canvasRef.current;
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  };
+
+  const initStars = () => {
+    stars = [];
+    const numStars = Math.floor((width * height) / 15000); // densité ajustable
+    for (let i = 0; i < numStars; i++) {
+      stars.push(new Star());
+    }
+  };
+
+  const connectStars = () => {
+    // On relie chaque étoile à ses voisines proches
+    for (let i = 0; i < stars.length; i++) {
+      for (let j = i + 1; j < stars.length; j++) {
+        const dx = stars[i].x - stars[j].x;
+        const dy = stars[i].y - stars[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 100) { // seuil de connexion (px)
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(42, 199, 255, ${0.15 - dist / 800})`; // déclin d’alpha selon la distance
+          ctx.lineWidth = 0.3;
+          ctx.moveTo(stars[i].x, stars[i].y);
+          ctx.lineTo(stars[j].x, stars[j].y);
+          ctx.stroke();
+          ctx.closePath();
         }
       }
     }
+  };
 
-    // Initialise les étoiles
-    const initStars = () => {
-      stars = [];
-      const num = Math.floor((canvas.width * canvas.height) / 10000);
-      for (let i = 0; i < num; i++) {
-        stars.push(new Star());
-      }
-    };
-    initStars();
+  const animate = () => {
+    ctx.clearRect(0, 0, width, height);
 
-    // Animation
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      stars.forEach((star) => {
-        star.update();
-        star.draw();
-      });
-      animationId = requestAnimationFrame(animate);
-    };
-    animate();
+    // Dessiner les étoiles
+    stars.forEach((star) => {
+      star.update();
+      star.draw();
+    });
 
+    // Dessiner le réseau
+    connectStars();
+
+    animationId = requestAnimationFrame(animate);
+  };
+
+  useEffect(() => {
+    initCanvas();
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', resize);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
