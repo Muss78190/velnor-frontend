@@ -8,7 +8,6 @@ const GalaxyParticles = () => {
   let width, height;
   let animationId;
 
-  // Classe pour chaque étoile
   class Star {
     constructor() {
       this.reset();
@@ -16,8 +15,8 @@ const GalaxyParticles = () => {
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.05; // vitesse horizontale très lente
-      this.vy = (Math.random() - 0.5) * 0.05; // vitesse verticale très lente
+      this.vx = (Math.random() - 0.5) * 0.05; // très lente
+      this.vy = (Math.random() - 0.5) * 0.05;
       this.radius = Math.random() * 1.2 + 0.3;
       this.alpha = Math.random() * 0.4 + 0.3;
     }
@@ -57,7 +56,7 @@ const GalaxyParticles = () => {
 
   const initStars = () => {
     stars = [];
-    // Ajustez la densité en changeant ce facteur (ici : 15000)
+    // Ajustez ce facteur pour plus ou moins d’étoiles
     const numStars = Math.floor((width * height) / 15000);
     for (let i = 0; i < numStars; i++) {
       stars.push(new Star());
@@ -65,15 +64,14 @@ const GalaxyParticles = () => {
   };
 
   const connectStars = () => {
-    // On relie chaque paire d’étoiles proches
     for (let i = 0; i < stars.length; i++) {
       for (let j = i + 1; j < stars.length; j++) {
         const dx = stars[i].x - stars[j].x;
         const dy = stars[i].y - stars[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) { // seuil de connexion (en px)
+        if (dist < 100) {
           ctx.beginPath();
-          // plus la distance est grande, plus l’alpha est faible
+          // plus la distance est élevée, plus la ligne est transparente
           ctx.strokeStyle = `rgba(42, 199, 255, ${0.15 - dist / 800})`;
           ctx.lineWidth = 0.3;
           ctx.moveTo(stars[i].x, stars[i].y);
@@ -88,15 +86,12 @@ const GalaxyParticles = () => {
   const animate = () => {
     ctx.clearRect(0, 0, width, height);
 
-    // On met à jour chaque étoile, puis on la dessine
     stars.forEach((star) => {
       star.update();
       star.draw();
     });
 
-    // On connecte les étoiles proches entre elles
     connectStars();
-
     animationId = requestAnimationFrame(animate);
   };
 
@@ -106,7 +101,7 @@ const GalaxyParticles = () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resize);
     };
-  }, []); // <-- Aucun commentaire ESLint ici
+  }, []);
 
   return (
     <canvas
