@@ -1,60 +1,97 @@
-import React, { useEffect, useRef } from "react";
+// src/pages/GalaxyParticles.js
+import React, { useRef, useEffect } from 'react';
 
 const GalaxyParticles = () => {
-  const canvasRef = useRef();
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    let width, height;
-    let particles = [];
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let starsArray = [];
+    let animationFrameId;
 
-    const resize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+    // Ajuste la taille du canvas
+    const setCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
+    setCanvasSize();
+    window.addEventListener('resize', setCanvasSize);
 
-    const initParticles = () => {
-      particles = [];
-      for (let i = 0; i < 100; i++) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          radius: Math.random() * 1.5,
-          speedX: (Math.random() - 0.5) * 0.5,
-          speedY: (Math.random() - 0.5) * 0.5,
-        });
+    // Création d’étoiles aléatoires
+    class Star {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 1.1;
+        this.alpha = Math.random() * 0.6 + 0.2; // luminosité
+        this.speed = Math.random() * 0.02 + 0.01;
+      }
+      draw() {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+        ctx.fill();
+        ctx.closePath();
+        ctx.restore();
+      }
+      update() {
+        this.y -= this.speed;
+        if (this.y < 0) {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height;
+          this.radius = Math.random() * 1.2;
+          this.alpha = Math.random() * 0.6 + 0.2;
+          this.speed = Math.random() * 0.02 + 0.01;
+        }
+      }
+    }
+
+    // Générer un certain nombre d’étoiles
+    const initStars = () => {
+      starsArray = [];
+      const numberOfStars = Math.floor((canvas.width * canvas.height) / 8000); 
+      for (let i = 0; i < numberOfStars; i++) {
+        starsArray.push(new Star());
       }
     };
+    initStars();
 
+    // Boucle d’animation
     const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-      particles.forEach((p) => {
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        if (p.x < 0 || p.x > width) p.speedX *= -1;
-        if (p.y < 0 || p.y > height) p.speedY *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(108,210,255,0.7)";
-        ctx.fill();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      starsArray.forEach((star) => {
+        star.update();
+        star.draw();
       });
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
-
-    resize();
-    initParticles();
     animate();
-    window.addEventListener("resize", resize);
 
-    return () => window.removeEventListener("resize", resize);
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', setCanvasSize);
+    };
   }, []);
 
-  return <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, zIndex: 0 }} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 0,
+      }}
+    />
+  );
 };
 
 export default GalaxyParticles;
