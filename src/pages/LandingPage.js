@@ -1,108 +1,89 @@
 import React, { useEffect } from 'react';
-import '../styles/LandingPage.css';
-import { gsap } from 'gsap';
+import '../styles/landingpage.css';
+import GalaxyParticles from './GalaxyParticles';
+import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const LandingPage = () => {
-  const navigate = useNavigate();
-
   useEffect(() => {
-    gsap.utils.toArray('.section').forEach((section) => {
+    gsap.from(".hero", {
+      opacity: 0,
+      y: 50,
+      duration: 1.2,
+      ease: "power2.out",
+    });
+
+    gsap.utils.toArray(".section").forEach((section) => {
       gsap.from(section, {
-        opacity: 0,
-        y: 80,
-        duration: 1,
-        ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse',
+          start: "top 80%",
+          toggleActions: "play none none none",
         },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power2.out",
       });
     });
   }, []);
 
   return (
     <div className="landing-wrapper">
+      <GalaxyParticles />
       <nav className="navbar">
         <div className="logo">VELNOR</div>
-        <ul>
+        <ul className="nav-links">
           <li><a href="#fonctionnement">Fonctionnement</a></li>
-          <li><a href="#offres">Offres</a></li>
           <li><a href="#technologie">Technologie</a></li>
+          <li><a href="#offres">Offres</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li>
-            <button className="admin-btn" onClick={() => navigate('/admin')}>Admin</button>
-          </li>
         </ul>
+        <a className="admin-btn" href="/adminlogin">Admin</a>
       </nav>
 
       <header className="hero">
         <div className="hero-content">
           <h1>Explorez l’IA de demain</h1>
           <p>Des audits cybersécurité automatisés, rapides et intelligents</p>
-          <button className="cta-btn" onClick={() => navigate('/paiement24')}>Demander un audit IA</button>
+          <a className="cta-btn" href="#offres">Demander un audit IA</a>
         </div>
-        <div className="hero-visual" />
       </header>
 
-      <section className="section" id="fonctionnement">
-        <h2>Fonctionnement</h2>
+      <section id="fonctionnement" className="section fonctionnement">
+        <h2>Fonctionnement ⚙️</h2>
         <div className="steps">
-          <div className="step">1. Demande d’audit</div>
-          <div className="step">2. Analyse IA</div>
-          <div className="step">3. Rapport PDF personnalisé</div>
+          <div className="step">1. Entrez l’URL de votre site</div>
+          <div className="step">2. L’IA scanne et identifie les failles</div>
+          <div className="step">3. Recevez un PDF premium en 24h ou 48h</div>
         </div>
       </section>
 
-      <section className="section" id="offres">
-        <h2>Nos Offres</h2>
+      <section id="technologie" className="section technologie">
+        <h2>Technologie IA 🤖</h2>
+        <p>Notre moteur d’audit utilise des algorithmes propriétaires combinés à l’IA pour détecter les vulnérabilités en profondeur et fournir des recommandations exploitables immédiatement.</p>
+      </section>
+
+      <section id="offres" className="section offres">
+        <h2>Offres</h2>
         <div className="cards">
           <div className="card">
-            <h3>Audit 24H</h3>
-            <p className="price">49€</p>
-            <button onClick={() => navigate('/paiement24')}>Choisir cette offre</button>
+            <h3>Audit IA – 48h</h3>
+            <p>499€ HT<br/>Rapport complet, score IA, recommandations personnalisées</p>
+            <a href="/paiement-48h" className="btn-offre">Choisir</a>
           </div>
           <div className="card">
-            <h3>Audit 48H</h3>
-            <p className="price">39€</p>
-            <button onClick={() => navigate('/paiement48')}>Choisir cette offre</button>
+            <h3>Audit Express – 24h</h3>
+            <p>699€ HT<br/>Audit prioritaire, badge sécurité, livraison rapide</p>
+            <a href="/paiement-24h" className="btn-offre">Choisir</a>
           </div>
         </div>
       </section>
 
-      <section className="section" id="technologie">
-        <h2>Technologie IA</h2>
-        <p>Notre moteur d’analyse s’appuie sur des modèles d’intelligence artificielle avancés, spécialisés en cybersécurité.</p>
-        <ul className="tech-icons">
-          <li>🔍 Analyse avancée</li>
-          <li>🛡️ Détection de failles</li>
-          <li>📄 Rapport PDF automatique</li>
-        </ul>
-      </section>
-
-      <section className="section" id="faq">
-        <h2>FAQ</h2>
-        <details className="faq-item">
-          <summary>Que contient le rapport d’audit ?</summary>
-          <p>Un score de sécurité, une liste de failles, et des recommandations détaillées générées par notre IA.</p>
-        </details>
-        <details className="faq-item">
-          <summary>Comment est généré le rapport ?</summary>
-          <p>Grâce à une IA propriétaire entraînée sur des millions de données cybersécurité et audit web.</p>
-        </details>
-      </section>
-
-      <footer className="footer">
-        <p>© 2025 VELNOR. Tous droits réservés.</p>
-        <div className="footer-links">
-          <a href="#fonctionnement">Fonctionnement</a>
-          <a href="#offres">Offres</a>
-          <a href="#faq">FAQ</a>
-        </div>
+      <footer className="section footer">
+        <p>© 2025 VELNOR — L’IA de cybersécurité d’élite.</p>
       </footer>
     </div>
   );
