@@ -2,40 +2,40 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { HiCog } from 'react-icons/hi';
-import { FaRocket, FaShieldAlt, FaChartLine } from 'react-icons/fa';
-import { MdSecurity, MdTimeline, MdStar } from 'react-icons/md';
+import { FaRocket, FaShieldAlt, FaChartLine, FaStar } from 'react-icons/fa';
+import { MdSecurity, MdTimeline } from 'react-icons/md';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GalaxyParticles from './GalaxyParticles';
-import '../styles/LandingPage.css';
+import '../styles/landingpage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const LandingPage = () => {
-  const sectionRefs = useRef([]);
-  sectionRefs.current = [];
+  // Référence à toutes les sections pour l'animation au scroll
+  const sectionsRef = useRef([]);
+  sectionsRef.current = [];
 
-  // On ajoute chaque section au ref array
   const addToRefs = (el) => {
-    if (el && !sectionRefs.current.includes(el)) {
-      sectionRefs.current.push(el);
+    if (el && !sectionsRef.current.includes(el)) {
+      sectionsRef.current.push(el);
     }
   };
 
   useEffect(() => {
-    // Animation d’apparition (opacity et translateY) pour chaque section
-    sectionRefs.current.forEach((section) => {
+    // Pour chaque section, on fait apparaître en douceur
+    sectionsRef.current.forEach((section) => {
       gsap.fromTo(
         section,
         { autoAlpha: 0, y: 50 },
         {
-          duration: 1.1,
+          duration: 1,
           autoAlpha: 1,
           y: 0,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 80%',
+            start: 'top 85%',
             toggleActions: 'play none none none',
           },
         }
@@ -45,35 +45,23 @@ const LandingPage = () => {
 
   return (
     <div className="velnor-landing">
-      {/* Fond Etoiles */}
+      {/* Fond d’étoiles animé */}
       <GalaxyParticles />
 
-      {/* NAVBAR */}
+      {/* ===== NAVBAR ===== */}
       <nav className="velnor-navbar">
         <div className="velnor-logo">VELNOR</div>
         <ul className="velnor-menu">
-          <li>
-            <a href="#fonctionnement">Fonctionnement</a>
-          </li>
-          <li>
-            <a href="#technologie">Technologie</a>
-          </li>
-          <li>
-            <a href="#offres">Offres</a>
-          </li>
-          <li>
-            <a href="#temoignages">Témoignages</a>
-          </li>
-          <li>
-            <a href="#faq">FAQ</a>
-          </li>
+          <li><a href="#fonctionnement">Fonctionnement</a></li>
+          <li><a href="#technologie">Technologie</a></li>
+          <li><a href="#offres">Offres</a></li>
+          <li><a href="#temoignages">Témoignages</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
-        <Link to="/admin" className="admin-btn-navbar">
-          Admin
-        </Link>
+        <Link to="/admin" className="admin-btn-navbar">Admin</Link>
       </nav>
 
-      {/* HERO */}
+      {/* ===== HERO ===== */}
       <section className="hero" id="hero">
         <div className="hero-content" ref={addToRefs}>
           <h1>L’IA qui audite votre cybersécurité</h1>
@@ -84,26 +72,32 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* FONCTIONNEMENT */}
+      {/* ===== SECTION FONCTIONNEMENT ===== */}
       <section className="section fonctionnement" id="fonctionnement" ref={addToRefs}>
         <h2>Fonctionnement</h2>
         <div className="steps">
           <div className="step">
             <MdSecurity className="step-icon" />
-            <span>1. Entrez l’URL de votre site</span>
+            <div className="step-text">
+              <strong>1. Entrez l’URL de votre site</strong>
+            </div>
           </div>
           <div className="step">
             <MdTimeline className="step-icon" />
-            <span>2. L’IA scanne et identifie les failles</span>
+            <div className="step-text">
+              <strong>2. L’IA scanne et identifie les failles</strong>
+            </div>
           </div>
           <div className="step">
-            <MdStar className="step-icon" />
-            <span>3. Recevez un PDF premium en 24h ou 48h</span>
+            <FaStar className="step-icon" />
+            <div className="step-text">
+              <strong>3. Recevez un PDF premium en 24h ou 48h</strong>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* TECHNOLOGIE */}
+      {/* ===== SECTION TECHNOLOGIE ===== */}
       <section className="section technologie" id="technologie" ref={addToRefs}>
         <h2>Technologie</h2>
         <div className="tech-cards">
@@ -115,17 +109,17 @@ const LandingPage = () => {
           <div className="tech-card">
             <FaShieldAlt className="tech-icon" />
             <h4>Scannage avancé</h4>
-            <p>Détection statique et dynamique de points faibles.</p>
+            <p>Détection statique & dynamique de points faibles, tests de pénétration automatisés.</p>
           </div>
           <div className="tech-card">
             <FaChartLine className="tech-icon" />
             <h4>Rapport détaillé</h4>
-            <p>Visualisation graphique, score de sécurité et recommandations.</p>
+            <p>Visualisation graphique, score sécurité, priorités d’actions et plan de remédiation.</p>
           </div>
         </div>
       </section>
 
-      {/* OFFRES */}
+      {/* ===== SECTION OFFRES ===== */}
       <section className="section offres" id="offres" ref={addToRefs}>
         <h2>Offres</h2>
         <div className="pricing-cards">
@@ -156,7 +150,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* TÉMOIGNAGES */}
+      {/* ===== SECTION TÉMOIGNAGES ===== */}
       <section className="section temoignages" id="temoignages" ref={addToRefs}>
         <h2>Témoignages</h2>
         <div className="testimonials-slider">
@@ -174,39 +168,39 @@ const LandingPage = () => {
           </div>
           <div className="testimonial-card">
             <p className="testimonial-text">
-              “Le rapport PDF est digne d’un cabinet à €2000. Bluffant.”
+              “Le rapport PDF est digne d’un cabinet à 2000 €. Bluffant.”
             </p>
             <p className="testimonial-name">– Entreprise Turing (PME)</p>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* ===== SECTION FAQ ===== */}
       <section className="section faq" id="faq" ref={addToRefs}>
         <h2>FAQ</h2>
         <div className="faq-list">
           <details className="faq-item">
             <summary>Qu’est-ce qu’un audit IA ?</summary>
-            <p>Notre IA analyse automatiquement la sécurité de votre site web et produit un rapport personnalisé.</p>
+            <p>Notre IA analyse automatiquement la sécurité de votre site web et délivre un rapport personnalisé, avec recommandations et plan d’actions.</p>
           </details>
           <details className="faq-item">
             <summary>Quelle différence entre 24h et 48h ?</summary>
-            <p>La version 24h inclut un badge sécurité premium et traitement prioritaire. La 48h est standard.</p>
+            <p>La version 24h inclut un badge « Sécurité premium » et un traitement prioritaire. La version 48h reste très complète, sans badge premium.</p>
           </details>
           <details className="faq-item">
             <summary>Puis-je accéder à un historique des audits ?</summary>
-            <p>Oui, dans l’espace Admin, vous trouverez l’historique complet et les résultats passés.</p>
+            <p>Oui, rendez-vous dans l’espace Admin pour consulter l’historique de vos précédents audits, dates, scores et rapports PDF.</p>
           </details>
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* ===== FOOTER ===== */}
       <footer className="footer" ref={addToRefs}>
         <p>© {new Date().getFullYear()} VELNOR. Tous droits réservés.</p>
         <div className="footer-links">
           <a href="/mentions-legales">Mentions Légales</a>·
           <a href="#">Contact</a>·
-          <a href="#">Politique de confidentialité</a>
+          <a href="#">Politique de confidentialité</a>
         </div>
       </footer>
     </div>

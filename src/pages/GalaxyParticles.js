@@ -8,18 +8,18 @@ const GalaxyParticles = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let starsArray = [];
-    let animationFrameId;
+    let stars = [];
+    let animationId;
 
-    // Ajuste la taille du canvas
-    const setCanvasSize = () => {
+    // Ajuster la taille du canvas
+    const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
-    setCanvasSize();
-    window.addEventListener('resize', setCanvasSize);
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    // Création d’étoiles aléatoires
+    // Classe pour une étoile
     class Star {
       constructor() {
         this.reset();
@@ -27,9 +27,9 @@ const GalaxyParticles = () => {
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.radius = Math.random() * 1.1;
-        this.alpha = Math.random() * 0.6 + 0.2; // luminosité
-        this.speed = Math.random() * 0.02 + 0.01;
+        this.radius = Math.random() * 1.2; 
+        this.alpha = Math.random() * 0.5 + 0.3; // densité
+        this.speed = Math.random() * 0.03 + 0.01; // réduit pour plus de subtilité
       }
       draw() {
         ctx.save();
@@ -46,36 +46,36 @@ const GalaxyParticles = () => {
           this.x = Math.random() * canvas.width;
           this.y = canvas.height;
           this.radius = Math.random() * 1.2;
-          this.alpha = Math.random() * 0.6 + 0.2;
-          this.speed = Math.random() * 0.02 + 0.01;
+          this.alpha = Math.random() * 0.5 + 0.3;
+          this.speed = Math.random() * 0.03 + 0.01;
         }
       }
     }
 
-    // Générer un certain nombre d’étoiles
+    // Initialise les étoiles
     const initStars = () => {
-      starsArray = [];
-      const numberOfStars = Math.floor((canvas.width * canvas.height) / 8000); 
-      for (let i = 0; i < numberOfStars; i++) {
-        starsArray.push(new Star());
+      stars = [];
+      const num = Math.floor((canvas.width * canvas.height) / 10000);
+      for (let i = 0; i < num; i++) {
+        stars.push(new Star());
       }
     };
     initStars();
 
-    // Boucle d’animation
+    // Animation
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      starsArray.forEach((star) => {
+      stars.forEach((star) => {
         star.update();
         star.draw();
       });
-      animationFrameId = requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
     animate();
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', setCanvasSize);
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', resizeCanvas);
     };
   }, []);
 
@@ -89,6 +89,7 @@ const GalaxyParticles = () => {
         width: '100vw',
         height: '100vh',
         zIndex: 0,
+        pointerEvents: 'none',
       }}
     />
   );

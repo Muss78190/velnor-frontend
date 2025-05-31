@@ -1,37 +1,36 @@
 /* ==========================================================================
-   landingpage.css  (VERSION FINALE FUTURISTE / ÉPURE PROFESSIONNELLE)
+   landingpage.css  (VERSION FUTURISTE – ÉPURÉE – PROFESSIONNELLE)
    ========================================================================== */
 
-/* ========== VARIABLES ========== */
+/* ========== VARIABLES GLOBALES ========== */
 :root {
-  --dark-bg: #0a0c18;
-  --deep-navy: #080a16;
-  --neon-blue: #2ac7ff;
-  --neon-purple: #b03eff;
-  --text-light: #e3e6f0;
-  --text-gray: #a8adbe;
-  --glass-bg: rgba(15, 17, 29, 0.7);
-  --card-bg: rgba(15, 17, 29, 0.9);
-  --border-radius: 1.2rem;
+  --dark-bg: #0a0c18;             /* Fond global très sombre */
+  --navy-bg: #080a16;             /* Navbar un peu plus foncé */
+  --neon-blue: #2ac7ff;           /* Accent bleu néon */
+  --neon-purple: #b03eff;         /* Accent violet néon */
+  --text-light: #e3e6f0;          /* Texte clair principal */
+  --text-gray: #a8adbe;           /* Texte secondaire/gris */
+  --glass-bg: rgba(15, 17, 29, 0.7); /* Fond “glass” pour navbar & footer */
+  --card-bg: rgba(15, 17, 29, 0.9);   /* Fond des cartes */
+  --border-radius: 1rem;          /* Rayon arrondi pour cartes, boutons, etc. */
   --shadow-neon-blue: 0 0 20px var(--neon-blue);
+  --shadow-neon-purple: 0 0 20px var(--neon-purple);
 }
 
-/* ========== REGLAGES GLOBAUX ========== */
+/* ========== RESET & GLOBAL ========== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
   font-family: 'Inter', sans-serif;
-  background: var(--deep-navy);
+  background: var(--dark-bg);
   color: var(--text-light);
 }
-
 body {
-  background: var(--deep-navy);
+  background: var(--dark-bg);
   overflow-x: hidden;
 }
 
@@ -41,46 +40,40 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 18px 5vw;
+  padding: 16px 5vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
+  background: var(--navy-bg);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   z-index: 50;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
-
 .velnor-logo {
   font-size: 1.9rem;
   font-weight: 800;
   color: var(--neon-blue);
-  text-shadow: 0 0 10px var(--neon-blue), 0 0 25px var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+  letter-spacing: 1px;
 }
-
 .velnor-menu {
   list-style: none;
   display: flex;
-  gap: 2.5rem;
+  gap: 2.8rem;
 }
-
 .velnor-menu li a {
-  text-decoration: none;
   color: var(--text-light);
+  text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
   transition: color 0.2s;
 }
-
 .velnor-menu li a:hover {
   color: var(--neon-blue);
 }
-
 .admin-btn-navbar {
   background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-  color: #f7f7f7;
-  padding: 8px 20px;
+  color: #fff;
+  padding: 8px 22px;
   border: none;
   border-radius: 0.8rem;
   font-weight: 600;
@@ -88,10 +81,9 @@ body {
   box-shadow: var(--shadow-neon-blue);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .admin-btn-navbar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px var(--neon-purple);
+  transform: scale(1.04);
+  box-shadow: var(--shadow-neon-purple);
 }
 
 /* ========== HERO ========== */
@@ -102,38 +94,34 @@ body {
   align-items: center;
   position: relative;
   z-index: 1;
+  padding-top: 70px; /* espace pour la navbar fixe */
   text-align: center;
-  padding-top: 80px; /* pour compenser la navbar */
   background: var(--dark-bg);
-  overflow: hidden;
 }
-
 .hero-content {
   max-width: 700px;
   margin: 0 auto;
   opacity: 0; /* GSAP anim */
 }
-
 .hero-content h1 {
   font-size: 3rem;
   font-weight: 900;
+  line-height: 1.2;
   margin-bottom: 1rem;
   background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  text-shadow: 0 0 12px var(--neon-blue), 0 0 18px var(--neon-purple);
+  text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-purple);
 }
-
 .hero-content p {
   font-size: 1.2rem;
   color: var(--text-gray);
   margin-bottom: 2rem;
 }
-
 .cta-btn {
   font-size: 1.1rem;
-  padding: 14px 38px;
+  padding: 14px 40px;
   border: none;
   border-radius: 2rem;
   background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
@@ -143,61 +131,57 @@ body {
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .cta-btn:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 30px var(--neon-purple);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-neon-purple);
 }
 
-/* ========== SECTION FONCTIONNEMENT ========== */
+/* ========== SECTION COMMUNE ========== */
 .section {
   max-width: 1100px;
   margin: 0 auto;
   padding: 5rem 2rem;
   opacity: 0; /* GSAP anim */
 }
-
-.fonctionnement h2,
-.technologie h2,
-.offres h2,
-.temoignages h2,
-.faq h2 {
+.section h2 {
   font-size: 2rem;
   font-weight: 800;
-  margin-bottom: 2rem;
   text-align: center;
-  color: #f7f7f7;
+  margin-bottom: 2.5rem;
+  color: #fff;
 }
 
+/* ========== SECTION FONCTIONNEMENT ========== */
 .steps {
   display: flex;
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
 }
-
 .step {
   background: var(--card-bg);
   border-radius: var(--border-radius);
   padding: 1.8rem 2rem;
-  min-width: 230px;
+  min-width: 240px;
   max-width: 280px;
   text-align: center;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-
 .step:hover {
   transform: translateY(-6px);
   box-shadow: 0 0 20px var(--neon-blue);
 }
-
 .step-icon {
   font-size: 1.8rem;
   color: var(--neon-blue);
+}
+.step-text strong {
+  color: var(--text-light);
+  font-size: 1rem;
 }
 
 /* ========== SECTION TECHNOLOGIE ========== */
@@ -207,35 +191,30 @@ body {
   gap: 2rem;
   flex-wrap: wrap;
 }
-
 .tech-card {
   background: var(--card-bg);
   border-radius: var(--border-radius);
   padding: 2rem 1.5rem;
-  min-width: 240px;
-  max-width: 280px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  min-width: 260px;
+  max-width: 300px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .tech-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 0 20px var(--neon-blue);
+  box-shadow: 0 0 20px var(--neon-purple);
 }
-
 .tech-icon {
   font-size: 2rem;
   color: var(--neon-purple);
   margin-bottom: 0.8rem;
 }
-
 .tech-card h4 {
   font-size: 1.3rem;
-  margin-bottom: 0.6rem;
   color: #fff;
+  margin-bottom: 0.6rem;
 }
-
 .tech-card p {
   font-size: 1rem;
   color: var(--text-gray);
@@ -249,46 +228,40 @@ body {
   gap: 2rem;
   flex-wrap: wrap;
 }
-
 .offres .card {
   background: var(--card-bg);
   border-radius: var(--border-radius);
-  padding: 2rem;
-  min-width: 260px;
-  max-width: 300px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  padding: 2rem 1.8rem;
+  min-width: 280px;
+  max-width: 320px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+  border: 2px solid transparent;
 }
-
 .offres .card.popular {
   border: 2px solid var(--neon-purple);
 }
-
 .offres .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 0 20px var(--neon-purple);
 }
-
 .offres .card h4 {
   font-size: 1.4rem;
   color: var(--neon-blue);
   margin-bottom: 0.6rem;
 }
-
 .offres .price {
   font-size: 2rem;
   font-weight: 900;
   color: var(--neon-purple);
   margin-bottom: 1rem;
 }
-
 .offres .features {
   list-style: none;
-  text-align: left;
   margin-bottom: 1.5rem;
+  text-align: left;
 }
-
 .offres .features li {
   font-size: 1rem;
   color: var(--text-gray);
@@ -296,55 +269,63 @@ body {
   padding-left: 1.2rem;
   position: relative;
 }
-
 .offres .features li::before {
   content: '•';
   position: absolute;
   left: 0;
   color: var(--neon-blue);
 }
-
 .offres .card-btn {
   background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
   color: #fff;
   font-weight: 600;
-  padding: 12px 24px;
+  padding: 12px 28px;
   border: none;
   border-radius: 1rem;
   cursor: pointer;
   box-shadow: var(--shadow-neon-blue);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .offres .card-btn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 25px var(--neon-purple);
+  transform: scale(1.04);
+  box-shadow: var(--shadow-neon-purple);
 }
 
 /* ========== SECTION TÉMOIGNAGES ========== */
+/* On utilise scroll-snap pour un carrousel fluide */
 .temoignages .testimonials-slider {
   display: flex;
   gap: 1.5rem;
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
   padding-bottom: 1rem;
 }
-
-.temoignages .testimonial-card {
+.temoignages .testimonials-slider::-webkit-scrollbar {
+  height: 6px;
+}
+.temoignages .testimonials-slider::-webkit-scrollbar-track {
+  background: transparent;
+}
+.temoignages .testimonials-slider::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+.testimonial-card {
   background: var(--card-bg);
   border-radius: var(--border-radius);
-  min-width: 280px;
+  min-width: 300px;
   max-width: 320px;
   padding: 1.8rem 1.5rem;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+  scroll-snap-align: start;
   transition: transform 0.2s, box-shadow 0.2s;
-  position: relative;
 }
-
-.temoignages .testimonial-card:hover {
+.testimonial-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 0 20px var(--neon-blue);
 }
-
 .testimonial-text {
   font-size: 1rem;
   color: var(--text-light);
@@ -352,7 +333,6 @@ body {
   margin-bottom: 1rem;
   font-style: italic;
 }
-
 .testimonial-name {
   font-size: 0.95rem;
   color: var(--neon-blue);
@@ -365,54 +345,68 @@ body {
   max-width: 800px;
   margin: 0 auto;
 }
-
 .faq-item {
   background: var(--card-bg);
   border-radius: var(--border-radius);
   margin-bottom: 1rem;
   padding: 0.5rem 0.8rem;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-  border-left: 3px solid var(--neon-purple);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  border-left: 3px solid transparent;
   transition: box-shadow 0.2s, border-left 0.2s;
 }
-
 .faq-item[open] {
-  border-left: 3px solid var(--neon-blue);
-  box-shadow: 0 0 20px var(--neon-blue);
+  border-left: 3px solid var(--neon-purple);
+  box-shadow: 0 0 20px var(--neon-purple);
 }
-
 .faq-item summary {
   cursor: pointer;
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--text-light);
-  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  list-style: none;
 }
-
+.faq-item summary::marker {
+  display: none;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary::after {
+  content: '▶';
+  font-size: 1rem;
+  transform: rotate(0deg);
+  transition: transform 0.2s;
+  color: var(--neon-purple);
+}
+.faq-item[open] summary::after {
+  content: '▼';
+  color: var(--neon-blue);
+}
 .faq-item p {
   color: var(--text-gray);
-  padding: 0.8rem 0 1rem 0.5rem;
-  line-height: 1.4;
+  padding: 0.6rem 1rem 1rem 1rem;
+  line-height: 1.5;
 }
 
 /* ========== FOOTER ========== */
 .footer {
   width: 100%;
-  background: var(--glass-bg);
+  background: var(--navy-bg);
   color: var(--text-gray);
   text-align: center;
   font-size: 0.95rem;
   padding: 2rem 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
-  margin-top: 3rem;
+  margin-top: 2rem;
   opacity: 0; /* GSAP anim */
 }
-
 .footer-links {
   margin-top: 0.8rem;
 }
-
 .footer-links a {
   color: var(--neon-blue);
   text-decoration: none;
@@ -420,42 +414,22 @@ body {
   font-weight: 500;
   transition: color 0.2s;
 }
-
 .footer-links a:hover {
   color: var(--neon-purple);
 }
 
 /* ========== MEDIA QUERIES ========== */
 @media (max-width: 900px) {
-  .velnor-menu {
-    display: none;
-  }
-  .hero-content h1 {
-    font-size: 2.3rem;
-  }
-  .cta-btn {
-    font-size: 1rem;
-    padding: 12px 24px;
-  }
-  .steps {
+  .velnor-menu { display: none; }
+  .hero-content h1 { font-size: 2.3rem; }
+  .cta-btn { font-size: 1rem; padding: 12px 28px; }
+  .steps, .tech-cards, .pricing-cards {
     flex-direction: column;
     align-items: center;
+    gap: 1.5rem;
   }
-  .step {
-    width: 100%;
-    max-width: 400px;
-  }
-  .tech-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-  .offres .pricing-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-  .temoignages .testimonials-slider {
-    flex-direction: column;
-    align-items: center;
+  .testimonial-card {
+    min-width: 90vw;
+    max-width: 90vw;
   }
 }
-
