@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 const GalaxyParticles = () => {
   const canvasRef = useRef();
@@ -6,75 +6,55 @@ const GalaxyParticles = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+    let width, height;
+    let particles = [];
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const resize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    };
 
-    const stars = [];
-    const numStars = 200;
-
-    for (let i = 0; i < numStars; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1.2 + 0.5,
-        velocity: Math.random() * 0.3 + 0.1,
-        alpha: Math.random() * 0.5 + 0.5,
-      });
-    }
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#ffffff";
-
-      for (let i = 0; i < numStars.length; i++) {
-        const star = stars[i];
-        ctx.beginPath();
-        ctx.globalAlpha = star.alpha;
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2, false);
-        ctx.fill();
-
-        // move
-        star.y += star.velocity;
-
-        // reset when off screen
-        if (star.y > canvas.height) {
-          star.y = 0;
-          star.x = Math.random() * canvas.width;
-        }
+    const initParticles = () => {
+      particles = [];
+      for (let i = 0; i < 100; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 1.5,
+          speedX: (Math.random() - 0.5) * 0.5,
+          speedY: (Math.random() - 0.5) * 0.5,
+        });
       }
     };
 
     const animate = () => {
-      draw();
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach((p) => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > width) p.speedX *= -1;
+        if (p.y < 0 || p.y > height) p.speedY *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(108,210,255,0.7)";
+        ctx.fill();
+      });
       requestAnimationFrame(animate);
     };
 
+    resize();
+    initParticles();
     animate();
+    window.addEventListener("resize", resize);
 
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", resize);
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        zIndex: 0,
-        width: "100%",
-        height: "100%",
-        pointerEvents: "none",
-      }}
-    />
-  );
+  return <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, zIndex: 0 }} />;
 };
 
 export default GalaxyParticles;

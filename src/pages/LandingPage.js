@@ -1,90 +1,106 @@
-import React, { useEffect } from 'react';
-import '../styles/LandingPage.css';
-import GalaxyParticles from './GalaxyParticles';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect } from "react";
+import "../styles/LandingPage.css";
+import GalaxyParticles from "./GalaxyParticles";
+import { useNavigate } from "react-router-dom";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const LandingPage = () => {
-  useEffect(() => {
-    gsap.from(".hero", {
-      opacity: 0,
-      y: 50,
-      duration: 1.2,
-      ease: "power2.out",
-    });
+  const navigate = useNavigate();
 
+  useEffect(() => {
     gsap.utils.toArray(".section").forEach((section) => {
-      gsap.from(section, {
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power2.out",
-      });
+      gsap.fromTo(
+        section,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+          },
+        }
+      );
     });
   }, []);
 
   return (
-    <div className="landing-wrapper">
+    <div className="landing-container">
       <GalaxyParticles />
+
       <nav className="navbar">
-        <div className="logo">VELNOR</div>
-        <ul className="nav-links">
-          <li><a href="#fonctionnement">Fonctionnement</a></li>
-          <li><a href="#technologie">Technologie</a></li>
-          <li><a href="#offres">Offres</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-        <a className="admin-btn" href="/adminlogin">Admin</a>
+        <div className="nav-left">
+          <h1 className="velnor-title">VELNOR</h1>
+        </div>
+        <div className="nav-right">
+          <button onClick={() => navigate("/adminlogin")} className="admin-btn">
+            Admin
+          </button>
+        </div>
       </nav>
 
       <header className="hero">
         <div className="hero-content">
-          <h1>Explorez l’IA de demain</h1>
-          <p>Des audits cybersécurité automatisés, rapides et intelligents</p>
-          <a className="cta-btn" href="#offres">Demander un audit IA</a>
+          <h2 className="hero-title">L’IA qui audite votre cybersécurité</h2>
+          <p className="hero-subtitle">
+            Audit automatisé, rapport PDF complet, badge de confiance. En 24h ou 48h.
+          </p>
+          <button className="cta-button" onClick={() => document.getElementById("offres").scrollIntoView({ behavior: "smooth" })}>
+            Demander un audit IA
+          </button>
         </div>
       </header>
 
-      <section id="fonctionnement" className="section fonctionnement">
-        <h2>Fonctionnement ⚙️</h2>
+      <section className="section fonctionnement">
+        <h2>Fonctionnement</h2>
         <div className="steps">
-          <div className="step">1. Entrez l’URL de votre site</div>
-          <div className="step">2. L’IA scanne et identifie les failles</div>
-          <div className="step">3. Recevez un PDF premium en 24h ou 48h</div>
+          <div className="step">🧠 Vous envoyez votre nom de domaine</div>
+          <div className="step">🤖 Notre IA analyse vos failles</div>
+          <div className="step">📄 Vous recevez un rapport PDF complet</div>
         </div>
       </section>
 
-      <section id="technologie" className="section technologie">
-        <h2>Technologie IA 🤖</h2>
-        <p>Notre moteur d’audit utilise des algorithmes propriétaires combinés à l’IA pour détecter les vulnérabilités en profondeur et fournir des recommandations exploitables immédiatement.</p>
+      <section className="section technologie">
+        <h2>Technologie IA</h2>
+        <p>
+          Propulsé par une IA entraînée sur des milliers de scénarios de cybersécurité. Audit précis, fiable, rapide.
+        </p>
       </section>
 
-      <section id="offres" className="section offres">
-        <h2>Offres</h2>
+      <section className="section offres" id="offres">
+        <h2>Nos Offres</h2>
         <div className="cards">
           <div className="card">
             <h3>Audit IA – 48h</h3>
-            <p>499€ HT<br/>Rapport complet, score IA, recommandations personnalisées</p>
-            <a href="/paiement-48h" className="btn-offre">Choisir</a>
+            <p>499 € HT</p>
+            <ul>
+              <li>📄 Rapport PDF complet</li>
+              <li>⚡ Livraison garantie sous 48h</li>
+              <li>📬 Envoi automatique par mail</li>
+            </ul>
+            <button onClick={() => navigate("/paiement-48h")}>Choisir</button>
           </div>
+
           <div className="card">
-            <h3>Audit Express – 24h</h3>
-            <p>699€ HT<br/>Audit prioritaire, badge sécurité, livraison rapide</p>
-            <a href="/paiement-24h" className="btn-offre">Choisir</a>
+            <h3>Audit Express IA – 24h</h3>
+            <p>699 € HT</p>
+            <ul>
+              <li>⚡ Traitement prioritaire</li>
+              <li>📄 Rapport + Badge Sécurité</li>
+              <li>📬 Livraison garantie sous 24h</li>
+            </ul>
+            <button onClick={() => navigate("/paiement-24h")}>Choisir</button>
           </div>
         </div>
       </section>
 
-      <footer className="section footer">
-        <p>© 2025 VELNOR — L’IA de cybersécurité d’élite.</p>
-      </footer>
+      <section className="section footer">
+        <p>© 2025 VELNOR. Tous droits réservés. | Contact : support@velnor.com</p>
+      </section>
     </div>
   );
 };
