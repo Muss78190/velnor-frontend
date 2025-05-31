@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../styles/landingpage.css';
+import '../styles/LandingPage.css';
 import GalaxyParticles from './GalaxyParticles';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
