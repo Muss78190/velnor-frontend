@@ -1,6 +1,6 @@
 // Paiement24h.js
 import React, { useState } from "react";
-import "./Paiement.css";
+import "../styles/Paiement.css";
 
 const Paiement24h = () => {
   const [loading, setLoading] = useState(false);
