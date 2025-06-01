@@ -426,51 +426,83 @@ li {
   box-shadow: 0 0 24px var(--purple-main);
 }
 
-/* ================ TÉMOIGNAGES ================ */
-.temoignages {
-  overflow: hidden;
-}
-.temoignages .testi-container {
+/* -----------------------------
+   Section Témoignages – Ajustement
+   ----------------------------- */
+
+.testimonials-container {
   display: flex;
-  gap: 1rem;
-  padding-bottom: 0.8rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+  justify-content: center;       /* Centre horizontal des cartes */
+  gap: 1.5rem;                   /* Espacement entre chaque carte */
+  flex-wrap: wrap;               /* Permet au troisième de « descendre » sur mobile */
+  padding: 0 1rem;               /* Petit padding à gauche/droite pour éviter la coupe */
 }
-.temoignages .testi-container::-webkit-scrollbar {
-  display: none;
-}
-.testi-card {
+
+.testimonial-card {
   background: rgba(5, 5, 40, 0.85);
-  border-radius: var(--border-radius);
-  box-shadow: var(--card-shadow);
-  min-width: 260px;
-  max-width: 300px;
-  padding: 1.8rem 1.4rem;
-  scroll-snap-align: start;
-  flex-shrink: 0;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  padding: 1.5rem;
+  max-width: 300px;              /* Fixe une largeur max pour chaque carte */
+  width: 100%;
+  color: #ecf2fa;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform var(--transition), box-shadow var(--transition);
 }
-.testi-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.6);
+
+/* Titre « Témoignages » + ligne sous-jacente */
+.testimonials-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+  position: relative;
 }
-.testi-text {
+.testimonials-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 8px auto 0;
+  background: linear-gradient(
+    90deg,
+    #33caff,
+    #b347ff
+  );
+  border-radius: 2px;
+}
+
+/* Texte du témoignage */
+.testimonial-card p {
   font-style: italic;
-  font-size: 0.96rem;
-  color: var(--text-light);
-  margin-bottom: 1rem;
   line-height: 1.4;
+  margin-bottom: 1rem;
+  flex-grow: 1;
 }
-.testi-author {
-  font-weight: 500;
-  color: var(--blue-main);
+
+/* Signature (nom + rôle) */
+.testimonial-card .author {
   text-align: right;
-  font-size: 0.9rem;
+  font-weight: 600;
+  color: #33caff;
+  margin-top: 1rem;
+}
+
+/* Responsive : sur petits écrans, empiler deux cartes maximum par ligne */
+@media (max-width: 900px) {
+  .testimonials-container {
+    gap: 1rem;
+  }
+  .testimonial-card {
+    max-width: 45%; /* deux cartes côte à côte sur tablette */
+  }
+}
+@media (max-width: 600px) {
+  .testimonial-card {
+    max-width: 100%; /* une carte par ligne sur mobile */
+  }
 }
 
 /* ================ FAQ ================ */

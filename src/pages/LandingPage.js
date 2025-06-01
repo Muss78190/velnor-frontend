@@ -200,7 +200,7 @@ const LandingPage = () => {
               aria-label="L’IA qui audite votre cybersécurité"
             >
               L’IA qui audite <br />
-              votre cybersécurité
+              votre sécurité
             </h1>
             <p className="hero-subtitle">
               Audits automatisés &bull; Rapport PDF détaillé &bull; Badge de confiance  
@@ -323,7 +323,7 @@ const LandingPage = () => {
               </button>
             </div>
             <div className="offer-card encadre-purple">
-              <h3>Audit Express – 24h</h3>
+              <h3>Audit IA – 24h</h3>
               <p className="offer-price">699&nbsp;€&nbsp;HT</p>
               <ul className="offer-features">
                 <li>
@@ -412,10 +412,10 @@ const LandingPage = () => {
               </p>
             </details>
             <details className="faq-item">
-              <summary>Puis-je accéder à un historique des audits ?</summary>
+              <summary>Puis-je vous faire confiance  ?</summary>
               <p>
-                Oui, via votre espace client sécurisé, vous retrouverez tous vos audits passés, vos rapports et
-                vos badges générés.
+                Oui, vous venir en aide est un projet qui ne nous tiens pas seulement a coeur, mais protéger est 
+                primordiale dans un monde connecté.
               </p>
             </details>
           </div>
