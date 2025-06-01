@@ -1,16 +1,16 @@
-/* src/styles/landingpage.css */
+/* ==============================================================
+   FILE: src/styles/LandingPage.css
+   ============================================================== */
 
-/* ================= VARIABLES ================= */
+/* ================= VARIABLES GLOBALES ================= */
 :root {
   --bg-dark: #010116;
-  --bg-darker: #00000A;
-  --text-light: #ECEFF4;
-  --text-secondary: #B0B9C8;
-  --blue-main: #2BC0FF;
-  --purple-main: #A94AFF;
+  --bg-darker: #00000a;
+  --text-light: #eceff4;
+  --text-secondary: #b0b9c8;
+  --blue-main: #2bc0ff;
+  --purple-main: #a94aff;
   --fade-neon: rgba(43, 192, 255, 0.06);
-  --glow-blue: rgba(43, 192, 255, 0.5);
-  --glow-purple: rgba(169, 74, 255, 0.5);
   --border-radius: 12px;
   --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
   --transition: 0.3s ease-in-out;
@@ -47,7 +47,7 @@ li {
   list-style: none;
 }
 
-/* ================= LOADER ================= */
+/* ================ LOADER ================= */
 .loader-overlay {
   position: fixed;
   top: 0;
@@ -74,8 +74,8 @@ li {
   }
 }
 
-/* ================= NAVBAR ================= */
-.velnor-navbar {
+/* ================ NAVBAR ================= */
+.navbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -90,7 +90,8 @@ li {
   z-index: 1000;
   border-bottom: 1px solid var(--fade-neon);
 }
-.velnor-logo {
+
+.logo {
   font-size: 1.7rem;
   font-weight: 700;
   color: var(--blue-main);
@@ -98,23 +99,25 @@ li {
   letter-spacing: 1.5px;
   cursor: default;
 }
-.velnor-menu {
+
+.menu-links {
   display: flex;
   align-items: center;
   gap: 1.8rem;
   transition: right var(--transition);
 }
-.velnor-menu a {
+
+.menu-links a {
   position: relative;
   font-size: 0.98rem;
   font-weight: 500;
   padding: 0.3rem 0;
   transition: color var(--transition);
 }
-.velnor-menu a:hover {
+.menu-links a:hover {
   color: var(--blue-main);
 }
-.velnor-menu a::after {
+.menu-links a::after {
   content: '';
   position: absolute;
   bottom: -3px;
@@ -125,9 +128,10 @@ li {
   transform: translateX(-50%);
   transition: width var(--transition);
 }
-.velnor-menu a:hover::after {
+.menu-links a:hover::after {
   width: 50%;
 }
+
 .admin-btn {
   background: linear-gradient(90deg, var(--blue-main), var(--purple-main));
   color: #fff;
@@ -143,7 +147,7 @@ li {
   transform: scale(1.03);
   box-shadow: 0 0 20px var(--purple-main);
 }
-/* Burger menu mobile */
+
 .menu-toggle {
   display: none;
   color: var(--text-light);
@@ -152,8 +156,10 @@ li {
   border: none;
   cursor: pointer;
 }
+
+/* Menu mobile */
 @media (max-width: 900px) {
-  .velnor-menu {
+  .menu-links {
     position: fixed;
     top: 0;
     right: -100%;
@@ -168,10 +174,10 @@ li {
     padding-left: 1.8rem;
     transition: right var(--transition);
   }
-  .velnor-menu.open {
+  .menu-links.open {
     right: 0;
   }
-  .velnor-menu a {
+  .menu-links a {
     font-size: 1.1rem;
     margin-bottom: 1rem;
   }
@@ -184,7 +190,12 @@ li {
   }
 }
 
-/* ================= HERO ================= */
+/* Pour compenser la navbar fixe */
+body {
+  padding-top: var(--nav-height);
+}
+
+/* ================ HERO ================= */
 .hero {
   display: flex;
   align-items: center;
@@ -193,7 +204,7 @@ li {
   padding-top: var(--nav-height);
   position: relative;
   z-index: 1;
-  background: rgba(1, 1, 22, 0.8); /* voile + dense */
+  background: rgba(1, 1, 22, 0.8);
 }
 .hero-content {
   text-align: center;
@@ -202,7 +213,6 @@ li {
   padding: 2rem 1rem 4rem;
 }
 .hero-title {
-  font-family: var(--font-primary);
   font-size: 3.2rem;
   font-weight: 700;
   margin-bottom: 0.8rem;
@@ -220,13 +230,11 @@ li {
 }
 .hero-subtitle {
   font-size: 1.05rem;
-  font-weight: 400;
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
   opacity: 0.9;
   line-height: 1.4;
 }
-/* ==== INTRODUCTION COURTE ==== */
 .hero-intro {
   font-size: 1rem;
   color: var(--text-light);
@@ -264,18 +272,22 @@ li {
   text-align: center;
   font-size: 2.4rem;
   font-weight: 700;
-  margin-bottom: 1.8rem;
+  margin-bottom: 1rem;
   position: relative;
+  color: #ffffff;
 }
-.section-title .underline {
-  width: 50px;
-  height: 3px;
-  background: var(--blue-main);
-  margin: 0.5rem auto 0;
-  transition: width 0.4s ease-in-out;
-}
-.section-title:hover .underline {
+.section-title::after {
+  content: "";
+  display: block;
+  margin: 0.6rem auto 0;
   width: 80px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--blue-main) 0%,
+    var(--purple-main) 100%
+  );
+  border-radius: 2px;
 }
 @media (max-width: 600px) {
   .section {
@@ -300,7 +312,6 @@ li {
   padding: 1.8rem 1.4rem;
   max-width: 280px;
   text-align: center;
-  color: #fff;
   transition: transform var(--transition), box-shadow var(--transition);
 }
 .step-card:hover {
@@ -311,6 +322,10 @@ li {
   font-size: 2.2rem;
   color: var(--blue-main);
   margin-bottom: 0.8rem;
+}
+.step-card p {
+  color: var(--text-light);
+  font-size: 1rem;
 }
 
 /* ================ TECHNOLOGIE ================ */
@@ -350,219 +365,149 @@ li {
   line-height: 1.4;
 }
 
-/* ================================
-   SECTION OFFRES (LandingPage.css)
-   ================================ */
-
-/* 1) TITRE DE SECTION UNIQUE AVEC SOULIGNEMENT */
-.section-title {
-  text-align: center;
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 1rem;
-  position: relative;
-  letter-spacing: 0.5px;
-}
-.section-title::after {
-  content: "";
-  display: block;
-  margin: 0.6rem auto 0;       /* espace avant / après la barre */
-  width: 80px;                /* largeur de la barre */
-  height: 4px;                /* épaisseur de la barre */
-  background: linear-gradient(
-    90deg,
-    #33caff 0%,
-    #b347ff 100%
-  );
-  border-radius: 2px;         /* bords légèrement arrondis */
-}
-
-/* 2) CONTENEUR FLEX POUR LES CARTES D’OFFRES */
-.offers-container {
+/* ================ OFFRES ================ */
+.offres .offers-container {
   display: flex;
   justify-content: center;
-  align-items: stretch;       /* force même hauteur */
-  gap: 2.5rem;                /* espace horizontal entre cartes */
-  padding: 2.5rem 1rem;       /* marge intérieure générale */
-  flex-wrap: wrap;            /* wrap en cas d’écran réduit */
+  align-items: stretch;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  padding: 2rem 1rem;
 }
-
-/* 3) STYLE COMMUN AUX CARTES */
 .offer-card {
   background: rgba(5, 5, 40, 0.85);
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  flex: 0 1 320px;            /* largeur de base 320px, peut rétrécir */
+  box-shadow: var(--card-shadow);
+  flex: 0 1 320px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem 1.5rem;
-  color: #ecf2fa;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--text-light);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 .offer-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
 }
-
-/* 4) TITRE DE LA CARTE */
 .offer-card h3 {
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #33caff;
-  text-shadow: 0 0 8px #33caff;
+  color: var(--blue-main);
+  text-shadow: 0 0 8px var(--blue-main);
   text-align: center;
 }
-
-/* 5) PRIX */
 .offer-card .price {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #b347ff;
+  color: var(--purple-main);
   margin: 0.5rem 0 1rem;
   text-align: center;
-  text-shadow: 0 0 6px #b347ff;
+  text-shadow: 0 0 6px var(--purple-main);
 }
-
-/* 6) LISTE DES FONCTIONNALITÉS */
 .offer-card .features {
   list-style: none;
   margin: 0;
   padding: 0;
-  flex-grow: 1;               /* occupe l’espace vide pour égaliser la hauteur */
+  flex-grow: 1;
 }
 .offer-card .features li {
   display: flex;
   align-items: center;
   margin-bottom: 0.8rem;
   font-size: 1rem;
-  color: #ecf2fa;
   line-height: 1.3;
+  color: var(--text-light);
 }
 .offer-card .features li::before {
-  content: "✔";
-  color: #33caff;
+  content: '✔';
+  color: var(--blue-main);
   margin-right: 0.6rem;
   font-size: 1.1rem;
   line-height: 1;
 }
-
-/* 7) BOUTON “CHOISIR” */
 .offer-btn {
-  background: linear-gradient(100deg, #33caff, #b347ff);
+  background: linear-gradient(100deg, var(--blue-main), var(--purple-main));
   color: #ffffff;
   border: none;
   border-radius: 14px;
   padding: 0.85rem 1.2rem;
   font-size: 1.05rem;
   font-weight: 600;
-  box-shadow: 0 0 16px #33caff;
+  box-shadow: 0 0 16px var(--blue-main);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--transition), box-shadow var(--transition);
   margin-top: 1.5rem;
 }
 .offer-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 28px #b347ff;
+  box-shadow: 0 0 28px var(--purple-main);
 }
 
-/* 8) STYLING MOBILE / TABLETTE */
-
-/* Jusqu’à 900px de large → 2 cartes / ligne */
 @media (max-width: 900px) {
   .offer-card {
     flex: 0 1 45%;
   }
 }
-
-/* Jusqu’à 600px de large → 1 carte / ligne */
 @media (max-width: 600px) {
   .offer-card {
     flex: 0 1 100%;
   }
 }
 
-
-/* ----- LandingPage.css (ou Testimonials.css) ----- */
-
-/* 1) Titre « Témoignages » */
-.testimonials-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
+/* ================ TÉMOIGNAGES ================ */
+.temoignages .section-title {
   margin-bottom: 0.5rem;
-  color: #ffffff;
-  position: relative;
 }
-.testimonials-title::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 4px;
-  margin: 8px auto 0;
-  background: linear-gradient(90deg, #33caff, #b347ff);
-  border-radius: 2px;
-}
-
-/* 2) Conteneur des cartes */
 .testimonials-container {
   display: flex;
-  justify-content: center;  /* centre horizontal */
-  gap: 1.5rem;              /* espace entre chaque carte */
-  flex-wrap: wrap;          /* passe la 3e carte à la ligne si trop étroit */
-  padding: 0 1rem;          /* petit padding à gauche/droite pour éviter la coupe */
-  margin-bottom: 4rem;      /* espace sous la section Témoignages */
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 2rem 1rem 0;
+  margin-bottom: 3rem;
 }
-
-/* 3) Style de chaque carte */
 .testimonial-card {
   background: rgba(5, 5, 40, 0.85);
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--card-shadow);
   padding: 1.5rem;
-  max-width: 300px;       /* largeur max de la carte */
-  width: 100%;            /* si l’écran est petit, rétrécit à 100% du parent */
+  max-width: 300px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #ecf2fa;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
-
-/* 4) Texte du témoignage */
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
 .testimonial-text {
   font-style: italic;
   line-height: 1.4;
-  margin-bottom: 1rem;
+  color: var(--text-light);
   flex-grow: 1;
 }
-
-/* 5) Signature (auteur) */
-.testimonial-card .author {
+.author {
   text-align: right;
   font-weight: 600;
-  color: #33caff;
+  color: var(--blue-main);
   margin-top: 1rem;
 }
 
-/* 6) Responsive : deux cartes côte à côte sur tablette */
 @media (max-width: 900px) {
   .testimonial-card {
-    max-width: 45%; /* deux cartes côte-à-côte */
-  }
-  .testimonials-container {
-    gap: 1rem;
+    max-width: 45%;
   }
 }
-
-/* 7) Responsive : une carte par ligne sur mobile */
 @media (max-width: 600px) {
   .testimonial-card {
     max-width: 100%;
   }
 }
-
 
 /* ================ FAQ ================ */
 .faq-container {
@@ -587,7 +532,6 @@ li {
   cursor: pointer;
   font-weight: 500;
   font-size: 1rem;
-  color: var(--text-light);
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -634,12 +578,12 @@ li {
   color: var(--purple-main);
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================ RESPONSIVE GÉNÉRAL ================ */
 @media (max-width: 900px) {
-  .velnor-logo {
+  .logo {
     font-size: 1.5rem;
   }
-  .velnor-menu a {
+  .menu-links a {
     font-size: 1rem;
     margin-bottom: 1rem;
   }
@@ -658,6 +602,7 @@ li {
     padding: 0.6rem 1.6rem;
   }
 }
+
 @media (max-width: 600px) {
   .hero-title {
     font-size: 2.2rem;
@@ -670,3 +615,4 @@ li {
     padding: 0.5rem 1.4rem;
   }
 }
+

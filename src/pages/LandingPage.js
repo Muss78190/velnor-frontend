@@ -1,4 +1,3 @@
-// src/pages/LandingPage.js
 import React, { useEffect, useRef, useState } from 'react';
 import {
   FaShieldAlt,
@@ -6,13 +5,10 @@ import {
   FaStar,
   FaBars,
   FaTimes,
+  FaChartBar,
 } from 'react-icons/fa';
 import { GiSpaceship } from 'react-icons/gi';
 import { MdSecurity } from 'react-icons/md';
-import { FaChartBar } from 'react-icons/fa';
-import { AiOutlineFilePdf } from 'react-icons/ai';
-import { BsLightningFill } from 'react-icons/bs';
-import { FiMail } from 'react-icons/fi';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GalaxyParticles from './GalaxyParticles';
@@ -23,16 +19,20 @@ gsap.registerPlugin(ScrollTrigger);
 const LandingPage = () => {
   const [loading, setLoading] = useState(true);
   const loaderRef = useRef(null);
+
+  // Références pour ScrollTrigger
   const heroRef = useRef(null);
-  const heroTitleRef = useRef(null);
   const funcRef = useRef(null);
   const techRef = useRef(null);
   const offersRef = useRef(null);
   const testiRef = useRef(null);
   const faqRef = useRef(null);
+  const heroTitleRef = useRef(null);
+
+  // Gestion menu mobile
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Loader
+  // Loader (1s)
   useEffect(() => {
     const timeout = setTimeout(() => {
       gsap.to(loaderRef.current, {
@@ -45,7 +45,7 @@ const LandingPage = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Animations & SEO
+  // Animations GSAP + SEO
   useEffect(() => {
     document.title = 'VELNOR – IA Cybersécurité Premium & Futuriste';
     const metaDesc = document.querySelector('meta[name="description"]');
@@ -56,7 +56,7 @@ const LandingPage = () => {
       );
     }
 
-    // Animation du hero
+    // Animation du Hero
     gsap.from(heroRef.current, {
       opacity: 0,
       y: 50,
@@ -64,17 +64,17 @@ const LandingPage = () => {
       ease: 'power3.out',
       delay: 1,
     });
-    // Pulse léger sur le titre
+    // Effet “pulse” sur le titre
     gsap.to(heroTitleRef.current, {
       textShadow: '0 0 20px var(--blue-main)',
       repeat: -1,
       yoyo: true,
       ease: 'sine.inOut',
       duration: 3,
-      delay: 1.5,
+      delay: 2,
     });
 
-    // ScrollTrigger pour chaque section
+    // ScrollTrigger sur chaque section
     const animateSection = (el) => {
       gsap.from(el, {
         y: 30,
@@ -88,14 +88,14 @@ const LandingPage = () => {
         },
       });
     };
-    animateSection(funcRef.current);
-    animateSection(techRef.current);
-    animateSection(offersRef.current);
-    animateSection(testiRef.current);
-    animateSection(faqRef.current);
+    if (funcRef.current) animateSection(funcRef.current);
+    if (techRef.current) animateSection(techRef.current);
+    if (offersRef.current) animateSection(offersRef.current);
+    if (testiRef.current) animateSection(testiRef.current);
+    if (faqRef.current) animateSection(faqRef.current);
   }, []);
 
-  // Smooth scroll & fermeture menu mobile
+  // Clic sur un lien de nav → scroll smooth + fermeture du menu
   const handleNavClick = (e, anchor) => {
     e.preventDefault();
     const target = document.querySelector(anchor);
@@ -107,91 +107,75 @@ const LandingPage = () => {
 
   return (
     <>
-      {/* ====== LOADER ====== */}
+      {/* ================= LOADER ================= */}
       {loading && (
         <div ref={loaderRef} className="loader-overlay">
           <div className="loader-spinner" aria-label="Chargement"></div>
         </div>
       )}
 
-      {/* ===== PARTICULES FOND ===== */}
+      {/* ================= FOND PARTICULES ================= */}
       <GalaxyParticles />
 
-      {/* ===== NAVBAR ===== */}
-      <nav
-        className="velnor-navbar"
-        role="navigation"
-        aria-label="Navigation principale"
-      >
-        <div className="velnor-logo">VELNOR</div>
-        <div className={`velnor-menu ${menuOpen ? 'open' : ''}`}>
-          <a
-            href="#hero"
-            onClick={(e) => handleNavClick(e, '#hero')}
-            aria-label="Aller à l’accueil"
-          >
+      {/* ================= NAVBAR ================= */}
+      <nav className="navbar" aria-label="Navigation principale">
+        <div className="logo">VELNOR</div>
+        <div className={`menu-links ${menuOpen ? 'open' : ''}`}>
+          <a href="#hero" onClick={(e) => handleNavClick(e, '#hero')}>
             Accueil
           </a>
           <a
             href="#fonctionnement"
             onClick={(e) => handleNavClick(e, '#fonctionnement')}
-            aria-label="Aller à Fonctionnement"
           >
             Fonctionnement
           </a>
           <a
             href="#technologie"
             onClick={(e) => handleNavClick(e, '#technologie')}
-            aria-label="Aller à Technologie"
           >
             Technologie
           </a>
-          <a
-            href="#offres"
-            onClick={(e) => handleNavClick(e, '#offres')}
-            aria-label="Aller à Offres"
-          >
+          <a href="#offres" onClick={(e) => handleNavClick(e, '#offres')}>
             Offres
           </a>
           <a
             href="#temoignages"
             onClick={(e) => handleNavClick(e, '#temoignages')}
-            aria-label="Aller à Témoignages"
           >
             Témoignages
           </a>
-          <a
-            href="#faq"
-            onClick={(e) => handleNavClick(e, '#faq')}
-            aria-label="Aller à FAQ"
-          >
+          <a href="#faq" onClick={(e) => handleNavClick(e, '#faq')}>
             FAQ
           </a>
           <button
             className="admin-btn"
             onClick={() => (window.location.href = '/admin-login')}
-            aria-label="Aller à la page d’administration"
           >
             Admin
           </button>
         </div>
         <button
           className="menu-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => setMenuOpen((prev) => !prev)}
           aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
         >
-          {menuOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
+          {menuOpen ? (
+            <FaTimes aria-hidden="true" />
+          ) : (
+            <FaBars aria-hidden="true" />
+          )}
         </button>
       </nav>
 
       <main>
-        {/* ===== HERO ===== */}
+        {/* ================= HERO ================= */}
         <section
           id="hero"
           className="hero"
           ref={heroRef}
           role="banner"
-          aria-label="Section d’accueil"
+          aria-label="Section Accueil"
         >
           <div className="hero-content">
             <h1
@@ -200,32 +184,37 @@ const LandingPage = () => {
               aria-label="L’IA qui audite votre cybersécurité"
             >
               L’IA qui audite <br />
-              votre sécurité
+              votre cybersécurité
             </h1>
             <p className="hero-subtitle">
-              Audits automatisés &bull; Rapport PDF détaillé &bull; Badge de confiance  
-              <br />
-              Livraison en <strong>24h</strong> ou <strong>48h</strong>
+              Audits automatisés &bull; Rapport PDF détaillé &bull; Badge de
+              confiance <br />
+              Livraison garantie en <strong>24 h</strong> ou <strong>48 h</strong>
             </p>
 
-            {/* ==== INTRODUCTION COURTE ==== */}
+            {/* INTRODUCTION COURTE */}
             <p className="hero-intro">
-              VELNOR propose un audit full-stack de votre site web grâce à notre IA de pointe :  
-              détection des vulnérabilités, génération d’un rapport détaillé et délivrance d’un badge  
-              de confiance. En 24 h ou 48 h, soyez sûr de la sécurité de votre infrastructure.
+              VELNOR propose un audit full-stack de votre site web avec notre IA
+              de pointe : détection automatique des vulnérabilités, génération
+              d’un rapport PDF complet et délivrance d’un badge de confiance.
+              En 24 h ou 48 h, soyez certain de la sécurité de votre
+              infrastructure.
             </p>
 
             <button
               className="cta-btn"
-              onClick={() => document.querySelector('#offres')?.scrollIntoView({ behavior: 'smooth' })}
-              aria-label="Demander un audit IA"
+              onClick={() =>
+                document
+                  .querySelector('#offres')
+                  ?.scrollIntoView({ behavior: 'smooth' })
+              }
             >
               Demander un audit IA
             </button>
           </div>
         </section>
 
-        {/* ===== FONCTIONNEMENT ===== */}
+        {/* ================= FONCTIONNEMENT ================= */}
         <section
           id="fonctionnement"
           className="section fonctionnement"
@@ -235,7 +224,6 @@ const LandingPage = () => {
         >
           <h2 id="fonctionnement-title" className="section-title">
             Fonctionnement
-            <div className="underline"></div>
           </h2>
           <div className="steps-container">
             <div className="step-card">
@@ -253,7 +241,7 @@ const LandingPage = () => {
           </div>
         </section>
 
-        {/* ===== TECHNOLOGIE ===== */}
+        {/* ================= TECHNOLOGIE ================= */}
         <section
           id="technologie"
           className="section technologie"
@@ -263,7 +251,6 @@ const LandingPage = () => {
         >
           <h2 id="technologie-title" className="section-title">
             Technologie
-            <div className="underline"></div>
           </h2>
           <div className="tech-container">
             <div className="tech-card">
@@ -284,68 +271,97 @@ const LandingPage = () => {
           </div>
         </section>
 
-        {/* ===== OFFRES ===== */}
-        <section id="offres">
-  <h2 className="section-title">Offres</h2>
+        {/* ================= OFFRES ================= */}
+        <section
+          id="offres"
+          className="section offres"
+          ref={offersRef}
+          role="region"
+          aria-labelledby="offres-title"
+        >
+          <h2 id="offres-title" className="section-title">
+            Offres
+          </h2>
+          <div className="offers-container">
+            {/* Carte 48 h */}
+            <div className="offer-card">
+              <h3>Audit IA – 48 h</h3>
+              <div className="price">499 € HT</div>
+              <ul className="features">
+                <li>Rapport PDF détaillé</li>
+                <li>Livraison garantie 48 h</li>
+                <li>Envoi automatique par e-mail</li>
+              </ul>
+              <button
+                className="offer-btn"
+                onClick={() =>
+                  (window.location.href = '/paiement-48h')
+                }
+              >
+                Choisir
+              </button>
+            </div>
 
-  <div className="offers-container">
-    {/* CARTE 48h */}
-    <div className="offer-card">
-      <h3>Audit IA – 48 h</h3>
-      <div className="price">499 € HT</div>
-      <ul className="features">
-        <li>Rapport PDF détaillé</li>
-        <li>Livraison garantie 48 h</li>
-        <li>Envoi automatique par e-mail</li>
-      </ul>
-      <button className="offer-btn">Choisir</button>
-    </div>
-
-    {/* CARTE 24h */}
-    <div className="offer-card">
-      <h3>Audit IA – 24 h</h3>
-      <div className="price">699 € HT</div>
-      <ul className="features">
-        <li>Traitement prioritaire</li>
-        <li>Rapport & Badge</li>
-        <li>Livraison garantie 24 h</li>
-      </ul>
-      <button className="offer-btn">Choisir</button>
-    </div>
-  </div>
-</section>
-
-        {/* ===== TÉMOIGNAGES ===== */}
-        
-              <section id="temoignages">
-        <h2 className="testimonials-title">Témoignages</h2>
-        <div className="testimonials-container">
-          <div className="testimonial-card">
-            <p className="testimonial-text">
-              “Velnor m’a permis de sécuriser mon business en un temps record, avec
-              un rapport limpide.”
-            </p>
-            <div className="author">— Paul D., CTO Startup SaaS</div>
+            {/* Carte 24 h */}
+            <div className="offer-card">
+              <h3>Audit IA – 24 h</h3>
+              <div className="price">699 € HT</div>
+              <ul className="features">
+                <li>Traitement prioritaire</li>
+                <li>Rapport & Badge</li>
+                <li>Livraison garantie 24 h</li>
+              </ul>
+              <button
+                className="offer-btn"
+                onClick={() =>
+                  (window.location.href = '/paiement-24h')
+                }
+              >
+                Choisir
+              </button>
+            </div>
           </div>
+        </section>
 
-          <div className="testimonial-card">
-            <p className="testimonial-text">
-              “Audit premium, retour en 24 h, recommandations actionnables. Vraiment
-              pro.”
-            </p>
-            <div className="author">— Sarah K., Freelance Web</div>
+        {/* ================= TÉMOIGNAGES ================= */}
+        <section
+          id="temoignages"
+          className="section temoignages"
+          ref={testiRef}
+          role="region"
+          aria-labelledby="temoignages-title"
+        >
+          <h2 id="temoignages-title" className="section-title">
+            Témoignages
+          </h2>
+          <div className="testimonials-container">
+            <div className="testimonial-card">
+              <p className="testimonial-text">
+                “Velnor m’a permis de sécuriser mon business en un temps record,
+                avec un rapport limpide.”
+              </p>
+              <p className="author">— Paul D., CTO Startup SaaS</p>
+            </div>
+
+            <div className="testimonial-card">
+              <p className="testimonial-text">
+                “Audit premium, retour en 24 h, recommandations actionnables.
+                Vraiment pro.”
+              </p>
+              <p className="author">— Sarah K., Freelance Web</p>
+            </div>
+
+            <div className="testimonial-card">
+              <p className="testimonial-text">
+                “Le rapport PDF est digne d’un cabinet de cybersécurité à 2000 €.
+                Bluffant.”
+              </p>
+              <p className="author">— Entreprise Turing (PME)</p>
+            </div>
           </div>
+        </section>
 
-          <div className="testimonial-card">
-            <p className="testimonial-text">
-              “Le rapport PDF est digne d’un cabinet de cybersécurité à 2000 €. Bluffant.”
-            </p>
-            <div className="author">— Entreprise Turing (PME)</div>
-          </div>
-        </div>
-      </section>
-
-        {/* ===== FAQ ===== */}
+        {/* ================= FAQ ================= */}
         <section
           id="faq"
           className="section faq"
@@ -355,41 +371,43 @@ const LandingPage = () => {
         >
           <h2 id="faq-title" className="section-title">
             FAQ
-            <div className="underline"></div>
           </h2>
           <div className="faq-container">
             <details className="faq-item">
               <summary>Qu’est-ce qu’un audit IA ?</summary>
               <p>
-                Un audit piloté par notre IA analyse automatiquement votre site, détecte les vulnérabilités
-                et génère un rapport PDF très détaillé pour vos équipes techniques.
+                Un audit piloté par notre IA analyse automatiquement votre site,
+                détecte les vulnérabilités et génère un rapport PDF très détaillé
+                pour vos équipes techniques.
               </p>
             </details>
             <details className="faq-item">
               <summary>Quelle différence entre 24 h et 48 h ?</summary>
               <p>
-                L’offre 24 h inclut un badge sécurité premium & un traitement prioritaire. L’offre 48 h reste
-                complète mais sans badge et un délai de livraison légèrement plus long.
+                L’offre 24 h inclut un badge sécurité premium & un traitement
+                prioritaire. L’offre 48 h reste complète mais sans badge et un
+                délai de livraison légèrement plus long.
               </p>
             </details>
             <details className="faq-item">
-              <summary>Puis-je vous faire confiance  ?</summary>
+              <summary>Puis-je vous faire confiance ?</summary>
               <p>
-                Oui, vous venir en aide est un projet qui ne nous tiens pas seulement a coeur, mais protéger est 
-                primordiale dans un monde connecté.
+                Oui, protéger votre infrastructure est notre priorité : notre IA
+                scrute chaque faille pour vous garantir la meilleure tranquillité
+                d’esprit.
               </p>
             </details>
           </div>
         </section>
       </main>
 
-      {/* ===== FOOTER ===== */}
+      {/* ================= FOOTER ================= */}
       <footer className="footer" role="contentinfo">
         <p>© 2025 Velnor – All rights reserved.</p>
         <div className="footer-links">
-          <a href="/mentions-legales" aria-label="Mentions légales">Mentions légales</a>
+          <a href="/mentions-legales">Mentions légales</a>
           <span> | </span>
-          <a href="/privacy" aria-label="Politique de confidentialité">Politique de confidentialité</a>
+          <a href="/privacy">Politique de confidentialité</a>
         </div>
       </footer>
     </>
