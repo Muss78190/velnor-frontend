@@ -43,7 +43,7 @@ const Paiement24h = () => {
           onClick={handleCheckout}
           disabled={loading}
         >
-          {loading ? "Redirection…" : "Payer 499 € HT (24 h)"}
+          {loading ? "Redirection…" : "Payer 699 € HT (24 h)"}
         </button>
         {errorMsg && <p className="paiement-error">{errorMsg}</p>}
       </div>
