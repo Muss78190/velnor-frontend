@@ -37,7 +37,7 @@ const Paiement48h = () => {
 
   return (
     <div className="paiement-container">
-      <h2>Paiement Audit – 48 h (699 € HT)</h2>
+      <h2>Paiement Audit – 48 h (499 € HT)</h2>
       <button className="btn-payer" onClick={handleCheckout} disabled={loading}>
         {loading ? "Redirection…" : "Payer 699 € HT (48 h)"}
       </button>
