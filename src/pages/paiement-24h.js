@@ -1,53 +1,54 @@
-// src/pages/paiement-24h.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/payment.css';
+// Paiement24h.js
+import React, { useState } from "react";
+import "./payment.css";
 
 const Paiement24h = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Ici, vous déclenchez votre logique de paiement (ex : appel API Stripe, etc.)
-    // Pour la démo, on redirige vers la page de succès
-    history.push('/success');
+  const handleCheckout = async () => {
+    setLoading(true);
+    setErrorMsg(null);
+
+    try {
+      // 1) Appelez votre backend FastAPI pour créer la session Stripe 24 h
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/create-checkout-session-24h`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.detail || "Erreur lors de la création de session Stripe");
+      }
+
+      const { url } = await response.json();
+      // 2) Redirigez l'utilisateur vers l'URL de checkout retournée par Stripe
+      window.location.href = url;
+    } catch (err) {
+      console.error("Paiement24h erreur :", err);
+      setErrorMsg(err.message);
+      setLoading(false);
+    }
   };
 
   return (
-    <section className="payment-page">
-      <div className="payment-container">
-        <h2>Audit Express – 24 h</h2>
-        <p className="payment-price">699&nbsp;€&nbsp;HT</p>
-        <ul className="payment-features">
-          <li>⚡ Traitement prioritaire</li>
-          <li>📄 Rapport & Badge sécurité</li>
-          <li>✉ Livraison garantie 24 h</li>
-        </ul>
-        <form className="payment-form" onSubmit={handleSubmit}>
-          <label htmlFor="email">Votre e-mail professionnel</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="exemple@entreprise.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            aria-required="true"
-          />
-          <button type="submit" className="payment-btn">
-            Payer maintenant
-          </button>
-        </form>
-        <button
-          className="payment-back"
-          onClick={() => history.push('/')}
-          aria-label="Retour à l’accueil"
-        >
-          ← Retour
-        </button>
-      </div>
-    </section>
+    <div className="paiement-container">
+      <h2>Paiement Audit – 24 h (499 € HT)</h2>
+      <button
+        className="btn-payer"
+        onClick={handleCheckout}
+        disabled={loading}
+      >
+        {loading ? "Redirection…" : "Payer 499 € HT (24 h)"}
+      </button>
+      {errorMsg && <p className="paiement-error">{errorMsg}</p>}
+    </div>
   );
 };
 

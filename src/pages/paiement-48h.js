@@ -1,52 +1,54 @@
-// src/pages/paiement-48h.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/payment.css';
+// Paiement48h.js
+import React, { useState } from "react";
+import "./payment.css";
 
 const Paiement48h = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Ici, on déclenche la logique de paiement 48 h
-    history.push('/success');
+  const handleCheckout = async () => {
+    setLoading(true);
+    setErrorMsg(null);
+
+    try {
+      // 1) Appelez votre backend FastAPI pour créer la session Stripe 48 h
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/create-checkout-session-48h`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.detail || "Erreur lors de la création de session Stripe");
+      }
+
+      const { url } = await response.json();
+      // 2) Redirigez l'utilisateur vers l'URL de checkout retournée par Stripe
+      window.location.href = url;
+    } catch (err) {
+      console.error("Paiement48h erreur :", err);
+      setErrorMsg(err.message);
+      setLoading(false);
+    }
   };
 
   return (
-    <section className="payment-page">
-      <div className="payment-container">
-        <h2>Audit IA – 48 h</h2>
-        <p className="payment-price">499&nbsp;€&nbsp;HT</p>
-        <ul className="payment-features">
-          <li>📄 Rapport PDF détaillé</li>
-          <li>⚡ Livraison garantie 48 h</li>
-          <li>✉ Envoi automatique par e-mail</li>
-        </ul>
-        <form className="payment-form" onSubmit={handleSubmit}>
-          <label htmlFor="email">Votre e-mail professionnel</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="exemple@entreprise.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            aria-required="true"
-          />
-          <button type="submit" className="payment-btn">
-            Payer maintenant
-          </button>
-        </form>
-        <button
-          className="payment-back"
-          onClick={() => history.push('/')}
-          aria-label="Retour à l’accueil"
-        >
-          ← Retour
-        </button>
-      </div>
-    </section>
+    <div className="paiement-container">
+      <h2>Paiement Audit – 48 h (699 € HT)</h2>
+      <button
+        className="btn-payer"
+        onClick={handleCheckout}
+        disabled={loading}
+      >
+        {loading ? "Redirection…" : "Payer 699 € HT (48 h)"}
+      </button>
+      {errorMsg && <p className="paiement-error">{errorMsg}</p>}
+    </div>
   );
 };
 
