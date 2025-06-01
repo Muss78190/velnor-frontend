@@ -351,80 +351,131 @@ li {
 }
 
 /* ================ OFFRES ================ */
-.offres .offers-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.8rem;
-  justify-items: center;
-}
-.offer-card {
-  background: rgba(5, 5, 40, 0.85);
-  border-radius: var(--border-radius);
-  box-shadow: var(--card-shadow);
-  padding: 2rem 1.6rem;
-  max-width: 300px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform var(--transition), box-shadow var(--transition), border 0.2s;
-}
-.offer-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 36px rgba(0, 0, 0, 0.6);
-}
-.encadre-blue {
-  border: 2px solid var(--blue-main);
-}
-.encadre-purple {
-  border: 2px solid var(--purple-main);
-}
-.offer-card h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--blue-main);
-  margin-bottom: 0.5rem;
-}
-.offer-price {
+/* 1) Titre de section */
+.section-title {
+  text-align: center;
   font-size: 2rem;
   font-weight: 700;
-  color: var(--purple-main);
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 8px auto 0;
+  background: linear-gradient(90deg, #33caff, #b347ff);
+  border-radius: 2px;
+}
+
+/* 2) Conteneur flex des cartes */
+.offers-container {
+  display: flex;
+  justify-content: center;   /* centre horizontalement les cartes */
+  align-items: stretch;      /* force toutes les cartes à prendre la même hauteur */
+  gap: 2rem;                 /* espace entre les cartes */
+  padding: 2rem 1rem;        /* marges intérieures */
+  flex-wrap: wrap;           /* si l’écran est trop étroit, empile les cartes */
+}
+
+/* 3) Style commun aux cartes */
+.offer-card {
+  background: rgba(5, 5, 40, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  
+  /* largeur fixe (ou vous pouvez ajuster selon votre besoin) */
+  flex: 0 1 300px;       /* 
+                           0 → ne pas grossir au-delà 
+                           1 → peut rétrécir si nécessaire 
+                           300px → largeur de base 
+                         */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.8rem 1.5rem;
+  color: #ecf2fa;
+  
+  /* Pour s’assurer que toutes les cartes ont la même hauteur, 
+     align-items: stretch sur le parent (offres-container) + flexbox ici suffit */
+}
+
+/* 4) Titre de chaque carte */
+.offer-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #33caff;
+  text-shadow: 0 0 8px #33caff;
+}
+
+/* 5) Prix */
+.offer-card .price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #b347ff;
   margin-bottom: 1rem;
+  text-align: center;
 }
-.offer-features {
-  width: 100%;
-  margin: 0 0 2rem 0;
-  padding-left: 1rem;
+
+/* 6) Liste des fonctionnalités */
+.offer-card .features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;           /* fait prendre le maximum d’espace vertical 
+                             pour égaliser la hauteur des cartes */
 }
-.offer-features li {
+.offer-card .features li {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  margin-bottom: 0.6rem;
   font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin-bottom: 0.8rem;
+  color: #ecf2fa;
 }
-.offer-features .bullet-icon {
-  font-size: 1.1rem;
-  color: var(--blue-main);
+.offer-card .features li::before {
+  content: "✔";
+  color: #33caff;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  line-height: 1;
 }
+
+/* 7) Bouton « Choisir » */
 .offer-btn {
-  margin-top: auto;
-  background: linear-gradient(100deg, var(--blue-main), var(--purple-main));
+  background: linear-gradient(100deg, #33caff, #b347ff);
   color: #fff;
   border: none;
-  border-radius: 16px;
-  padding: 0.7rem 1.6rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  box-shadow: 0 0 14px var(--blue-main);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 0 14px #33caff;
   cursor: pointer;
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 1rem;
 }
 .offer-btn:hover {
   transform: scale(1.04);
-  box-shadow: 0 0 24px var(--purple-main);
+  box-shadow: 0 0 24px #b347ff;
 }
+
+/* 8) Responsive : deux cartes côte à côte en tablette */
+@media (max-width: 900px) {
+  .offer-card {
+    flex: 0 1 45%;  /* deux cartes de 45% chacune, avec gap de 2rem */
+  }
+}
+
+/* 9) Responsive : une carte par ligne sur mobile */
+@media (max-width: 600px) {
+  .offer-card {
+    flex: 0 1 100%;
+  }
+}
+
 /* ----- LandingPage.css (ou Testimonials.css) ----- */
 
 /* 1) Titre « Témoignages » */
