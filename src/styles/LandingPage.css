@@ -350,131 +350,140 @@ li {
   line-height: 1.4;
 }
 
-/* ================ OFFRES ================ */
-/* 1) Titre de section */
+/* ================================
+   SECTION OFFRES (LandingPage.css)
+   ================================ */
+
+/* 1) TITRE DE SECTION UNIQUE AVEC SOULIGNEMENT */
 .section-title {
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   position: relative;
+  letter-spacing: 0.5px;
 }
 .section-title::after {
   content: "";
   display: block;
-  width: 60px;
-  height: 4px;
-  margin: 8px auto 0;
-  background: linear-gradient(90deg, #33caff, #b347ff);
-  border-radius: 2px;
+  margin: 0.6rem auto 0;       /* espace avant / après la barre */
+  width: 80px;                /* largeur de la barre */
+  height: 4px;                /* épaisseur de la barre */
+  background: linear-gradient(
+    90deg,
+    #33caff 0%,
+    #b347ff 100%
+  );
+  border-radius: 2px;         /* bords légèrement arrondis */
 }
 
-/* 2) Conteneur flex des cartes */
+/* 2) CONTENEUR FLEX POUR LES CARTES D’OFFRES */
 .offers-container {
   display: flex;
-  justify-content: center;   /* centre horizontalement les cartes */
-  align-items: stretch;      /* force toutes les cartes à prendre la même hauteur */
-  gap: 2rem;                 /* espace entre les cartes */
-  padding: 2rem 1rem;        /* marges intérieures */
-  flex-wrap: wrap;           /* si l’écran est trop étroit, empile les cartes */
+  justify-content: center;
+  align-items: stretch;       /* force même hauteur */
+  gap: 2.5rem;                /* espace horizontal entre cartes */
+  padding: 2.5rem 1rem;       /* marge intérieure générale */
+  flex-wrap: wrap;            /* wrap en cas d’écran réduit */
 }
 
-/* 3) Style commun aux cartes */
+/* 3) STYLE COMMUN AUX CARTES */
 .offer-card {
   background: rgba(5, 5, 40, 0.85);
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  
-  /* largeur fixe (ou vous pouvez ajuster selon votre besoin) */
-  flex: 0 1 300px;       /* 
-                           0 → ne pas grossir au-delà 
-                           1 → peut rétrécir si nécessaire 
-                           300px → largeur de base 
-                         */
+  flex: 0 1 320px;            /* largeur de base 320px, peut rétrécir */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.8rem 1.5rem;
+  padding: 2rem 1.5rem;
   color: #ecf2fa;
-  
-  /* Pour s’assurer que toutes les cartes ont la même hauteur, 
-     align-items: stretch sur le parent (offres-container) + flexbox ici suffit */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.offer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
 }
 
-/* 4) Titre de chaque carte */
+/* 4) TITRE DE LA CARTE */
 .offer-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: #33caff;
   text-shadow: 0 0 8px #33caff;
-}
-
-/* 5) Prix */
-.offer-card .price {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #b347ff;
-  margin-bottom: 1rem;
   text-align: center;
 }
 
-/* 6) Liste des fonctionnalités */
+/* 5) PRIX */
+.offer-card .price {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #b347ff;
+  margin: 0.5rem 0 1rem;
+  text-align: center;
+  text-shadow: 0 0 6px #b347ff;
+}
+
+/* 6) LISTE DES FONCTIONNALITÉS */
 .offer-card .features {
   list-style: none;
   margin: 0;
   padding: 0;
-  flex-grow: 1;           /* fait prendre le maximum d’espace vertical 
-                             pour égaliser la hauteur des cartes */
+  flex-grow: 1;               /* occupe l’espace vide pour égaliser la hauteur */
 }
 .offer-card .features li {
   display: flex;
   align-items: center;
-  margin-bottom: 0.6rem;
-  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
   color: #ecf2fa;
+  line-height: 1.3;
 }
 .offer-card .features li::before {
   content: "✔";
   color: #33caff;
-  margin-right: 0.5rem;
-  font-size: 1rem;
+  margin-right: 0.6rem;
+  font-size: 1.1rem;
   line-height: 1;
 }
 
-/* 7) Bouton « Choisir » */
+/* 7) BOUTON “CHOISIR” */
 .offer-btn {
   background: linear-gradient(100deg, #33caff, #b347ff);
-  color: #fff;
+  color: #ffffff;
   border: none;
-  border-radius: 12px;
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
+  border-radius: 14px;
+  padding: 0.85rem 1.2rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  box-shadow: 0 0 14px #33caff;
+  box-shadow: 0 0 16px #33caff;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 .offer-btn:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 24px #b347ff;
+  transform: scale(1.05);
+  box-shadow: 0 0 28px #b347ff;
 }
 
-/* 8) Responsive : deux cartes côte à côte en tablette */
+/* 8) STYLING MOBILE / TABLETTE */
+
+/* Jusqu’à 900px de large → 2 cartes / ligne */
 @media (max-width: 900px) {
   .offer-card {
-    flex: 0 1 45%;  /* deux cartes de 45% chacune, avec gap de 2rem */
+    flex: 0 1 45%;
   }
 }
 
-/* 9) Responsive : une carte par ligne sur mobile */
+/* Jusqu’à 600px de large → 1 carte / ligne */
 @media (max-width: 600px) {
   .offer-card {
     flex: 0 1 100%;
   }
 }
+
 
 /* ----- LandingPage.css (ou Testimonials.css) ----- */
 

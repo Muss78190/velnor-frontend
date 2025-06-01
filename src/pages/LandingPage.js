@@ -285,70 +285,35 @@ const LandingPage = () => {
         </section>
 
         {/* ===== OFFRES ===== */}
-        <section
-          id="offres"
-          className="section offres"
-          ref={offersRef}
-          role="region"
-          aria-labelledby="offres-title"
-        >
-          <h2 id="offres-title" className="section-title">
-            Offres
-            <div className="underline"></div>
-          </h2>
-          <div className="offers-container">
-            <div className="offer-card encadre-blue">
-              <h3>Audit IA – 48h</h3>
-              <p className="offer-price">499&nbsp;€&nbsp;HT</p>
-              <ul className="offer-features">
-                <li>
-                  <AiOutlineFilePdf className="bullet-icon" aria-hidden="true" />
-                  <span>Rapport PDF détaillé</span>
-                </li>
-                <li>
-                  <BsLightningFill className="bullet-icon" aria-hidden="true" />
-                  <span>Livraison garantie 48 h</span>
-                </li>
-                <li>
-                  <FiMail className="bullet-icon" aria-hidden="true" />
-                  <span>Envoi automatique par e-mail</span>
-                </li>
-              </ul>
-              <button
-                className="offer-btn"
-                onClick={() => (window.location.href = '/paiement-48h')}
-                aria-label="Choisir Audit IA 48 h"
-              >
-                Choisir
-              </button>
-            </div>
-            <div className="offer-card encadre-purple">
-              <h3>Audit IA – 24h</h3>
-              <p className="offer-price">699&nbsp;€&nbsp;HT</p>
-              <ul className="offer-features">
-                <li>
-                  <BsLightningFill className="bullet-icon" aria-hidden="true" />
-                  <span>Traitement prioritaire</span>
-                </li>
-                <li>
-                  <AiOutlineFilePdf className="bullet-icon" aria-hidden="true" />
-                  <span>Rapport & Badge</span>
-                </li>
-                <li>
-                  <FiMail className="bullet-icon" aria-hidden="true" />
-                  <span>Livraison garantie 24 h</span>
-                </li>
-              </ul>
-              <button
-                className="offer-btn"
-                onClick={() => (window.location.href = '/paiement-24h')}
-                aria-label="Choisir Audit Express 24 h"
-              >
-                Choisir
-              </button>
-            </div>
-          </div>
-        </section>
+        <section id="offres">
+  <h2 className="section-title">Offres</h2>
+
+  <div className="offers-container">
+    {/* CARTE 48h */}
+    <div className="offer-card">
+      <h3>Audit IA – 48 h</h3>
+      <div className="price">499 € HT</div>
+      <ul className="features">
+        <li>Rapport PDF détaillé</li>
+        <li>Livraison garantie 48 h</li>
+        <li>Envoi automatique par e-mail</li>
+      </ul>
+      <button className="offer-btn">Choisir</button>
+    </div>
+
+    {/* CARTE 24h */}
+    <div className="offer-card">
+      <h3>Audit IA – 24 h</h3>
+      <div className="price">699 € HT</div>
+      <ul className="features">
+        <li>Traitement prioritaire</li>
+        <li>Rapport & Badge</li>
+        <li>Livraison garantie 24 h</li>
+      </ul>
+      <button className="offer-btn">Choisir</button>
+    </div>
+  </div>
+</section>
 
         {/* ===== TÉMOIGNAGES ===== */}
         
