@@ -351,38 +351,34 @@ const LandingPage = () => {
         </section>
 
         {/* ===== TÉMOIGNAGES ===== */}
-        <section
-          id="temoignages"
-          className="section temoignages"
-          ref={testiRef}
-          role="region"
-          aria-labelledby="temoignages-title"
-        >
-          <h2 id="temoignages-title" className="section-title">
-            Témoignages
-            <div className="underline"></div>
-          </h2>
-          <div className="testi-container">
-            <div className="testi-card">
-              <p className="testi-text">
-                “Velnor m’a permis de sécuriser mon business en un temps record, avec un rapport limpide.”
-              </p>
-              <p className="testi-author">— Paul D., CTO Startup SaaS</p>
-            </div>
-            <div className="testi-card">
-              <p className="testi-text">
-                “Audit premium, retour en 24 h, recommandations actionnables. Vraiment pro.”
-              </p>
-              <p className="testi-author">— Sarah K., Freelance Web</p>
-            </div>
-            <div className="testi-card">
-              <p className="testi-text">
-                “Le rapport PDF est digne d’un cabinet de cybersécurité à 2000 €. Bluffant.”
-              </p>
-              <p className="testi-author">— Entreprise Turing (PME)</p>
-            </div>
+        
+              <section id="temoignages">
+        <h2 className="testimonials-title">Témoignages</h2>
+        <div className="testimonials-container">
+          <div className="testimonial-card">
+            <p className="testimonial-text">
+              “Velnor m’a permis de sécuriser mon business en un temps record, avec
+              un rapport limpide.”
+            </p>
+            <div className="author">— Paul D., CTO Startup SaaS</div>
           </div>
-        </section>
+
+          <div className="testimonial-card">
+            <p className="testimonial-text">
+              “Audit premium, retour en 24 h, recommandations actionnables. Vraiment
+              pro.”
+            </p>
+            <div className="author">— Sarah K., Freelance Web</div>
+          </div>
+
+          <div className="testimonial-card">
+            <p className="testimonial-text">
+              “Le rapport PDF est digne d’un cabinet de cybersécurité à 2000 €. Bluffant.”
+            </p>
+            <div className="author">— Entreprise Turing (PME)</div>
+          </div>
+        </div>
+      </section>
 
         {/* ===== FAQ ===== */}
         <section

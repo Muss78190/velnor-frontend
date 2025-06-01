@@ -425,33 +425,9 @@ li {
   transform: scale(1.04);
   box-shadow: 0 0 24px var(--purple-main);
 }
+/* ----- LandingPage.css (ou Testimonials.css) ----- */
 
-/* -----------------------------
-   Section Témoignages – Ajustement
-   ----------------------------- */
-
-.testimonials-container {
-  display: flex;
-  justify-content: center;       /* Centre horizontal des cartes */
-  gap: 1.5rem;                   /* Espacement entre chaque carte */
-  flex-wrap: wrap;               /* Permet au troisième de « descendre » sur mobile */
-  padding: 0 1rem;               /* Petit padding à gauche/droite pour éviter la coupe */
-}
-
-.testimonial-card {
-  background: rgba(5, 5, 40, 0.85);
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  padding: 1.5rem;
-  max-width: 300px;              /* Fixe une largeur max pour chaque carte */
-  width: 100%;
-  color: #ecf2fa;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Titre « Témoignages » + ligne sous-jacente */
+/* 1) Titre « Témoignages » */
 .testimonials-title {
   text-align: center;
   font-size: 2rem;
@@ -466,23 +442,43 @@ li {
   width: 60px;
   height: 4px;
   margin: 8px auto 0;
-  background: linear-gradient(
-    90deg,
-    #33caff,
-    #b347ff
-  );
+  background: linear-gradient(90deg, #33caff, #b347ff);
   border-radius: 2px;
 }
 
-/* Texte du témoignage */
-.testimonial-card p {
+/* 2) Conteneur des cartes */
+.testimonials-container {
+  display: flex;
+  justify-content: center;  /* centre horizontal */
+  gap: 1.5rem;              /* espace entre chaque carte */
+  flex-wrap: wrap;          /* passe la 3e carte à la ligne si trop étroit */
+  padding: 0 1rem;          /* petit padding à gauche/droite pour éviter la coupe */
+  margin-bottom: 4rem;      /* espace sous la section Témoignages */
+}
+
+/* 3) Style de chaque carte */
+.testimonial-card {
+  background: rgba(5, 5, 40, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  padding: 1.5rem;
+  max-width: 300px;       /* largeur max de la carte */
+  width: 100%;            /* si l’écran est petit, rétrécit à 100% du parent */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #ecf2fa;
+}
+
+/* 4) Texte du témoignage */
+.testimonial-text {
   font-style: italic;
   line-height: 1.4;
   margin-bottom: 1rem;
   flex-grow: 1;
 }
 
-/* Signature (nom + rôle) */
+/* 5) Signature (auteur) */
 .testimonial-card .author {
   text-align: right;
   font-weight: 600;
@@ -490,20 +486,23 @@ li {
   margin-top: 1rem;
 }
 
-/* Responsive : sur petits écrans, empiler deux cartes maximum par ligne */
+/* 6) Responsive : deux cartes côte à côte sur tablette */
 @media (max-width: 900px) {
+  .testimonial-card {
+    max-width: 45%; /* deux cartes côte-à-côte */
+  }
   .testimonials-container {
     gap: 1rem;
   }
-  .testimonial-card {
-    max-width: 45%; /* deux cartes côte à côte sur tablette */
-  }
 }
+
+/* 7) Responsive : une carte par ligne sur mobile */
 @media (max-width: 600px) {
   .testimonial-card {
-    max-width: 100%; /* une carte par ligne sur mobile */
+    max-width: 100%;
   }
 }
+
 
 /* ================ FAQ ================ */
 .faq-container {
