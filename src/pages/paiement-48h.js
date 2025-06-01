@@ -1,4 +1,4 @@
-// paiement-48h.js
+// src/pages/paiement-48h.js
 import React, { useState } from "react";
 import "../styles/Paiement.css";
 
@@ -20,13 +20,12 @@ const Paiement48h = () => {
       );
 
       const resText = await response.text();
-
       if (!response.ok) {
         throw new Error("Erreur backend : " + resText);
       }
 
       const data = JSON.parse(resText);
-      if (!data.url) throw new Error("URL de redirection manquante.");
+      if (!data.url) throw new Error("URL de redirection manquante");
       window.location.href = data.url;
     } catch (err) {
       console.error("Paiement48h erreur :", err);
@@ -36,12 +35,18 @@ const Paiement48h = () => {
   };
 
   return (
-    <div className="paiement-container">
-      <h2>Paiement Audit – 48 h (499 € HT)</h2>
-      <button className="btn-payer" onClick={handleCheckout} disabled={loading}>
-        {loading ? "Redirection…" : "Payer 699 € HT (48 h)"}
-      </button>
-      {errorMsg && <p className="paiement-error">{errorMsg}</p>}
+    <div className="paiement-page">
+      <div className="paiement-container">
+        <h2>Paiement Audit – 48 h (499 € HT)</h2>
+        <button
+          className={`btn-payer ${loading ? "loading" : ""}`}
+          onClick={handleCheckout}
+          disabled={loading}
+        >
+          {loading ? "Redirection…" : "Payer 699 € HT (48 h)"}
+        </button>
+        {errorMsg && <p className="paiement-error">{errorMsg}</p>}
+      </div>
     </div>
   );
 };
