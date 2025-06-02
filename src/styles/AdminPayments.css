@@ -1,78 +1,141 @@
+/* src/styles/AdminPayments.css */
+
 .admin-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 40px;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f8f9fc;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.08);
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
 .admin-title {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: #1f2937;
+  font-size: 2rem;
+  color: #2BC0FF;
+  text-shadow: 0 0 8px #2BC0FF;
+}
+
+.admin-logout-btn {
+  background: linear-gradient(90deg, #A94AFF, #2BC0FF);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 0 12px #2BC0FF;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.admin-logout-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px #A94AFF;
 }
 
 .admin-input-box {
   display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .admin-input-box input {
   flex: 1;
-  padding: 12px;
+  padding: 0.9rem 1rem;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #333;
+  background: #0a0a1e;
+  color: #ECEFF4;
+  font-size: 1rem;
+  transition: box-shadow 0.3s;
+}
+.admin-input-box input:focus {
+  outline: none;
+  box-shadow: 0 0 8px #2BC0FF;
 }
 
 .admin-input-box button {
-  padding: 12px 18px;
-  background-color: #2563eb;
-  color: white;
+  background: linear-gradient(90deg, #2BC0FF, #A94AFF);
+  color: #fff;
+  padding: 0.9rem 1.4rem;
   border: none;
   border-radius: 6px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 0 10px #2BC0FF;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.admin-input-box button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.admin-input-box button:hover:not(:disabled) {
+  transform: scale(1.03);
+  box-shadow: 0 0 18px #A94AFF;
 }
 
 .admin-error {
-  color: red;
+  color: #FF6B6B;
   text-align: center;
-  margin: 12px 0;
+  margin-top: 1rem;
 }
 
 .admin-result {
-  background: white;
+  background: rgba(5, 5, 40, 0.95);
   border-radius: 10px;
-  padding: 24px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.06);
+  padding: 2rem;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+  margin-top: 2rem;
 }
 
 .admin-section {
-  margin-bottom: 24px;
+  margin-bottom: 2rem;
+  color: #ECEFF4;
 }
-
 .admin-section h2,
 .admin-section h3 {
-  color: #111827;
-  margin-bottom: 10px;
+  color: #A94AFF;
+  margin-bottom: 0.8rem;
+}
+
+.admin-section p {
+  margin: 0.4rem 0;
 }
 
 .admin-section ul {
+  margin-left: 1.5rem;
   list-style-type: disc;
-  margin-left: 20px;
+}
+.admin-section li {
+  margin-bottom: 0.5rem;
 }
 
 .admin-download {
   display: inline-block;
-  margin-top: 16px;
-  padding: 10px 16px;
-  background-color: #10b981;
-  color: white;
+  margin-top: 1rem;
+  padding: 0.7rem 1.3rem;
+  background: linear-gradient(90deg, #2BC0FF, #A94AFF);
+  color: #fff;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 600;
+  box-shadow: 0 0 12px #2BC0FF;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.admin-download:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 20px #A94AFF;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-input-box {
+    flex-direction: column;
+  }
+  .admin-input-box button {
+    width: 100%;
+  }
 }

@@ -150,7 +150,7 @@ const LandingPage = () => {
           </a>
           <button
             className="admin-btn"
-            onClick={() => (window.location.href = '/admin-login')}
+            onClick={() => (window.location.href = '/admin')}
           >
             Admin
           </button>

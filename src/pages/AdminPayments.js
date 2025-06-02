@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// src/pages/AdminPayments.js
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/AdminPayments.css";
 
 const AdminPayments = () => {
@@ -6,6 +8,15 @@ const AdminPayments = () => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  // À l’ouverture du composant, on vérifie l’authentification
+  useEffect(() => {
+    const auth = localStorage.getItem("auth");
+    if (auth !== "ok") {
+      navigate("/admin");
+    }
+  }, [navigate]);
 
   const lancerAudit = async () => {
     if (!url) return;
@@ -24,7 +35,7 @@ const AdminPayments = () => {
       if (res.ok) {
         setResult(data);
       } else {
-        setError(data.error || "Erreur serveur.");
+        setError(data.detail || "Erreur serveur.");
       }
     } catch (err) {
       setError("Erreur réseau ou serveur.");
@@ -33,9 +44,19 @@ const AdminPayments = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+    navigate("/admin");
+  };
+
   return (
     <div className="admin-container">
-      <h1 className="admin-title">🧠 Audit IA • VELNOR</h1>
+      <div className="admin-header">
+        <h1 className="admin-title">🧠 Audit IA • VELNOR</h1>
+        <button className="admin-logout-btn" onClick={handleLogout}>
+          Se déconnecter
+        </button>
+      </div>
 
       <div className="admin-input-box">
         <input
@@ -43,6 +64,7 @@ const AdminPayments = () => {
           placeholder="https://monsite.com"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
+          aria-label="URL du site à auditer"
         />
         <button onClick={lancerAudit} disabled={loading}>
           {loading ? "Analyse en cours..." : "🚀 Lancer l’audit"}
@@ -55,9 +77,15 @@ const AdminPayments = () => {
         <div className="admin-result">
           <div className="admin-section">
             <h2>✅ Résultat d’audit</h2>
-            <p><strong>🌐 URL :</strong> {result.url}</p>
-            <p><strong>🔒 Score :</strong> {result.score}/100</p>
-            <p><strong>📄 Résumé :</strong> {result.resume}</p>
+            <p>
+              <strong>🌐 URL :</strong> {result.url}
+            </p>
+            <p>
+              <strong>🔒 Score :</strong> {result.score}/100
+            </p>
+            <p>
+              <strong>📄 Résumé :</strong> {result.resume}
+            </p>
           </div>
 
           <div className="admin-section">
@@ -91,6 +119,7 @@ const AdminPayments = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="admin-download"
+            aria-label="Télécharger le rapport PDF"
           >
             📥 Télécharger le rapport PDF
           </a>

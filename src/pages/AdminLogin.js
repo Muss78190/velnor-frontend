@@ -1,5 +1,7 @@
+// src/pages/AdminLogin.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/AdminLogin.css"; // Nouveau fichier CSS (voir plus bas)
 
 const AdminLogin = () => {
   const [password, setPassword] = useState("");
@@ -9,27 +11,29 @@ const AdminLogin = () => {
   const handleLogin = () => {
     if (password === "adminvelnor") {
       localStorage.setItem("auth", "ok");
-      navigate("/admin");
+      navigate("/admin/payments");
     } else {
       setError("Mot de passe incorrect");
     }
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h2>Connexion Admin</h2>
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={{ padding: "10px", fontSize: "1rem", margin: "10px" }}
-      />
-      <br />
-      <button onClick={handleLogin} style={{ padding: "10px 20px", fontSize: "1rem" }}>
-        Se connecter
-      </button>
-      {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+    <div className="admin-login-container">
+      <div className="admin-login-box" role="form" aria-label="Connexion Admin">
+        <h2>Connexion Admin</h2>
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setError("");
+          }}
+          aria-label="Saisir le mot de passe"
+        />
+        <button onClick={handleLogin}>Se connecter</button>
+        {error && <p className="admin-login-error">{error}</p>}
+      </div>
     </div>
   );
 };
