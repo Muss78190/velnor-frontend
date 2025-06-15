@@ -10,7 +10,6 @@ const AdminPayments = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // À l’ouverture du composant, on vérifie l’authentification
   useEffect(() => {
     const auth = localStorage.getItem("auth");
     if (auth !== "ok") {
@@ -25,7 +24,7 @@ const AdminPayments = () => {
     setResult(null);
 
     try {
-      const res = await fetch("https://velnor-backend.onrender.com/scan", {
+      const res = await fetch("http://51.158.64.37:10000/scan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
@@ -115,7 +114,7 @@ const AdminPayments = () => {
           </div>
 
           <a
-            href={`https://velnor-backend.onrender.com${result.pdf}`}
+            href={`http://51.158.64.37:10000${result.pdf}`}
             target="_blank"
             rel="noopener noreferrer"
             className="admin-download"

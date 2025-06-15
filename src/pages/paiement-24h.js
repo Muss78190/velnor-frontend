@@ -11,13 +11,10 @@ const Paiement24h = () => {
     setErrorMsg(null);
 
     try {
-      const response = await fetch(
-        "https://velnor-backend.onrender.com/create-checkout-session-24h",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await fetch("http://51.158.64.37:10000/create-checkout-session-24h", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
 
       const resText = await response.text();
       if (!response.ok) {
