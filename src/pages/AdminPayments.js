@@ -24,7 +24,7 @@ const AdminPayments = () => {
     setResult(null);
 
     try {
-      const res = await fetch("http://51.158.64.37:10000/scan", {
+      const res = await fetch("https://api.velnor.fr/scan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
@@ -114,7 +114,7 @@ const AdminPayments = () => {
           </div>
 
           <a
-            href={`http://51.158.64.37:10000${result.pdf}`}
+            href={`https://api.velnor.fr${result.pdf}`}
             target="_blank"
             rel="noopener noreferrer"
             className="admin-download"

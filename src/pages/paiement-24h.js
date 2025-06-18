@@ -11,7 +11,7 @@ const Paiement24h = () => {
     setErrorMsg(null);
 
     try {
-      const response = await fetch("http://51.158.64.37:10000/create-checkout-session-24h", {
+      const response = await fetch("https://api.velnor.fr/create-checkout-session-24h", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
