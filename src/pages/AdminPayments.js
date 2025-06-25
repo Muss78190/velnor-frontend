@@ -91,16 +91,18 @@ const AdminPayments = () => {
         const res = await fetch(`https://api.velnor.fr/scan-result/${taskId}`);
         const data = await res.json();
 
-        if (data.status === "completed" || data.status === "failed") {
-          // Analyse terminée
+        if (data.status !== "en_cours") {
+          // Analyse terminée (succès ou échec de sécurité)
           setLoading(false);
           setProgress(100);
           setCurrentPhase("✅ Analyse terminée !");
           
-          if (data.status === "completed") {
+          if (data.score !== undefined || data.anomalies !== undefined) {
+            // Analyse réussie avec résultats
             setResult(data);
             setError("");
           } else {
+            // Vraie erreur d'analyse
             setError(data.error || "L'analyse a échoué");
             setResult(null);
           }
