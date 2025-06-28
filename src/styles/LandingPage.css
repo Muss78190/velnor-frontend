@@ -1,4 +1,230 @@
+/* ==============================================================
+   VELNOR - CSS RÉVOLUTIONNAIRE GALACTIQUE
+   Version Ultra-Avancée avec Effets Quantiques
+   ============================================================== */
+
+.quantum-progress {
+  width: 250px;
+  height: 4px;
+  background: rgba(43, 192, 255, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto 15px;
+  position: relative;
+}
+
+.quantum-progress-bar {
+  height: 100%;
+  background: var(--gradient-main);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.quantum-progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: quantum-shimmer 2s infinite;
+}
+
+.quantum-percentage {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--blue-main);
+  font-family: var(--font-mono);
+}
+
+/* ================= CURSEUR QUANTIQUE ================= */
+.quantum-cursor-orb {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, var(--blue-main) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  mix-blend-mode: screen;
+  transition: transform 0.1s ease;
+}
+
+.cursor-quantum-trail {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: var(--blue-main);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  animation: quantum-trail-fade 1s ease-out forwards;
+}
+
+/* ================= CANVAS SYSTÈMES ================= */
+.quantum-particles,
+.quantum-matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: var(--z-particles);
+}
+
+.quantum-matrix {
+  opacity: 0.3;
+  mix-blend-mode: screen;
+}
+
+/* ================= NAVBAR RÉVOLUTIONNAIRE ================= */
+.quantum-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  background: rgba(1, 1, 22, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(43, 192, 255, 0.2);
+  z-index: var(--z-navbar);
+  transition: all var(--transition-smooth);
+}
+
+.navbar-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.quantum-logo {
+  position: relative;
+  z-index: 1001;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 800;
+  background: var(--gradient-main);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 30px;
+  background: var(--blue-glow);
+  border-radius: 50%;
+  filter: blur(15px);
+  opacity: 0.6;
+  animation: quantum-logo-pulse 3s ease-in-out infinite;
+}
+
+.quantum-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  transition: var(--transition-smooth);
+}
+
+.quantum-nav-link {
+  position: relative;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  overflow: hidden;
+}
+
+.quantum-nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-main);
+  opacity: 0.1;
+  transition: var(--transition-smooth);
+  z-index: -1;
+}
+
+.quantum-nav-link:hover::before {
+  left: 0;
+}
+
+.quantum-nav-link:hover {
+  color: var(--text-accent);
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px var(--blue-glow);
+}
+
+.nav-link-glow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-main);
+  transform: translateX(-50%);
+  transition: var(--transition-smooth);
+}
+
+.quantum-nav-link:hover .nav-link-glow {
+  width: 80%;
+}
+
+.quantum-admin-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--gradient-main);
+  border: none;
+  border-radius: 16px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
 .quantum-admin-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: var(--transition-bounce);
+}
+
+.quantum-admin-btn:hover::before {
   width: 300px;
   height: 300px;
 }
@@ -722,796 +948,6 @@
   letter-spacing: 1px;
 }
 
-/* ================= OFFRES SECTION ================= */
-.offers-section {
-  position: relative;
-}
-
-.quantum-offers-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-  gap: 2rem;
-  max-width: 900px;
-  margin: 0 auto 4rem;
-}
-
-.quantum-offer-card {
-  background: rgba(5, 5, 40, 0.4);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(43, 192, 255, 0.2);
-  border-radius: var(--border-radius-large);
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-  transition: var(--transition-smooth);
-  cursor: pointer;
-}
-
-.quantum-offer-card.popular {
-  transform: scale(1.05);
-  border-color: rgba(43, 192, 255, 0.5);
-  box-shadow: var(--shadow-quantum);
-}
-
-.offer-badge {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--gradient-main);
-  color: white;
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  z-index: 10;
-}
-
-.badge-glow {
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: var(--gradient-main);
-  border-radius: 22px;
-  z-index: -1;
-  opacity: 0.6;
-  filter: blur(8px);
-}
-
-.offer-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.offer-icon {
-  width: 60px;
-  height: 60px;
-  background: var(--gradient-main);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-  font-size: 24px;
-  color: white;
-}
-
-.offer-name {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-accent);
-  margin-bottom: 0.5rem;
-}
-
-.offer-subtitle {
-  color: var(--text-secondary);
-  margin-bottom: 2rem;
-}
-
-.offer-pricing {
-  text-align: center;
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background: rgba(43, 192, 255, 0.05);
-  border-radius: var(--border-radius);
-  border: 1px solid rgba(43, 192, 255, 0.1);
-}
-
-.price-container {
-  margin-bottom: 0.5rem;
-}
-
-.price-main {
-  font-size: 48px;
-  font-weight: 800;
-  color: var(--blue-main);
-}
-
-.price-currency {
-  color: var(--text-secondary);
-  margin-left: 8px;
-  font-size: 18px;
-}
-
-.price-original {
-  color: var(--text-muted);
-  text-decoration: line-through;
-  margin-bottom: 0.5rem;
-}
-
-.price-duration {
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
-.offer-features {
-  margin-bottom: 2rem;
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  font-size: 14px;
-}
-
-.feature-item.included {
-  color: var(--text-light);
-}
-
-.feature-item.excluded {
-  color: var(--text-muted);
-  opacity: 0.6;
-}
-
-.feature-item.premium .feature-text {
-  color: var(--blue-main);
-  font-weight: 600;
-}
-
-.feature-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.feature-item.included .feature-icon {
-  background: var(--green-accent);
-  color: white;
-}
-
-.feature-item.excluded .feature-icon {
-  background: var(--text-muted);
-  color: white;
-}
-
-.premium-badge {
-  background: var(--gradient-main);
-  color: white;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.quantum-offer-btn {
-  width: 100%;
-  padding: 16px;
-  border-radius: var(--border-radius);
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  position: relative;
-  overflow: hidden;
-}
-
-.quantum-offer-btn:not(.popular) {
-  background: transparent;
-  border: 1px solid rgba(82, 88, 102, 0.5);
-  color: var(--text-secondary);
-}
-
-.quantum-offer-btn.popular {
-  background: var(--gradient-main);
-  border: none;
-  color: white;
-}
-
-.quantum-offer-btn:hover {
-  transform: translateY(-2px);
-}
-
-.quantum-offer-btn.popular:hover {
-  box-shadow: var(--shadow-glow);
-}
-
-.quantum-offer-btn:not(.popular):hover {
-  border-color: rgba(43, 192, 255, 0.5);
-  background: rgba(43, 192, 255, 0.1);
-}
-
-.btn-quantum-effect {
-  position: absolute;
-  top: 50%;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transform: translateY(-50%);
-  transition: var(--transition-smooth);
-}
-
-.quantum-offer-btn:hover .btn-quantum-effect {
-  left: 100%;
-}
-
-.offer-quantum-glow {
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border-radius: var(--border-radius-large);
-  z-index: -2;
-  opacity: 0;
-  filter: blur(10px);
-  transition: var(--transition-smooth);
-}
-
-.quantum-offer-card:hover .offer-quantum-glow {
-  opacity: 0.3;
-}
-
-.offers-guarantee {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-.guarantee-content {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 24px;
-  background: rgba(76, 205, 196, 0.1);
-  border: 1px solid rgba(76, 205, 196, 0.3);
-  border-radius: var(--border-radius);
-  max-width: 400px;
-}
-
-.guarantee-icon {
-  font-size: 24px;
-  color: var(--green-accent);
-}
-
-.guarantee-text h4 {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--green-accent);
-  margin-bottom: 4px;
-}
-
-.guarantee-text p {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-/* ================= TÉMOIGNAGES SECTION ================= */
-.testimonials-section {
-  position: relative;
-}
-
-.quantum-testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
-}
-
-.quantum-testimonial-card {
-  background: rgba(5, 5, 40, 0.4);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(43, 192, 255, 0.2);
-  border-radius: var(--border-radius-large);
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-  transition: var(--transition-smooth);
-  cursor: pointer;
-}
-
-.testimonial-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.05;
-  z-index: -1;
-}
-
-.testimonial-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.author-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--gradient-main);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-}
-
-.rating-stars {
-  display: flex;
-  gap: 4px;
-}
-
-.star {
-  color: #ffd700;
-  font-size: 16px;
-}
-
-.testimonial-content {
-  margin-bottom: 1.5rem;
-}
-
-.quote-mark {
-  font-size: 48px;
-  color: rgba(43, 192, 255, 0.3);
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-
-.testimonial-text {
-  font-size: 16px;
-  color: var(--text-light);
-  line-height: 1.6;
-  font-style: italic;
-}
-
-.testimonial-footer {
-  border-top: 1px solid rgba(43, 192, 255, 0.1);
-  padding-top: 1rem;
-}
-
-.author-name {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-accent);
-  margin-bottom: 4px;
-}
-
-.author-position {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
-}
-
-.author-company {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.testimonial-quantum-glow {
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: var(--gradient-main);
-  border-radius: var(--border-radius-large);
-  z-index: -2;
-  opacity: 0;
-  filter: blur(10px);
-  transition: var(--transition-smooth);
-}
-
-.quantum-testimonial-card:hover .testimonial-quantum-glow {
-  opacity: 0.3;
-}
-
-.testimonials-stats {
-  margin-top: 3rem;
-}
-
-.stats-container {
-  display: flex;
-  justify-content: center;
-  gap: 4rem;
-  padding: 2rem;
-  background: rgba(5, 5, 40, 0.3);
-  border-radius: var(--border-radius-large);
-  border: 1px solid rgba(43, 192, 255, 0.2);
-}
-
-.testimonials-stats .stat-item {
-  text-align: center;
-}
-
-.testimonials-stats .stat-number {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--blue-main);
-  display: block;
-  margin-bottom: 4px;
-}
-
-.testimonials-stats .stat-label {
-  font-size: 14px;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* ================= FAQ SECTION ================= */
-.faq-section {
-  position: relative;
-}
-
-.quantum-faq-container {
-  margin-bottom: 3rem;
-}
-
-.quantum-faq-item {
-  background: rgba(5, 5, 40, 0.3);
-  border: 1px solid rgba(43, 192, 255, 0.2);
-  border-radius: var(--border-radius);
-  margin-bottom: 1rem;
-  overflow: hidden;
-  transition: var(--transition-smooth);
-}
-
-.quantum-faq-item:hover {
-  border-color: rgba(43, 192, 255, 0.4);
-  background: rgba(5, 5, 40, 0.5);
-}
-
-.faq-question {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem;
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-  transition: var(--transition-smooth);
-}
-
-.question-content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex: 1;
-}
-
-.question-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--gradient-main);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: white;
-}
-
-.question-text {
-  flex: 1;
-}
-
-.question-category {
-  display: block;
-  font-size: 12px;
-  color: var(--blue-main);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-}
-
-.question-text h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-accent);
-  margin: 0;
-}
-
-.question-arrow {
-  width: 24px;
-  height: 24px;
-  position: relative;
-  transition: var(--transition-fast);
-}
-
-.arrow-line {
-  position: absolute;
-  background: var(--text-secondary);
-  transition: var(--transition-fast);
-}
-
-.arrow-line:first-child {
-  top: 11px;
-  left: 4px;
-  width: 16px;
-  height: 2px;
-}
-
-.arrow-line:last-child {
-  top: 4px;
-  left: 11px;
-  width: 2px;
-  height: 16px;
-}
-
-.quantum-faq-item[open] .arrow-line:last-child {
-  transform: rotate(90deg);
-}
-
-.faq-answer {
-  padding: 0 1.5rem 1.5rem;
-  border-top: 1px solid rgba(43, 192, 255, 0.1);
-}
-
-.faq-answer p {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin: 0;
-  padding-top: 1rem;
-}
-
-.faq-cta {
-  text-align: center;
-  padding: 2rem;
-  background: rgba(5, 5, 40, 0.3);
-  border-radius: var(--border-radius-large);
-  border: 1px solid rgba(43, 192, 255, 0.2);
-}
-
-.faq-cta-content h3 {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-accent);
-  margin-bottom: 0.5rem;
-}
-
-.faq-cta-content p {
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.quantum-support-btn {
-  padding: 12px 32px;
-  background: var(--gradient-main);
-  border: none;
-  border-radius: var(--border-radius);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-  position: relative;
-  overflow: hidden;
-}
-
-.quantum-support-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
-}
-
-.btn-glow {
-  position: absolute;
-  top: 50%;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transform: translateY(-50%);
-  transition: var(--transition-smooth);
-}
-
-.quantum-support-btn:hover .btn-glow {
-  left: 100%;
-}
-
-/* ================= FOOTER RÉVOLUTIONNAIRE ================= */
-.quantum-footer {
-  padding: 4rem 2rem;
-  border-top: 1px solid rgba(43, 192, 255, 0.2);
-  position: relative;
-}
-
-.footer-quantum-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  overflow: hidden;
-}
-
-.footer-wave {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: linear-gradient(135deg, rgba(43, 192, 255, 0.1) 0%, transparent 100%);
-  border-radius: 0 0 50% 50%;
-  transform: translateY(-50%);
-}
-
-.footer-content {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.footer-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
-.footer-brand {
-  position: relative;
-}
-
-.footer-logo {
-  position: relative;
-  margin-bottom: 1rem;
-}
-
-.footer-logo .logo-text {
-  font-size: 24px;
-  font-weight: 700;
-  background: var(--gradient-main);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.logo-quantum-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px;
-  height: 20px;
-  background: var(--blue-glow);
-  border-radius: 50%;
-  filter: blur(15px);
-  opacity: 0.6;
-  animation: quantum-pulse 3s ease-in-out infinite;
-  z-index: -1;
-}
-
-.footer-tagline {
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.footer-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
-.footer-stat {
-  text-align: center;
-}
-
-.footer-stat .stat-number {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--blue-main);
-  display: block;
-}
-
-.footer-stat .stat-label {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.footer-links {
-  display: contents;
-}
-
-.footer-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer-column h4 {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-accent);
-  margin-bottom: 1rem;
-}
-
-.footer-column a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  margin-bottom: 0.5rem;
-  transition: var(--transition-fast);
-}
-
-.footer-column a:hover {
-  color: var(--text-accent);
-  transform: translateX(4px);
-}
-
-.footer-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(43, 192, 255, 0.2);
-}
-
-.footer-copyright {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 14px;
-}
-
-.footer-social {
-  display: flex;
-  gap: 1rem;
-}
-
-.social-links {
-  display: flex;
-  gap: 1rem;
-}
-
-.social-link {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(43, 192, 255, 0.1);
-  border: 1px solid rgba(43, 192, 255, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--blue-main);
-  text-decoration: none;
-  transition: var(--transition-fast);
-  font-size: 18px;
-}
-
-.social-link:hover {
-  background: rgba(43, 192, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(43, 192, 255, 0.3);
-}
-
 /* ================= ANIMATIONS KEYFRAMES ================= */
 @keyframes quantum-spin {
   from { transform: rotate(0deg); }
@@ -1616,32 +1052,6 @@
   50% { transform: translateY(-10px); }
 }
 
-/* ================= FLOATING ELEMENTS ================= */
-.floating-element {
-  animation: quantum-float 4s ease-in-out infinite;
-}
-
-.floating-element:nth-child(even) {
-  animation-delay: -2s;
-}
-
-/* ================= COULEURS SPÉCIFIQUES ================= */
-.color-blue {
-  border-color: rgba(43, 192, 255, 0.3);
-}
-
-.color-purple {
-  border-color: rgba(169, 74, 255, 0.3);
-}
-
-.intensity-high .tech-icon {
-  animation: quantum-pulse 2s ease-in-out infinite;
-}
-
-.intensity-medium .tech-icon {
-  animation: quantum-float 3s ease-in-out infinite;
-}
-
 /* ================= RESPONSIVE DESIGN ================= */
 @media (max-width: 1200px) {
   :root {
@@ -1650,14 +1060,6 @@
   
   .quantum-section {
     padding: 6rem 1.5rem;
-  }
-  
-  .tech-stats-banner {
-    gap: 2rem;
-  }
-  
-  .cta-stats {
-    gap: 2rem;
   }
 }
 
@@ -1674,7 +1076,6 @@
     justify-content: center;
     gap: 2rem;
     transition: var(--transition-smooth);
-    z-index: 999;
   }
   
   .quantum-menu.open {
@@ -1697,197 +1098,13 @@
     padding: 4rem 1rem;
   }
   
-  .quantum-process-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
   .quantum-tech-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .quantum-offers-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .quantum-testimonials-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .tech-stats-banner {
-    flex-direction: column;
-    gap: 1.5rem;
-    text-align: center;
-  }
-  
-  .tech-stats-banner .stat-item {
-    justify-content: center;
-  }
-  
-  .cta-stats {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .stats-container {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .footer-main {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .footer-bottom {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .guarantee-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
 }
-
-@media (max-width: 480px) {
-  .quantum-section {
-    padding: 3rem 1rem;
-  }
-  
-  .quantum-hero {
-    padding: 1rem;
-  }
-  
-  .hero-badge {
-    padding: 6px 16px;
-    font-size: 12px;
-  }
-  
-  .quantum-cta-btn {
-    padding: 14px 28px;
-    font-size: 16px;
-  }
-  
-  .process-number {
-    font-size: 36px;
-  }
-  
-  .sphere-ring {
-    display: none;
-  }
-  
-  .tech-circuits {
-    display: none;
-  }
 }
-
-/* ================= PERFORMANCE OPTIMIZATIONS ================= */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* ================= PRINT STYLES ================= */
-@media print {
-  .quantum-particles,
-  .quantum-matrix,
-  .quantum-cursor-orb,
-  .quantum-loader {
-    display: none !important;
-  }
-  
-  body {
-    background: white !important;
-    color: black !important;
-  }
-  
-  .quantum-navbar {
-    position: static !important;
-    background: white !important;
-    border-bottom: 1px solid #ccc !important;
-  }
-}
-
-/* ================= DARK MODE IMPROVEMENTS ================= */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-dark: #000000;
-    --bg-darker: #000000;
-    --text-light: #ffffff;
-  }
-}
-
-/* ================= HIGH CONTRAST MODE ================= */
-@media (prefers-contrast: high) {
-  :root {
-    --blue-main: #00bfff;
-    --purple-main: #9f4fff;
-    --text-light: #ffffff;
-    --text-secondary: #cccccc;
-  }
-}
-
-/* ================= FOCUS STYLES FOR ACCESSIBILITY ================= */
-.quantum-nav-link:focus,
-.quantum-cta-btn:focus,
-.quantum-offer-btn:focus,
-.quantum-support-btn:focus,
-.quantum-admin-btn:focus {
-  outline: 2px solid var(--blue-main);
-  outline-offset: 2px;
-}
-
-/* ================= MOTION SAFE PREFERENCES ================= */
-@media (prefers-reduced-motion: no-preference) {
-  .quantum-card {
-    transition: transform var(--transition-smooth), 
-                box-shadow var(--transition-smooth),
-                border-color var(--transition-smooth);
-  }
-}
-
-/* ================= SELECTION IMPROVEMENTS ================= */
-.quantum-title::selection,
-.quantum-section-title::selection {
-  background: var(--purple-glow);
-  color: var(--text-accent);
-  text-shadow: 0 0 20px var(--purple-main);
-}
-
-/* ================= UTILITY CLASSES ================= */
-.text-gradient {
-  background: var(--gradient-main);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.glass-effect {
-  background: rgba(5, 5, 40, 0.4);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(43, 192, 255, 0.2);
-}
-
-.quantum-glow-effect {
-  box-shadow: var(--shadow-glow);
-}
-
-.quantum-border {
-  border: 1px solid rgba(43, 192, 255, 0.3);
-}/* ==============================================================
-   VELNOR - CSS RÉVOLUTIONNAIRE GALACTIQUE
-   Version Ultra-Avancée avec Effets Quantiques
-   ============================================================== */
 
 /* ================= VARIABLES QUANTIQUES ================= */
 :root {
@@ -2011,7 +1228,6 @@ body {
   align-items: center;
   z-index: var(--z-loader);
   backdrop-filter: blur(10px);
-  transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .quantum-loader-container {
@@ -2091,227 +1307,3 @@ body {
   opacity: 0.8;
   animation: quantum-fade 2s ease-in-out infinite alternate;
 }
-
-.quantum-progress {
-  width: 250px;
-  height: 4px;
-  background: rgba(43, 192, 255, 0.2);
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 0 auto 15px;
-  position: relative;
-}
-
-.quantum-progress-bar {
-  height: 100%;
-  background: var(--gradient-main);
-  border-radius: 10px;
-  transition: width 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.quantum-progress-bar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: quantum-shimmer 2s infinite;
-}
-
-.quantum-percentage {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--blue-main);
-  font-family: var(--font-mono);
-}
-
-/* ================= CURSEUR QUANTIQUE ================= */
-.quantum-cursor-orb {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(circle, var(--blue-main) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: var(--z-cursor);
-  mix-blend-mode: screen;
-  transition: transform 0.3s ease;
-}
-
-.cursor-quantum-trail {
-  position: fixed;
-  width: 4px;
-  height: 4px;
-  background: var(--blue-main);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: var(--z-cursor);
-  animation: quantum-trail-fade 1s ease-out forwards;
-}
-
-/* ================= CANVAS SYSTÈMES ================= */
-.quantum-particles,
-.quantum-matrix {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: var(--z-particles);
-}
-
-.quantum-matrix {
-  opacity: 0.3;
-  mix-blend-mode: screen;
-}
-
-/* ================= NAVBAR RÉVOLUTIONNAIRE ================= */
-.quantum-navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--nav-height);
-  background: rgba(1, 1, 22, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(43, 192, 255, 0.2);
-  z-index: var(--z-navbar);
-  transition: all var(--transition-smooth);
-}
-
-.navbar-content {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-}
-
-.quantum-logo {
-  position: relative;
-  z-index: 1001;
-}
-
-.logo-text {
-  font-size: 28px;
-  font-weight: 800;
-  background: var(--gradient-main);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  letter-spacing: 2px;
-  position: relative;
-  z-index: 2;
-}
-
-.logo-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px;
-  height: 30px;
-  background: var(--blue-glow);
-  border-radius: 50%;
-  filter: blur(15px);
-  opacity: 0.6;
-  animation: quantum-logo-pulse 3s ease-in-out infinite;
-}
-
-.quantum-menu {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  transition: var(--transition-smooth);
-}
-
-.quantum-nav-link {
-  position: relative;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 15px;
-  color: var(--text-light);
-  text-decoration: none;
-  transition: var(--transition-smooth);
-  overflow: hidden;
-}
-
-.quantum-nav-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: var(--gradient-main);
-  opacity: 0.1;
-  transition: var(--transition-smooth);
-  z-index: -1;
-}
-
-.quantum-nav-link:hover::before {
-  left: 0;
-}
-
-.quantum-nav-link:hover {
-  color: var(--text-accent);
-  transform: translateY(-2px);
-  text-shadow: 0 0 10px var(--blue-glow);
-}
-
-.nav-link-glow {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: var(--gradient-main);
-  transform: translateX(-50%);
-  transition: var(--transition-smooth);
-}
-
-.quantum-nav-link:hover .nav-link-glow {
-  width: 80%;
-}
-
-.quantum-admin-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: var(--gradient-main);
-  border: none;
-  border-radius: 16px;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-  position: relative;
-  overflow: hidden;
-}
-
-.quantum-admin-btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: var(--transition-bounce);
-}
-
-.quantum-admin-btn:hover::before {
-  width: 300px}
