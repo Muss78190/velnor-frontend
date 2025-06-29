@@ -1,6 +1,4 @@
-
-
-export default VelnorLanding;import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import {
   FaShieldAlt,
   FaRocket,
@@ -2874,3 +2872,5 @@ const VelnorLanding = () => {
     </>
   );
 };
+
+export default VelnorLanding;
