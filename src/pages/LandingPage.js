@@ -31,8 +31,8 @@ import {
   GiCircuitry,
   GiCrystalGrowth,
   GiLaserSparks,
-  GiQuantumTunnel,
-  GiHologram,
+  GiAtom,
+  GiCrystalBall,
   GiTechnoHeart,
   GiProcessor,
   GiRadarSweep,
@@ -1675,7 +1675,7 @@ const VelnorLanding = () => {
                   <span className="stat-label">Menaces Détectées</span>
                 </div>
                 <div className="stat-item">
-                  <GiQuantumTunnel className="stat-icon-animated" />
+                  <GiAtom className="stat-icon-animated" />
                   <span className="stat-number">99.9%</span>
                   <span className="stat-label">Précision IA</span>
                 </div>
@@ -1770,7 +1770,7 @@ const VelnorLanding = () => {
                 animation: "brain"
               },
               {
-                icon: GiHologram,
+                icon: GiCrystalBall,
                 title: "Rapport Holographique",
                 description: "PDF ultra-détaillé avec visualisations 3D et recommandations personnalisées",
                 features: ["Rapport interactif", "Visualisations 3D", "Plan d'action détaillé"],
@@ -1892,7 +1892,7 @@ const VelnorLanding = () => {
             <div className="tech-main-display">
               <div className="holographic-display">
                 <div className="holo-content">
-                  <GiQuantumTunnel className="holo-icon" />
+                  <GiAtom className="holo-icon" />
                   <div className="holo-rings">
                     <div className="holo-ring ring-1"></div>
                     <div className="holo-ring ring-2"></div>
@@ -2103,7 +2103,7 @@ const VelnorLanding = () => {
                 popular: true,
                 savings: "300€",
                 bestValue: true,
-                icon: GiQuantumTunnel
+                icon: GiAtom
               }
             ].map((offer, index) => (
               <div
@@ -2638,7 +2638,7 @@ const VelnorLanding = () => {
                   <span>Chat en Direct</span>
                 </button>
                 <button className="quantum-demo-btn">
-                  <GiHologram className="btn-icon" />
+                  < GiCrystalBall className="btn-icon" />
                   <span>Demander une Démo</span>
                 </button>
               </div>
@@ -2678,7 +2678,7 @@ const VelnorLanding = () => {
             
             <button className="quantum-mega-cta" onClick={handleCTAClick}>
               <div className="mega-cta-bg"></div>
-              <GiQuantumTunnel className="mega-icon" />
+              <GiAtom className="mega-icon" />
               <span>Commencer Mon Audit Quantique</span>
               <div className="mega-cta-particles"></div>
             </button>
@@ -2754,7 +2754,7 @@ const VelnorLanding = () => {
                   <FaRocket /> Plans & Tarifs
                 </a>
                 <a href="/demo">
-                  <GiHologram /> Démo Interactive
+                  <GiCrystalBall/> Démo Interactive
                 </a>
                 <a href="/api">
                   <FaDatabase /> API Développeurs
