@@ -1,0 +1,35 @@
+[33m8cc1380[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m 🚀 VELNOR v5.0 - Landing Page NASA niveau avec CSS quantique
+[33m1b039d6[m 🔧 Rénovation du site web ✨
+[33m20a9f65[m 🚀 VELNOR Landing Page Révolutionnaire - IA Quantique Galactique ✨
+[33mc9009e8[m 🔧 Fix logique statut analyse
+[33m8d7fb2c[m 🔥 Interface admin ultra-pro
+[33mcc470b9[m 🔁 Mise à jour des URLs backend vers https://api.velnor.fr
+[33m278d1d8[m fix: backend URL changed to Scaleway VPS
+[33m10b5be1[m feat: ajout console Admin avec login et page d’audit, + ajustement LandingPage
+[33m3d73a7e[m Amélioration finale insh'Allh
+[33m47384b6[m  améliorations page d'offres
+[33mc707065[m amélioration carte de paiments
+[33md865ad8[m Améliorations finale des témoignages
+[33m694c4b5[m Améliorations des pages de paiments et témoignags
+[33ma845a0b[m Refonte des pages de paiement : design néon centré + prix corrigés
+[33m1efd219[m Refonte des pages de paiement : design néon centré + prix corrigés
+[33m6b704ff[m Amélioration futuriste des pages de paiements
+[33mb072e75[m ✅ Connexion directe au backend Render pour paiements 24h et 48h
+[33m1b55a97[m 🐛 Fix CSS path import for Paiement
+[33mbf3082c[m 🚀 Frontend Velnor : amélioration du design et animations
+[33m1c9f406[m 💾 Ajout des pages de paiement Stripe 24h/48h et backend FastAPI mis à jour
+[33m8487b49[m 💾 Ajout des pages de paiement Stripe 24h/48h et backend FastAPI mis à jour
+[33m42515fa[m 🔧 Migration useHistory → useNavigate pour React Router v6
+[33m39f45e2[m 💅 Suppression mini-CTA + introduction courte + harmonisation paiements
+[33ma3fe58a[m 💅 Suppression mini-CTA + introduction courte + harmonisation paiements
+[33m83c77db[m ✨ Design Hero plus pro, typo Poppins, glow atténué, améliorations UX
+[33mf73aae4[m 🔥 V2 : Refactoring Hero, Loader, encadrement offres, micro-animations, SEO/accessibilité
+[33m92d52df[m ✨ Refonte totale du site VELNOR - design futuriste, animations GSAP, carrousel, menu burger, canvas étoilé
+[33m3aab8cd[m 🎨 Refonte complète futuriste : landing page avec GSAP + fond néon animé
+[33m83fb33f[m 🛠 Corrige ESLint + Refonte futuriste
+[33m4c230d3[m ✨ Refonte totale futuriste : réseau étoilé, GSAP, design épuré haut de gamme
+[33mc3a2a6b[m 🔮 Refonte complète LandingPage : nouveau design futuriste, GSAP, fond étoilé, sections uniformisées
+[33m01f3c82[m 🔮 Refonte complète LandingPage : nouveau design futuriste, GSAP, fond étoilé, sections uniformisées
+[33m5e551f7[m 🔮 Refonte totale landing page futuriste, fond spatial, GSAP ScrollTrigger
+[33m1054530[m 💠 Version futuriste VELNOR avec GSAP, fond animé, IA
+[33m26205d7[m ✨ Ajout GalaxyParticles, fond spatial animé
