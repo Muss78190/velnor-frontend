@@ -1,2113 +1,574 @@
-import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
-import {
-  FaShieldAlt,
-  FaRocket,
-  FaStar,
-  FaBars,
-  FaTimes,
-  FaChartBar,
-  FaEye,
-  FaCog,
-  FaLock,
-  FaCode,
-  FaDatabase,
-  FaNetworkWired,
-  FaBrain,
-  FaAtom,
-  FaCheckCircle,
-  FaArrowRight,
-  FaQuoteLeft,
-  FaPlus,
-  FaMinus,
-  FaCertificate,
-  FaAward,
-  FaChevronDown,
-} from 'react-icons/fa';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import { 
-  GiSpaceship, 
-  GiArtificialIntelligence,
-  GiCircuitry,
-  GiCrystalGrowth,
-  GiLaserSparks,
-  GiAtom,
-  GiCrystalBall,
-  GiTechnoHeart,
-  GiProcessor,
-  GiRadarSweep,
-} from 'react-icons/gi';
-import { 
-  MdSecurity, 
-  MdSpeed,
-  MdAutoGraph,
-  MdOutlineAnalytics,
-  Md3dRotation,
-  MdOutlineScience,
-  MdElectricBolt,
-  MdRadar,
-} from 'react-icons/md';
-import { 
-  BsShieldCheck, 
-  BsLightning,
-  BsGraphUp,
-  BsCloudLightning,
-  BsCpuFill,
-  BsHexagon,
-  BsTriangle,
-} from 'react-icons/bs';
-import { 
-  BiAtom,
-  BiPulse,
-  BiDna,
-  BiCube,
-  BiPlanet,
-} from 'react-icons/bi';
-import { 
-  IoMdPulse,
-  IoMdGlobe,
-  IoMdFlash,
-} from 'react-icons/io';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
-import '../styles/LandingPage.css';
+  Shield, 
+  Zap, 
+  CheckCircle, 
+  ChevronDown, 
+  ChevronRight,
+  Star,
+  Menu,
+  X,
+  Clock,
+  Award,
+  Users,
+  Cpu,
+  Lock,
+  BarChart3,
+  ArrowRight,
+  Brain,
+  Globe,
+  Settings
+} from 'lucide-react';
 
-// Enregistrer les plugins GSAP
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, DrawSVGPlugin);
+// ================= COMPOSANTS MÉMORISÉS =================
+const Icon = memo(({ icon: IconComponent, className = "" }) => (
+  <IconComponent className={className} />
+));
 
-// Configuration globale
-const CONFIG = {
-  particleCount: 350,
-  connectionDistance: 150,
-  mouseForce: 0.0005,
-  quantumStateChangeDistance: 80,
-  matrixCharCount: 100,
-  starFieldCount: 200,
-  animationFPS: 60,
-  scrollSmoothness: 1.2,
-  glowIntensity: 1.5,
-  hologramOpacity: 0.4,
-};
+const Button = memo(({ 
+  children, 
+  variant = "primary", 
+  onClick, 
+  className = "",
+  icon: IconComponent,
+  ...props 
+}) => (
+  <button
+    className={`btn btn-${variant} ${className}`}
+    onClick={onClick}
+    {...props}
+  >
+    {children}
+    {IconComponent && <IconComponent className="btn-icon" />}
+  </button>
+));
 
-const VelnorLanding = () => {
-  // ================= STATES AVANCÉS =================
-  const [loading, setLoading] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [loadingProgress, setLoadingProgress] = useState(0);
-  const [activeSection, setActiveSection] = useState('hero');
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [deviceType, setDeviceType] = useState('desktop');
-  const [isQuantumMode, setIsQuantumMode] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [expandedFAQ, setExpandedFAQ] = useState(null);
-  
-  // ================= REFS SYSTÈME =================
-  const loaderRef = useRef(null);
-  const heroRef = useRef(null);
-  const heroTitleRef = useRef(null);
-  const particleCanvasRef = useRef(null);
-  const matrixCanvasRef = useRef(null);
-  const glowOrbRef = useRef(null);
-  const cursorTrailRef = useRef([]);
-  const scrollIndicatorRef = useRef(null);
-  const navRef = useRef(null);
-  const quantumFieldRef = useRef(null);
-  const hologramRef = useRef(null);
-  
-  // Refs pour toutes les sections
-  const sectionsRefs = {
-    func: useRef(null),
-    tech: useRef(null),
-    offers: useRef(null),
-    testi: useRef(null),
-    faq: useRef(null),
-    stats: useRef(null),
-    partners: useRef(null),
-    footer: useRef(null),
-  };
+// ================= HEADER =================
+const Header = memo(() => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // ================= DÉTECTION DEVICE =================
-  useEffect(() => {
-    const detectDevice = () => {
-      const width = window.innerWidth;
-      if (width < 768) setDeviceType('mobile');
-      else if (width < 1024) setDeviceType('tablet');
-      else setDeviceType('desktop');
-    };
-    
-    detectDevice();
-    window.addEventListener('resize', detectDevice);
-    return () => window.removeEventListener('resize', detectDevice);
-  }, []);
-
-  // ================= SYSTÈME DE LOADING QUANTIQUE =================
-  useEffect(() => {
-    const loadingSequence = async () => {
-      // Simulation de chargement avec étapes
-      const steps = [
-        { progress: 20, text: "Initialisation du noyau quantique..." },
-        { progress: 40, text: "Chargement des algorithmes IA..." },
-        { progress: 60, text: "Calibrage des systèmes de sécurité..." },
-        { progress: 80, text: "Synchronisation avec le réseau..." },
-        { progress: 100, text: "Activation complète..." }
-      ];
-
-      for (let step of steps) {
-        await new Promise(resolve => {
-          gsap.to({}, {
-            duration: 0.5,
-            onUpdate: function() {
-              setLoadingProgress(prev => {
-                const newProgress = prev + (step.progress - prev) * 0.1;
-                return Math.min(newProgress, step.progress);
-              });
-            },
-            onComplete: resolve
-          });
-        });
-      }
-
-      // Animation de sortie épique
-      setTimeout(() => {
-        const tl = gsap.timeline();
-        
-        tl.to(loaderRef.current, {
-          scale: 1.1,
-          duration: 0.3,
-          ease: 'power2.in'
-        })
-        .to(loaderRef.current, {
-          scale: 0,
-          opacity: 0,
-          rotationY: 720,
-          rotationX: 360,
-          duration: 1.2,
-          ease: 'expo.inOut',
-          onComplete: () => setLoading(false)
-        })
-        .to('.quantum-loader-container > *', {
-          y: -50,
-          opacity: 0,
-          stagger: 0.05,
-          duration: 0.8,
-          ease: 'power3.out'
-        }, '-=0.8');
-      }, 300);
-    };
-
-    loadingSequence();
-  }, []);
-
-  // ================= SYSTÈME DE CURSEUR QUANTIQUE =================
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-      
-      // Mise à jour de l'orbe lumineux
-      if (glowOrbRef.current) {
-        gsap.to(glowOrbRef.current, {
-          x: e.clientX - 15,
-          y: e.clientY - 15,
-          duration: 0.2,
-          ease: 'power2.out'
-        });
-      }
-
-      // Création de multiples trails
-      for (let i = 0; i < 3; i++) {
-        setTimeout(() => {
-          const trail = document.createElement('div');
-          trail.className = 'cursor-quantum-trail';
-          trail.style.left = (e.clientX + (Math.random() - 0.5) * 20) + 'px';
-          trail.style.top = (e.clientY + (Math.random() - 0.5) * 20) + 'px';
-          trail.style.width = Math.random() * 6 + 2 + 'px';
-          trail.style.height = trail.style.width;
-          document.body.appendChild(trail);
-          
-          // Animation du trail
-          gsap.to(trail, {
-            scale: 0,
-            opacity: 0,
-            x: (Math.random() - 0.5) * 100,
-            y: (Math.random() - 0.5) * 100,
-            duration: 1,
-            ease: 'power2.out',
-            onComplete: () => {
-              if (trail.parentNode) {
-                trail.parentNode.removeChild(trail);
-              }
-            }
-          });
-        }, i * 50);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // ================= SCROLL PROGRESS TRACKER =================
   useEffect(() => {
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (window.pageYOffset / totalHeight) * 100;
-      setScrollProgress(progress);
-      
-      // Mise à jour de la section active
-      const sections = ['hero', 'fonctionnement', 'technologie', 'offres', 'temoignages', 'faq'];
-      for (let section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
+      setScrolled(window.scrollY > 50);
     };
-
-    window.addEventListener('scroll', handleScroll);
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ================= ANIMATIONS GSAP RÉVOLUTIONNAIRES =================
+  const navLinks = [
+    { href: '#process', label: 'Processus' },
+    { href: '#tech', label: 'Technologies' },
+    { href: '#offers', label: 'Offres' },
+    { href: '#testimonials', label: 'Témoignages' },
+    { href: '#faq', label: 'FAQ' }
+  ];
+
+  return (
+    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+      <nav className="nav container">
+        <a href="/" className="logo">
+          VELNOR
+        </a>
+
+        <div className={`nav-menu ${mobileMenuOpen ? 'active' : ''}`}>
+          {navLinks.map((link) => (
+            <a 
+              key={link.href}
+              href={link.href} 
+              className="nav-link"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          <Button 
+            variant="secondary" 
+            onClick={() => window.location.href = '/admin'}
+            icon={Settings}
+          >
+            Admin
+          </Button>
+        </div>
+
+        <button 
+          className="mobile-toggle"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X /> : <Menu />}
+        </button>
+      </nav>
+    </header>
+  );
+});
+
+// ================= HERO SECTION =================
+const HeroSection = memo(() => (
+  <section className="hero">
+    <div className="container">
+      <div className="hero-content">
+        <div className="hero-badge">
+          <Zap className="badge-icon" />
+          <span>IA & Cybersécurité</span>
+        </div>
+        
+        <h1 className="hero-title">
+          L'audit de sécurité
+          <span className="text-gradient"> nouvelle génération</span>
+        </h1>
+        
+        <p className="hero-subtitle">
+          Détectez et corrigez vos vulnérabilités en 24h grâce à notre IA avancée.
+          Rapport détaillé, badge de confiance et protection garantie.
+        </p>
+
+        <div className="hero-cta">
+          <Button onClick={() => window.location.href = '#offers'} icon={ArrowRight}>
+            Commencer l'audit
+          </Button>
+          <p className="hero-trust">
+            <CheckCircle className="trust-icon" />
+            <span>2,847 entreprises protégées</span>
+          </p>
+        </div>
+
+        <div className="hero-stats">
+          <div className="stat">
+            <span className="stat-value">99.9%</span>
+            <span className="stat-label">Précision</span>
+          </div>
+          <div className="stat">
+            <span className="stat-value">24h</span>
+            <span className="stat-label">Livraison</span>
+          </div>
+          <div className="stat">
+            <span className="stat-value">500+</span>
+            <span className="stat-label">Vulnérabilités</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+));
+
+// ================= PROCESSUS =================
+const ProcessSection = memo(() => {
+  const steps = [
+    {
+      icon: Brain,
+      title: "Analyse IA",
+      description: "Notre IA scanne votre infrastructure en profondeur"
+    },
+    {
+      icon: Shield,
+      title: "Détection",
+      description: "Identification des vulnérabilités et menaces"
+    },
+    {
+      icon: BarChart3,
+      title: "Rapport",
+      description: "PDF détaillé avec recommandations personnalisées"
+    },
+    {
+      icon: Award,
+      title: "Certification",
+      description: "Badge de confiance pour rassurer vos clients"
+    }
+  ];
+
+  return (
+    <section id="process" className="section">
+      <div className="container">
+        <div className="section-header">
+          <h2 className="section-title">Notre Processus</h2>
+          <p className="section-subtitle">
+            Un audit complet en 4 étapes simples et efficaces
+          </p>
+        </div>
+
+        <div className="process-grid">
+          {steps.map((step, index) => (
+            <div key={index} className="process-card">
+              <div className="process-number">{index + 1}</div>
+              <div className="process-icon">
+                <step.icon />
+              </div>
+              <h3 className="process-title">{step.title}</h3>
+              <p className="process-description">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+});
+
+// ================= TECHNOLOGIES =================
+const TechSection = memo(() => {
+  const technologies = [
+    { name: "OWASP ZAP", icon: Shield },
+    { name: "Nmap", icon: Globe },
+    { name: "FastAPI", icon: Zap },
+    { name: "TensorFlow", icon: Brain },
+    { name: "React", icon: Cpu },
+    { name: "Stripe", icon: Lock }
+  ];
+
+  return (
+    <section id="tech" className="section section-alt">
+      <div className="container">
+        <div className="section-header">
+          <h2 className="section-title">Technologies Utilisées</h2>
+          <p className="section-subtitle">
+            Les meilleurs outils pour votre sécurité
+          </p>
+        </div>
+
+        <div className="tech-grid">
+          {technologies.map((tech, index) => (
+            <div key={index} className="tech-card">
+              <tech.icon className="tech-icon" />
+              <span className="tech-name">{tech.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+});
+
+// ================= OFFRES =================
+const OffersSection = memo(() => {
+  const offers = [
+    {
+      name: "Audit Express",
+      price: "499",
+      duration: "48h",
+      features: [
+        "Scan complet IA",
+        "Rapport PDF 50+ pages",
+        "500+ vulnérabilités",
+        "Support email",
+        "Badge standard"
+      ],
+      cta: "Choisir Express"
+    },
+    {
+      name: "Audit Premium",
+      price: "699",
+      duration: "24h",
+      features: [
+        "Scan IA avancé",
+        "Rapport PDF 100+ pages",
+        "1000+ vulnérabilités",
+        "Support prioritaire 24/7",
+        "Badge premium",
+        "Consultation expert 1h"
+      ],
+      popular: true,
+      cta: "Choisir Premium"
+    }
+  ];
+
+  return (
+    <section id="offers" className="section">
+      <div className="container">
+        <div className="section-header">
+          <h2 className="section-title">Nos Offres</h2>
+          <p className="section-subtitle">
+            Choisissez la protection adaptée à vos besoins
+          </p>
+        </div>
+
+        <div className="offers-grid">
+          {offers.map((offer, index) => (
+            <div key={index} className={`offer-card ${offer.popular ? 'popular' : ''}`}>
+              {offer.popular && <div className="offer-badge">Populaire</div>}
+              
+              <h3 className="offer-name">{offer.name}</h3>
+              <div className="offer-price">
+                <span className="price-value">{offer.price}€</span>
+                <span className="price-unit">HT</span>
+              </div>
+              <p className="offer-duration">
+                <Clock className="duration-icon" />
+                Livraison en {offer.duration}
+              </p>
+
+              <ul className="offer-features">
+                {offer.features.map((feature, idx) => (
+                  <li key={idx}>
+                    <CheckCircle className="feature-icon" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <Button 
+                variant={offer.popular ? "primary" : "secondary"}
+                className="offer-cta"
+                onClick={() => window.location.href = `/checkout?plan=${index}`}
+              >
+                {offer.cta}
+              </Button>
+            </div>
+          ))}
+        </div>
+
+        <div className="offers-trust">
+          <Lock className="trust-icon" />
+          <span>Paiement sécurisé • Satisfait ou remboursé</span>
+        </div>
+      </div>
+    </section>
+  );
+});
+
+// ================= TÉMOIGNAGES =================
+const TestimonialsSection = memo(() => {
+  const testimonials = [
+    {
+      text: "VELNOR a détecté des vulnérabilités critiques que nous n'avions jamais vues. Le rapport est d'une précision exceptionnelle.",
+      author: "Marie Chen",
+      position: "CTO, TechStart",
+      rating: 5
+    },
+    {
+      text: "En 24h, j'ai reçu un audit complet qui m'aurait coûté 10x plus cher ailleurs. Rapport professionnel et recommandations claires.",
+      author: "Thomas Martin",
+      position: "Développeur Freelance",
+      rating: 5
+    },
+    {
+      text: "Le badge de confiance VELNOR a augmenté notre taux de conversion de 34%. Un investissement rentable dès le premier mois.",
+      author: "Sophie Dubois",
+      position: "CEO, E-Shop Pro",
+      rating: 5
+    }
+  ];
+
+  return (
+    <section id="testimonials" className="section section-alt">
+      <div className="container">
+        <div className="section-header">
+          <h2 className="section-title">Témoignages Clients</h2>
+          <p className="section-subtitle">
+            Ils nous font confiance pour leur sécurité
+          </p>
+        </div>
+
+        <div className="testimonials-grid">
+          {testimonials.map((testimonial, index) => (
+            <div key={index} className="testimonial-card">
+              <div className="testimonial-rating">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} className="star" />
+                ))}
+              </div>
+              
+              <blockquote className="testimonial-text">
+                "{testimonial.text}"
+              </blockquote>
+              
+              <div className="testimonial-author">
+                <strong>{testimonial.author}</strong>
+                <span>{testimonial.position}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="testimonials-stats">
+          <div className="stat">
+            <Users className="stat-icon" />
+            <span className="stat-value">2,847</span>
+            <span className="stat-label">Clients satisfaits</span>
+          </div>
+          <div className="stat">
+            <Star className="stat-icon" />
+            <span className="stat-value">4.9/5</span>
+            <span className="stat-label">Note moyenne</span>
+          </div>
+          <div className="stat">
+            <Award className="stat-icon" />
+            <span className="stat-value">99.2%</span>
+            <span className="stat-label">Satisfaction</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+});
+
+// ================= FAQ =================
+const FAQSection = memo(() => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const faqs = [
+    {
+      question: "Qu'est-ce qui rend votre audit différent ?",
+      answer: "Notre IA utilise des algorithmes de pointe pour détecter des vulnérabilités que les scanners traditionnels manquent. Nous offrons un rapport ultra-détaillé avec des recommandations personnalisées et un badge de confiance."
+    },
+    {
+      question: "Quelle est la différence entre les plans 24h et 48h ?",
+      answer: "Le plan 24h inclut une analyse plus approfondie, un rapport de 100+ pages, le support prioritaire 24/7 et une consultation avec un expert. Le plan 48h offre toutes les fonctionnalités essentielles à un prix plus accessible."
+    },
+    {
+      question: "Comment garantissez-vous la sécurité de nos données ?",
+      answer: "Nous utilisons un chiffrement AES-256 de bout en bout. Vos données sont analysées dans des environnements isolés et automatiquement supprimées après livraison. Nous sommes certifiés ISO 27001 et GDPR compliant."
+    },
+    {
+      question: "Que se passe-t-il si vous dépassez les délais ?",
+      answer: "C'est simple : remboursement intégral automatique + vous recevez votre audit gratuitement. Notre taux de livraison dans les délais est de 99.8%."
+    },
+    {
+      question: "Le badge de confiance est-il vraiment efficace ?",
+      answer: "Oui ! Nos clients constatent en moyenne une augmentation de 30% de leur taux de conversion. Le badge affiche en temps réel votre niveau de sécurité et rassure vos visiteurs."
+    }
+  ];
+
+  const toggleFAQ = useCallback((index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  }, [openIndex]);
+
+  return (
+    <section id="faq" className="section">
+      <div className="container">
+        <div className="section-header">
+          <h2 className="section-title">Questions Fréquentes</h2>
+          <p className="section-subtitle">
+            Tout ce que vous devez savoir sur nos services
+          </p>
+        </div>
+
+        <div className="faq-container">
+          {faqs.map((faq, index) => (
+            <div key={index} className="faq-item">
+              <button
+                className="faq-question"
+                onClick={() => toggleFAQ(index)}
+                aria-expanded={openIndex === index}
+              >
+                <span>{faq.question}</span>
+                <ChevronDown className={`faq-icon ${openIndex === index ? 'open' : ''}`} />
+              </button>
+              
+              <div className={`faq-answer ${openIndex === index ? 'open' : ''}`}>
+                <p>{faq.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="faq-cta">
+          <p>Vous avez d'autres questions ?</p>
+          <Button variant="secondary" onClick={() => window.location.href = '/contact'}>
+            Contactez-nous
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+});
+
+// ================= FOOTER =================
+const Footer = memo(() => (
+  <footer className="footer">
+    <div className="container">
+      <div className="footer-content">
+        <div className="footer-brand">
+          <h3 className="footer-logo">VELNOR</h3>
+          <p className="footer-tagline">
+            L'avenir de la cybersécurité, aujourd'hui.
+          </p>
+          <div className="footer-badges">
+            <span className="badge">ISO 27001</span>
+            <span className="badge">GDPR</span>
+            <span className="badge">SOC 2</span>
+          </div>
+        </div>
+
+        <div className="footer-links">
+          <div className="footer-column">
+            <h4>Produit</h4>
+            <a href="#process">Fonctionnement</a>
+            <a href="#tech">Technologies</a>
+            <a href="#offers">Tarifs</a>
+            <a href="/api">API</a>
+          </div>
+          
+          <div className="footer-column">
+            <h4>Entreprise</h4>
+            <a href="/about">À propos</a>
+            <a href="/careers">Carrières</a>
+            <a href="/blog">Blog</a>
+            <a href="/press">Presse</a>
+          </div>
+          
+          <div className="footer-column">
+            <h4>Support</h4>
+            <a href="/help">Centre d'aide</a>
+            <a href="/contact">Contact</a>
+            <a href="/status">Statut</a>
+            <a href="/changelog">Changelog</a>
+          </div>
+          
+          <div className="footer-column">
+            <h4>Légal</h4>
+            <a href="/privacy">Confidentialité</a>
+            <a href="/terms">CGU</a>
+            <a href="/security">Sécurité</a>
+            <a href="/cookies">Cookies</a>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <p>&copy; 2025 VELNOR. Tous droits réservés.</p>
+        <div className="footer-social">
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="GitHub">gh</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+));
+
+// ================= COMPOSANT PRINCIPAL =================
+const VelnorLanding = () => {
+  // Smooth scroll pour les ancres
   useEffect(() => {
-    if (loading) return;
-
-    // Configuration de base
-    gsap.config({ nullTargetWarn: false });
-    ScrollTrigger.config({ limitCallbacks: true });
-
-    // ================= ANIMATION HERO CINÉMATOGRAPHIQUE =================
-    const heroTimeline = gsap.timeline({ delay: 0.5 });
-    
-    heroTimeline
-      .fromTo(heroRef.current,
-        {
-          opacity: 0,
-          scale: 0.9,
-          y: 100,
-          rotationX: 20
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          rotationX: 0,
-          duration: 2,
-          ease: 'expo.out'
+    const handleClick = (e) => {
+      const target = e.target.closest('a[href^="#"]');
+      if (target) {
+        e.preventDefault();
+        const id = target.getAttribute('href').slice(1);
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      )
-      .fromTo('.hero-badge',
-        {
-          opacity: 0,
-          y: -30,
-          scale: 0.8
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1,
-          ease: 'back.out(1.7)'
-        },
-        '-=1.5'
-      )
-      .fromTo('.quantum-title .title-line',
-        {
-          opacity: 0,
-          y: 50,
-          rotationY: -15,
-          transformOrigin: 'left center'
-        },
-        {
-          opacity: 1,
-          y: 0,
-          rotationY: 0,
-          duration: 1.2,
-          stagger: 0.2,
-          ease: 'power3.out'
-        },
-        '-=1'
-      )
-      .fromTo('.quantum-subtitle',
-        {
-          opacity: 0,
-          y: 30,
-          filter: 'blur(10px)'
-        },
-        {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          duration: 1,
-          ease: 'power2.out'
-        },
-        '-=0.5'
-      )
-      .fromTo('.quantum-description',
-        {
-          opacity: 0,
-          y: 30
-        },
-        {
-          opacity: 0.9,
-          y: 0,
-          duration: 1,
-          ease: 'power2.out'
-        },
-        '-=0.5'
-      )
-      .fromTo('.quantum-cta-btn',
-        {
-          opacity: 0,
-          scale: 0.8,
-          y: 30
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 1,
-          ease: 'elastic.out(1, 0.5)'
-        },
-        '-=0.5'
-      )
-      .fromTo('.cta-stats',
-        {
-          opacity: 0,
-          y: 20
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power2.out'
-        },
-        '-=0.3');
-
-    // Animation continue du titre avec effet holographique
-    gsap.to(heroTitleRef.current, {
-      textShadow: `
-        0 0 30px var(--blue-main),
-        0 0 60px var(--purple-main),
-        0 0 90px var(--blue-main),
-        0 0 120px var(--purple-main)
-      `,
-      scale: 1.02,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-      duration: 4,
-    });
-
-    // ================= ANIMATIONS DE SCROLL AVANCÉES =================
-    const createScrollAnimation = (target, options = {}) => {
-      const defaults = {
-        y: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: 'power3.out',
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse'
-      };
-      
-      const settings = { ...defaults, ...options };
-      
-      gsap.fromTo(target,
-        {
-          y: settings.y,
-          opacity: settings.opacity,
-          ...settings.from
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: settings.duration,
-          ease: settings.ease,
-          scrollTrigger: {
-            trigger: target,
-            start: settings.start,
-            end: settings.end,
-            toggleActions: settings.toggleActions,
-            scrub: settings.scrub || false
-          },
-          ...settings.to
-        }
-      );
-    };
-
-    // Animations pour chaque section
-    Object.values(sectionsRefs).forEach((ref, index) => {
-      if (ref.current) {
-        createScrollAnimation(ref.current, {
-          y: 80,
-          delay: index * 0.1,
-          from: {
-            rotationY: index % 2 === 0 ? -10 : 10,
-            transformPerspective: 1000
-          }
-        });
       }
-    });
-
-    // ================= ANIMATIONS DE CARTES QUANTIQUES =================
-    gsap.utils.toArray('.quantum-card').forEach((card, index) => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse'
-        }
-      });
-
-      tl.fromTo(card,
-        {
-          opacity: 0,
-          y: 60,
-          scale: 0.9,
-          rotationY: -20
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          rotationY: 0,
-          duration: 1.2,
-          delay: index * 0.15,
-          ease: 'power3.out'
-        }
-      );
-
-      // Hover effects
-      card.addEventListener('mouseenter', () => {
-        gsap.to(card, {
-          y: -15,
-          scale: 1.05,
-          boxShadow: '0 40px 100px rgba(43, 192, 255, 0.3)',
-          duration: 0.4,
-          ease: 'power2.out'
-        });
-        
-        // Animation de l'icône
-        const icon = card.querySelector('.process-icon, .tech-icon');
-        if (icon) {
-          gsap.to(icon, {
-            rotation: 360,
-            scale: 1.2,
-            duration: 0.8,
-            ease: 'power2.inOut'
-          });
-        }
-      });
-
-      card.addEventListener('mouseleave', () => {
-        gsap.to(card, {
-          y: 0,
-          scale: 1,
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-          duration: 0.4,
-          ease: 'power2.out'
-        });
-        
-        const icon = card.querySelector('.process-icon, .tech-icon');
-        if (icon) {
-          gsap.to(icon, {
-            rotation: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: 'power2.inOut'
-          });
-        }
-      });
-    });
-
-    // ================= ANIMATION DES LIGNES DE CONNEXION =================
-    const connectionPaths = document.querySelectorAll('.quantum-path');
-    connectionPaths.forEach((path, index) => {
-      const length = path.getTotalLength();
-      
-      gsap.set(path, {
-        strokeDasharray: length,
-        strokeDashoffset: length
-      });
-      
-      gsap.to(path, {
-        strokeDashoffset: 0,
-        duration: 2,
-        delay: index * 0.5,
-        ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: path,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        }
-      });
-    });
-
-    // ================= ANIMATION DES STATISTIQUES =================
-    const animateStats = () => {
-      gsap.utils.toArray('.stat-number').forEach(stat => {
-        const value = stat.textContent;
-        const isPercentage = value.includes('%');
-        const isDecimal = value.includes('.');
-        const numericValue = parseFloat(value.replace(/[^0-9.-]/g, ''));
-        
-        gsap.fromTo(stat,
-          {
-            textContent: 0
-          },
-          {
-            textContent: numericValue,
-            duration: 2.5,
-            ease: 'power2.out',
-            snap: isDecimal ? { textContent: 0.1 } : { textContent: 1 },
-            scrollTrigger: {
-              trigger: stat,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse'
-            },
-            onUpdate: function() {
-              const current = this.targets()[0].textContent;
-              if (isPercentage) {
-                stat.textContent = parseFloat(current).toFixed(isDecimal ? 1 : 0) + '%';
-              } else if (value.includes('M')) {
-                stat.textContent = parseFloat(current).toFixed(1) + 'M+';
-              } else if (value.includes('TB')) {
-                stat.textContent = parseFloat(current).toFixed(1) + 'TB/s';
-              } else {
-                stat.textContent = Math.floor(current).toLocaleString();
-              }
-            }
-          }
-        );
-      });
     };
 
-    animateStats();
-
-    // ================= PARALLAX EFFECTS =================
-    gsap.utils.toArray('.parallax-element').forEach(element => {
-      const speed = element.dataset.speed || 0.5;
-      
-      gsap.to(element, {
-        y: () => window.innerHeight * speed,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: element,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true
-        }
-      });
-    });
-
-    // ================= ANIMATION NAVBAR =================
-    let lastScrollY = 0;
-    ScrollTrigger.create({
-      start: 'top -80',
-      end: 99999,
-      onUpdate: (self) => {
-        const scrollY = self.scroll();
-        
-        if (scrollY > lastScrollY && scrollY > 100) {
-          // Scrolling down
-          gsap.to(navRef.current, {
-            y: -100,
-            duration: 0.3,
-            ease: 'power2.inOut'
-          });
-        } else {
-          // Scrolling up
-          gsap.to(navRef.current, {
-            y: 0,
-            duration: 0.3,
-            ease: 'power2.inOut'
-          });
-        }
-        
-        // Changement de style de la navbar
-        if (scrollY > 50) {
-          navRef.current?.classList.add('scrolled');
-        } else {
-          navRef.current?.classList.remove('scrolled');
-        }
-        
-        lastScrollY = scrollY;
-      }
-    });
-
-    // ================= FLOATING ELEMENTS =================
-    gsap.utils.toArray('.floating-element').forEach((element, index) => {
-      gsap.to(element, {
-        y: -20,
-        rotation: 3,
-        duration: 3 + index * 0.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      });
-    });
-
-    // Cleanup
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, [loading]);
-
-  // ================= NAVIGATION HANDLERS =================
-  const handleNavClick = useCallback((e, anchor) => {
-    e.preventDefault();
-    const target = document.querySelector(anchor);
-    if (target) {
-      const offset = 80;
-      const targetPosition = target.offsetTop - offset;
-      
-      gsap.to(window, {
-        scrollTo: {
-          y: targetPosition,
-          autoKill: true
-        },
-        duration: 1.5,
-        ease: 'power3.inOut'
-      });
-    }
-    setMenuOpen(false);
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
   }, []);
 
-  const handleCTAClick = useCallback(() => {
-    // Animation du bouton
-    const button = document.querySelector('.quantum-cta-btn');
-    
-    gsap.timeline()
-      .to(button, {
-        scale: 0.95,
-        duration: 0.1
-      })
-      .to(button, {
-        scale: 1.05,
-        duration: 0.1
-      })
-      .to(button, {
-        scale: 1,
-        duration: 0.1,
-        onComplete: () => {
-          const offersSection = document.querySelector('#offres');
-          if (offersSection) {
-            offersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }
-      });
-  }, []);
-
-  // ================= MODE QUANTIQUE =================
-  const toggleQuantumMode = useCallback(() => {
-    setIsQuantumMode(prev => !prev);
-    
-    if (!isQuantumMode) {
-      document.body.classList.add('quantum-mode');
-      
-      // Effet de transition quantique
-      gsap.timeline()
-        .to('body', {
-          backgroundColor: '#000',
-          duration: 0.5
-        })
-        .to('.quantum-particles, .quantum-matrix', {
-          opacity: 1,
-          duration: 0.5
-        }, '-=0.3');
-    } else {
-      document.body.classList.remove('quantum-mode');
-      
-      gsap.timeline()
-        .to('body', {
-          backgroundColor: '#010116',
-          duration: 0.5
-        })
-        .to('.quantum-particles, .quantum-matrix', {
-          opacity: 0.5,
-          duration: 0.5
-        }, '-=0.3');
-    }
-  }, [isQuantumMode]);
-
-  // ================= RENDER =================
   return (
     <>
-      {/* ================= LOADER QUANTIQUE RÉVOLUTIONNAIRE ================= */}
-      {loading && (
-        <div ref={loaderRef} className="quantum-loader">
-          <div className="quantum-loader-container">
-            <div className="quantum-spinner">
-              <div className="quantum-ring ring-1"></div>
-              <div className="quantum-ring ring-2"></div>
-              <div className="quantum-ring ring-3"></div>
-              <div className="quantum-core"></div>
-              <div className="quantum-particles-loader"></div>
-            </div>
-            <div className="quantum-text">VELNOR</div>
-            <div className="quantum-subtitle">Initialisation du Système IA Quantique...</div>
-            <div className="quantum-progress">
-              <div 
-                className="quantum-progress-bar"
-                style={{ width: `${loadingProgress}%` }}
-              >
-                <div className="progress-glow"></div>
-              </div>
-            </div>
-            <div className="quantum-percentage">{Math.floor(loadingProgress)}%</div>
-            <div className="loading-status">
-              {loadingProgress < 30 && "Chargement des algorithmes quantiques..."}
-              {loadingProgress >= 30 && loadingProgress < 60 && "Calibrage des systèmes de sécurité..."}
-              {loadingProgress >= 60 && loadingProgress < 90 && "Synchronisation avec le réseau neuronal..."}
-              {loadingProgress >= 90 && "Activation imminente..."}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ================= EFFETS VISUELS ================= */}
-      <div ref={glowOrbRef} className="quantum-cursor-orb"></div>
-      <canvas ref={particleCanvasRef} className="quantum-particles"></canvas>
-      <canvas ref={matrixCanvasRef} className="quantum-matrix"></canvas>
-      
-      {/* ================= BARRE DE PROGRESSION ================= */}
-      <div className="scroll-progress-bar">
-        <div 
-          className="scroll-progress-fill"
-          style={{ width: `${scrollProgress}%` }}
-        ></div>
-      </div>
-
-      {/* ================= NAVBAR QUANTIQUE ================= */}
-      <nav ref={navRef} className="quantum-navbar">
-        <div className="navbar-content">
-          <div className="quantum-logo floating-element">
-            <span className="logo-text">VELNOR</span>
-            <div className="logo-glow"></div>
-            <div className="logo-particles"></div>
-          </div>
-          
-          <div className={`quantum-menu ${menuOpen ? 'open' : ''}`}>
-            {[
-              { name: 'Accueil', id: 'hero', icon: FaRocket },
-              { name: 'Processus', id: 'fonctionnement', icon: GiCircuitry },
-              { name: 'Technologie', id: 'technologie', icon: GiArtificialIntelligence },
-              { name: 'Offres', id: 'offres', icon: FaShieldAlt },
-              { name: 'Témoignages', id: 'temoignages', icon: FaStar },
-              { name: 'FAQ', id: 'faq', icon: FaQuoteLeft }
-              ].map((item, index) => (
-              <a
-                key={index}
-                href={`#${item.id}`}
-                onClick={(e) => handleNavClick(e, `#${item.id}`)}
-                className={`quantum-nav-link ${activeSection === item.id ? 'active' : ''}`}
-              >
-                <item.icon className="nav-icon" />
-                <span>{item.name}</span>
-                <div className="nav-link-glow"></div>
-                <div className="nav-link-particles"></div>
-              </a>
-            ))}
-            
-            <button 
-              className="quantum-admin-btn floating-element"
-              onClick={() => window.location.href = '/admin'}
-            >
-              <FaCog className="admin-icon" />
-              <span>Admin</span>
-              <div className="btn-quantum-glow"></div>
-            </button>
-            
-            <button
-              className="quantum-mode-toggle"
-              onClick={toggleQuantumMode}
-            >
-              <BiAtom className={`mode-icon ${isQuantumMode ? 'active' : ''}`} />
-            </button>
-          </div>
-
-          <button
-            className="quantum-menu-toggle"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <div className={`burger-line ${menuOpen ? 'open' : ''}`}></div>
-            <div className={`burger-line ${menuOpen ? 'open' : ''}`}></div>
-            <div className={`burger-line ${menuOpen ? 'open' : ''}`}></div>
-          </button>
-        </div>
-      </nav>
-
-      <main className="quantum-main">
-        {/* ================= HERO SECTION QUANTIQUE ================= */}
-        <section id="hero" className="quantum-hero" ref={heroRef}>
-          <div className="hero-quantum-bg">
-            <div className="quantum-wave wave-1"></div>
-            <div className="quantum-wave wave-2"></div>
-            <div className="quantum-wave wave-3"></div>
-            <div className="quantum-grid"></div>
-            <div className="quantum-stars"></div>
-          </div>
-          
-          <div className="hero-content">
-            <div className="hero-badge floating-element">
-              <BsLightning className="badge-icon" />
-              <span>IA Révolutionnaire</span>
-              <div className="badge-glow"></div>
-            </div>
-            
-            <h1 className="quantum-title" ref={heroTitleRef}>
-              <span className="title-line">
-                <span className="title-word">L'Intelligence</span>
-                <span className="title-word">Artificielle</span>
-              </span>
-              <span className="title-line highlight">
-                <span className="title-word">qui</span>
-                <span className="title-word">révolutionne</span>
-              </span>
-              <span className="title-line">
-                <span className="title-word">votre</span>
-                <span className="title-word">cybersécurité</span>
-              </span>
-            </h1>
-            
-            <p className="quantum-subtitle">
-              <span className="subtitle-tech">Technologie quantique</span>
-              <span className="subtitle-separator">•</span>
-              <span className="subtitle-tech">Analyse prédictive</span>
-              <span className="subtitle-separator">•</span>
-              <span className="subtitle-tech">Rapport holographique</span>
-              <br />
-              <strong className="delivery-highlight">
-                <MdElectricBolt className="highlight-icon" />
-                Livraison Ultra-Rapide 24h-48h
-              </strong>
-            </p>
-
-            <p className="quantum-description">
-              VELNOR déploie une <span className="text-glow">Intelligence Artificielle</span> de nouvelle génération 
-              qui analyse votre infrastructure avec une <span className="text-glow">précision quantique</span>. 
-              Notre système révolutionnaire détecte les menaces invisibles, 
-              génère des <span className="text-glow">rapports PDF ultra-détaillés</span> et délivre des badges 
-              de confiance certifiés. L'avenir de la cybersécurité, aujourd'hui.
-            </p>
-
-            <div className="quantum-cta-container">
-              <button className="quantum-cta-btn main-cta" onClick={handleCTAClick}>
-                <div className="btn-bg"></div>
-                <GiArtificialIntelligence className="cta-icon" />
-                <span>Lancer Audit Quantique</span>
-                <div className="cta-quantum-trail"></div>
-                <div className="btn-particles"></div>
-              </button>
-              
-              <div className="cta-stats">
-                <div className="stat-item">
-                  <IoMdPulse className="stat-icon-animated" />
-                  <span className="stat-number">2.3M+</span>
-                  <span className="stat-label">Menaces Détectées</span>
-                </div>
-                <div className="stat-item">
-                  <GiAtom className="stat-icon-animated" />
-                  <span className="stat-number">99.9%</span>
-                  <span className="stat-label">Précision IA</span>
-                </div>
-                <div className="stat-item">
-                  <MdRadar className="stat-icon-animated" />
-                  <span className="stat-number">0.3s</span>
-                  <span className="stat-label">Temps Réponse</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="hero-scroll-indicator" ref={scrollIndicatorRef}>
-              <FaChevronDown className="scroll-arrow" />
-              <span>Découvrir</span>
-            </div>
-          </div>
-          
-          <div className="hero-hologram">
-            <div className="hologram-container" ref={hologramRef}>
-              <div className="hologram-rings">
-                <div className="ring ring-1"></div>
-                <div className="ring ring-2"></div>
-                <div className="ring ring-3"></div>
-              </div>
-              <div className="hologram-core">
-                <GiArtificialIntelligence />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ================= STATISTIQUES GLOBALES ================= */}
-        <section className="quantum-stats-banner" ref={sectionsRefs.stats}>
-          <div className="stats-container">
-            <div className="stats-grid">
-              {[
-                { icon: GiRadarSweep, value: "847K", label: "Sites Analysés", color: "blue" },
-                { icon: BsShieldCheck, value: "99.97%", label: "Détection", color: "purple" },
-                { icon: IoMdFlash, value: "2.3TB/s", label: "Vitesse Traitement", color: "green" },
-                { icon: FaAward, value: "ISO 27001", label: "Certifié", color: "gold" }
-              ].map((stat, index) => (
-                <div key={index} className="global-stat-item" data-color={stat.color}>
-                  <div className="stat-icon-container">
-                    <stat.icon className="stat-icon" />
-                    <div className="icon-pulse"></div>
-                  </div>
-                  <div className="stat-content">
-                    <span className="stat-value">{stat.value}</span>
-                    <span className="stat-label">{stat.label}</span>
-                  </div>
-                  <div className="stat-bg-effect"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ================= PROCESSUS QUANTIQUE ================= */}
-        <section id="fonctionnement" className="quantum-section" ref={sectionsRefs.func}>
-          <div className="section-header">
-            <div className="section-badge">
-              <GiCircuitry />
-              <span>Processus</span>
-            </div>
-            <h2 className="quantum-section-title">
-              <span>Processus</span>
-              <span className="title-accent">Révolutionnaire</span>
-            </h2>
-            <p className="section-subtitle">
-              Notre IA quantique analyse votre infrastructure en 3 étapes ultra-avancées
-            </p>
-          </div>
-
-          <div className="quantum-process-container">
-            {[
-              {
-                icon: GiRadarSweep,
-                title: "Scan Quantique",
-                description: "L'IA analyse votre site avec une précision moléculaire, détectant les moindres anomalies",
-                features: ["Analyse en temps réel", "Scan multi-dimensionnel", "Détection prédictive"],
-                metrics: { speed: "<1s", accuracy: "99.9%", depth: "∞" },
-                color: "blue",
-                animation: "radar"
-              },
-              {
-                icon: GiArtificialIntelligence,
-                title: "Analyse Prédictive",
-                description: "Détection des vulnérabilités futures grâce à nos algorithmes quantiques",
-                features: ["Machine Learning avancé", "Prédiction temporelle", "Analyse comportementale"],
-                metrics: { patterns: "847M", precision: "99.97%", prediction: "30j" },
-                color: "purple",
-                animation: "brain"
-              },
-              {
-                icon: GiCrystalBall,
-                title: "Rapport Holographique",
-                description: "PDF ultra-détaillé avec visualisations 3D et recommandations personnalisées",
-                features: ["Rapport interactif", "Visualisations 3D", "Plan d'action détaillé"],
-                metrics: { pages: "50+", graphs: "3D", delivery: "24h" },
-                color: "green",
-                animation: "hologram"
-              }
-            ].map((step, index) => (
-              <div
-                key={index}
-                className={`quantum-process-card quantum-card color-${step.color}`}
-                data-animation={step.animation}
-              >
-                <div className="process-card-bg">
-                  <div className="bg-pattern"></div>
-                  <div className="bg-glow"></div>
-                </div>
-                
-                <div className="process-card-header">
-                  <div className="process-icon-container">
-                    <step.icon className="process-icon" />
-                    <div className="icon-quantum-ring"></div>
-                    <div className="icon-particles"></div>
-                  </div>
-                  <div className="process-number">0{index + 1}</div>
-                </div>
-                
-                <h3 className="process-title">{step.title}</h3>
-                <p className="process-description">{step.description}</p>
-                
-                <div className="process-features">
-                  {step.features.map((feature, fIndex) => (
-                    <div key={fIndex} className="feature-item">
-                      <FaCheckCircle className="feature-icon" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="process-metrics">
-                  {Object.entries(step.metrics).map(([key, value]) => (
-                    <div key={key} className="metric">
-                      <span className="metric-value">{value}</span>
-                      <span className="metric-label">{key}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="card-quantum-effects">
-                  <div className="quantum-glow"></div>
-                  <div className="quantum-particles"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="quantum-connection-visualization">
-            <svg className="connection-svg" viewBox="0 0 1200 300">
-              <defs>
-                <linearGradient id="quantumGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="var(--blue-main)" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="var(--purple-main)" stopOpacity="1" />
-                  <stop offset="100%" stopColor="var(--green-accent)" stopOpacity="0.8" />
-                </linearGradient>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                  <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-              
-              <path
-                d="M 100 150 Q 300 50 600 150 Q 900 250 1100 150"
-                stroke="url(#quantumGradient1)"
-                strokeWidth="3"
-                fill="none"
-                filter="url(#glow)"
-                className="quantum-path main-path"
-              />
-              
-              <circle cx="100" cy="150" r="8" fill="var(--blue-main)" className="path-node" />
-              <circle cx="600" cy="150" r="8" fill="var(--purple-main)" className="path-node" />
-              <circle cx="1100" cy="150" r="8" fill="var(--green-accent)" className="path-node" />
-              
-              {/* Particules animées le long du chemin */}
-              <circle r="4" fill="#fff" className="path-particle">
-                <animateMotion dur="4s" repeatCount="indefinite">
-                  <mpath href="#motionPath" />
-                </animateMotion>
-              </circle>
-            </svg>
-          </div>
-        </section>
-
-        {/* ================= TECHNOLOGIE RÉVOLUTIONNAIRE ================= */}
-        <section id="technologie" className="quantum-section tech-section" ref={sectionsRefs.tech}>
-          <div className="section-bg-effects">
-            <div className="tech-grid-bg"></div>
-            <div className="tech-particles"></div>
-          </div>
-          
-          <div className="section-header">
-            <div className="section-badge">
-              <GiProcessor />
-              <span>Technologies</span>
-            </div>
-            <h2 className="quantum-section-title">
-              <span>Arsenal</span>
-              <span className="title-accent">Technologique</span>
-            </h2>
-            <p className="section-subtitle">
-              Technologies de pointe fusionnées pour une cybersécurité révolutionnaire
-            </p>
-          </div>
-
-          <div className="quantum-tech-showcase">
-            <div className="tech-main-display">
-              <div className="holographic-display">
-                <div className="holo-content">
-                  <GiAtom className="holo-icon" />
-                  <div className="holo-rings">
-                    <div className="holo-ring ring-1"></div>
-                    <div className="holo-ring ring-2"></div>
-                    <div className="holo-ring ring-3"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="quantum-tech-grid">
-              {[
-                {
-                  icon: GiArtificialIntelligence,
-                  title: "IA Quantique",
-                  description: "Réseaux de neurones quantiques pour une analyse prédictive révolutionnaire",
-                  features: ["Deep Learning Avancé", "Analyse Comportementale", "Prédiction Temporelle"],
-                  stats: { neurons: "1.2B", layers: "847", accuracy: "99.97%" },
-                  color: "purple",
-                  intensity: "high"
-                },
-                {
-                  icon: MdSecurity,
-                  title: "Bouclier Adaptatif",
-                  description: "Système de défense auto-évolutif qui s'adapte aux nouvelles menaces",
-                  features: ["Protection Temps Réel", "Auto-apprentissage", "Réponse Instantanée"],
-                  stats: { response: "0.3ms", adaptation: "∞", coverage: "100%" },
-                  color: "blue",
-                  intensity: "medium"
-                },
-                {
-                  icon: FaChartBar,
-                  title: "Analytics 4D",
-                  description: "Visualisation multi-dimensionnelle des données de sécurité",
-                  features: ["Graphiques Holographiques", "Métriques Prédictives", "Tableaux de Bord IA"],
-                  stats: { dimensions: "4D", datapoints: "10M/s", viz: "∞" },
-                  color: "green",
-                  intensity: "high"
-                },
-                {
-                  icon: BsLightning,
-                  title: "Traitement Éclair",
-                  description: "Analyse ultra-rapide grâce à l'informatique quantique",
-                  features: ["Vitesse Lumière", "Parallélisation Massive", "Optimisation Continue"],
-                  stats: { speed: "2.3TB/s", cores: "1024", optimization: "99.9%" },
-                  color: "yellow",
-                  intensity: "extreme"
-                },
-                {
-                  icon: GiCrystalGrowth,
-                  title: "Auto-Évolution",
-                  description: "Système qui apprend et évolue continuellement",
-                  features: ["Apprentissage Continu", "Mutation Algorithmique", "Adaptation Dynamique"],
-                  stats: { evolution: "24/7", patterns: "∞", growth: "+15%/j" },
-                  color: "purple",
-                  intensity: "medium"
-                },
-                {
-                  icon: BiDna,
-                  title: "ADN Digital",
-                  description: "Empreinte numérique unique pour chaque infrastructure",
-                  features: ["Signature Unique", "Traçabilité Complète", "Identification Instantanée"],
-                  stats: { uniqueness: "100%", tracking: "∞", id: "0.1ms" },
-                  color: "blue",
-                  intensity: "high"
-                }
-              ].map((tech, index) => (
-                <div
-                  key={index}
-                  className={`quantum-tech-card quantum-card color-${tech.color} intensity-${tech.intensity}`}
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="tech-card-background">
-                    <div className="tech-pattern"></div>
-                    <div className="tech-circuits"></div>
-                    <div className="tech-glow-effect"></div>
-                  </div>
-
-                  <div className="tech-card-header">
-                    <div className="tech-icon-sphere">
-                      <tech.icon className="tech-icon" />
-                      <div className="sphere-ring ring-1"></div>
-                      <div className="sphere-ring ring-2"></div>
-                      <div className="sphere-ring ring-3"></div>
-                      <div className="icon-particles">
-                        {[...Array(6)].map((_, i) => (
-                          <div key={i} className="particle"></div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="tech-card-content">
-                    <h3 className="tech-title">{tech.title}</h3>
-                    <p className="tech-description">{tech.description}</p>
-                    
-                    <div className="tech-features">
-                      {tech.features.map((feature, fIndex) => (
-                        <div key={fIndex} className="tech-feature">
-                          <div className="feature-dot"></div>
-                          <span>{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <div className="tech-stats">
-                      {Object.entries(tech.stats).map(([key, value]) => (
-                        <div key={key} className="tech-stat">
-                          <span className="stat-key">{key}:</span>
-                          <span className="stat-value">{value}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="tech-quantum-field"></div>
-                  <div className="tech-hover-effect">
-                    <div className="hover-particles"></div>
-                    <div className="hover-glow"></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="tech-integration-display">
-            <h3 className="integration-title">Intégrations Technologiques</h3>
-            <div className="integration-grid">
-              {[
-                { name: "OWASP ZAP", icon: FaShieldAlt, status: "active" },
-                { name: "Nmap", icon: FaNetworkWired, status: "active" },
-                { name: "FastAPI", icon: FaRocket, status: "active" },
-                { name: "TensorFlow", icon: FaBrain, status: "active" },
-                { name: "Stripe", icon: FaLock, status: "secure" },
-                { name: "AWS Shield", icon: BsShieldCheck, status: "protected" }
-              ].map((integration, index) => (
-                <div key={index} className={`integration-item ${integration.status}`}>
-                  <integration.icon className="integration-icon" />
-                  <span className="integration-name">{integration.name}</span>
-                  <div className="integration-status"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ================= OFFRES QUANTIQUES ================= */}
-        <section id="offres" className="quantum-section offers-section" ref={sectionsRefs.offers}>
-          <div className="section-header">
-            <div className="section-badge">
-              <FaCertificate />
-              <span>Offres</span>
-            </div>
-            <h2 className="quantum-section-title">
-              <span>Plans</span>
-              <span className="title-accent">Quantiques</span>
-            </h2>
-            <p className="section-subtitle">
-              Choisissez votre niveau de protection cybersécurité révolutionnaire
-            </p>
-          </div>
-
-          <div className="quantum-offers-container">
-            {[
-              {
-                id: "starter",
-                name: "Audit Quantique 48h",
-                subtitle: "Protection Professionnelle",
-                price: "499",
-                originalPrice: "699",
-                currency: "€ HT",
-                duration: "48 heures",
-                features: [
-                  { name: "Scan IA Complet", included: true, premium: false, description: "Analyse approfondie de votre infrastructure" },
-                  { name: "Rapport PDF Ultra-Détaillé", included: true, premium: false, description: "50+ pages d'analyses et recommandations" },
-                  { name: "Détection 500+ Vulnérabilités", included: true, premium: false, description: "Base de données constamment mise à jour" },
-                  { name: "Support Email Standard", included: true, premium: false, description: "Réponse sous 24h" },
-                  { name: "Garantie Livraison 48h", included: true, premium: false, description: "Ou remboursé" },
-                  { name: "Badge de Confiance Premium", included: false, premium: true },
-                  { name: "Support Prioritaire 24/7", included: false, premium: true },
-                  { name: "Analyse Prédictive Avancée", included: false, premium: true }
-                ],
-                badge: null,
-                gradient: "linear-gradient(135deg, var(--blue-main), var(--purple-main))",
-                popular: false,
-                savings: "200€",
-                icon: BsShieldCheck
-              },
-              {
-                id: "premium",
-                name: "Audit Quantique 24h",
-                subtitle: "Protection Elite",
-                price: "699",
-                originalPrice: "999",
-                currency: "€ HT",
-                duration: "24 heures",
-                features: [
-                  { name: "Scan IA Quantique Avancé", included: true, premium: true, description: "Technologie de pointe avec IA prédictive" },
-                  { name: "Rapport Holographique PDF", included: true, premium: true, description: "100+ pages avec visualisations 3D" },
-                  { name: "Détection 1000+ Vulnérabilités", included: true, premium: true, description: "Incluant zero-days et menaces émergentes" },
-                  { name: "Badge de Confiance Premium", included: true, premium: true, description: "Certification reconnue mondialement" },
-                  { name: "Support Prioritaire 24/7", included: true, premium: true, description: "Ligne directe avec nos experts" },
-                  { name: "Analyse Prédictive IA", included: true, premium: true, description: "Anticipation des menaces futures" },
-                  { name: "Consultation Personnalisée", included: true, premium: true, description: "1h avec un expert cybersécurité" },
-                  { name: "Mises à jour Temps Réel", included: true, premium: true, description: "Alertes instantanées des nouvelles menaces" }
-                ],
-                badge: "POPULAIRE",
-                gradient: "linear-gradient(135deg, var(--purple-main), #ff6b6b, var(--blue-main))",
-                popular: true,
-                savings: "300€",
-                bestValue: true,
-                icon: GiAtom
-              }
-            ].map((offer, index) => (
-              <div
-                key={offer.id}
-                className={`quantum-offer-card ${offer.popular ? 'popular' : ''} ${selectedPlan === offer.id ? 'selected' : ''}`}
-                onClick={() => setSelectedPlan(offer.id)}
-              >
-                {offer.badge && (
-                  <div className="offer-badge">
-                    <span>{offer.badge}</span>
-                    <div className="badge-glow"></div>
-                    <div className="badge-particles"></div>
-                  </div>
-                )}
-
-                {offer.bestValue && (
-                  <div className="best-value-banner">
-                    <FaStar /> Meilleur Rapport Qualité/Prix
-                  </div>
-                )}
-
-                <div className="offer-header">
-                  <div className="offer-icon-container">
-                    <offer.icon className="offer-icon" />
-                    <div className="icon-rings">
-                      <div className="ring"></div>
-                      <div className="ring"></div>
-                    </div>
-                  </div>
-                  <h3 className="offer-name">{offer.name}</h3>
-                  <p className="offer-subtitle">{offer.subtitle}</p>
-                </div>
-
-                <div className="offer-pricing">
-                  <div className="price-display">
-                    <span className="price-currency">{offer.currency.split(' ')[1]}</span>
-                    <span className="price-main">{offer.price}</span>
-                    <span className="price-currency">{offer.currency.split(' ')[0]}</span>
-                  </div>
-                  <div className="price-details">
-                    <div className="price-original">
-                      <span className="strike">Au lieu de {offer.originalPrice}€</span>
-                      <span className="savings">Économisez {offer.savings}</span>
-                    </div>
-                    <div className="price-duration">
-                      <IoMdFlash className="duration-icon" />
-                      Livraison garantie en {offer.duration}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="offer-features">
-                  {offer.features.map((feature, fIndex) => (
-                    <div
-                      key={fIndex}
-                      className={`feature-item ${feature.included ? 'included' : 'excluded'} ${feature.premium ? 'premium' : ''}`}
-                    >
-                      <div className="feature-icon">
-                        {feature.included ? <FaCheckCircle /> : <FaTimes />}
-                      </div>
-                      <div className="feature-content">
-                        <span className="feature-text">{feature.name}</span>
-                        {feature.description && feature.included && (
-                          <span className="feature-description">{feature.description}</span>
-                        )}
-                      </div>
-                      {feature.premium && feature.included && (
-                        <div className="premium-badge">PRO</div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="offer-cta-section">
-                  <button 
-                    className={`quantum-offer-btn ${offer.popular ? 'popular' : ''}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.location.href = `/checkout?plan=${offer.id}`;
-                    }}
-                  >
-                    <span>Sélectionner ce Plan</span>
-                    <FaArrowRight className="btn-icon" />
-                    <div className="btn-quantum-effect"></div>
-                  </button>
-                  
-                  {offer.popular && (
-                    <div className="offer-guarantee">
-                      <FaLock className="guarantee-icon" />
-                      <span>Satisfait ou Remboursé 30j</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="offer-quantum-effects">
-                  <div className="offer-glow" style={{ background: offer.gradient }}></div>
-                  <div className="offer-particles"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="offers-comparison">
-            <button className="comparison-btn">
-              <FaChartBar />
-              Comparer les offres en détail
-            </button>
-          </div>
-
-          <div className="offers-trust-indicators">
-            <div className="trust-item">
-              <FaLock className="trust-icon" />
-              <span>Paiement 100% Sécurisé</span>
-            </div>
-            <div className="trust-item">
-              <FaShieldAlt className="trust-icon" />
-              <span>Garantie Satisfaction</span>
-            </div>
-            <div className="trust-item">
-              <FaCertificate className="trust-icon" />
-              <span>Certifié ISO 27001</span>
-            </div>
-          </div>
-        </section>
-
-        {/* ================= TÉMOIGNAGES CLIENTS ================= */}
-        <section id="temoignages" className="quantum-section testimonials-section" ref={sectionsRefs.testi}>
-          <div className="section-header">
-            <div className="section-badge">
-              <FaStar />
-              <span>Témoignages</span>
-            </div>
-            <h2 className="quantum-section-title">
-              <span>Retours</span>
-              <span className="title-accent">Clients</span>
-            </h2>
-            <p className="section-subtitle">
-              Découvrez pourquoi les leaders technologiques nous font confiance
-            </p>
-          </div>
-
-          <div className="quantum-testimonials-container">
-            <div className="testimonials-main">
-              <div className="quantum-testimonials-grid">
-                {[
-                  {
-                    id: 1,
-                    text: "VELNOR a révolutionné notre approche cybersécurité. L'IA quantique a détecté des vulnérabilités que nos équipes n'avaient jamais vues. Le rapport est d'une précision chirurgicale.",
-                    author: "Alexandre Chen",
-                    position: "CTO",
-                    company: "TechNova",
-                    companyType: "Licorne SaaS 🦄",
-                    rating: 5,
-                    avatar: "🚀",
-                    gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                    metrics: { vulnerabilities: "-87%", roi: "+340%", time: "24h" },
-                    verified: true
-                  },
-                  {
-                    id: 2,
-                    text: "Incroyable ! En 24h, j'ai reçu un audit qui m'aurait coûté 10x plus cher ailleurs. La qualité du rapport PDF est digne d'un cabinet international. Recommandations ultra-précises.",
-                    author: "Sarah Martinez",
-                    position: "Lead Developer",
-                    company: "Freelance",
-                    companyType: "Développeuse Full-Stack",
-                    rating: 5,
-                    avatar: "💎",
-                    gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-                    metrics: { cost: "-90%", quality: "AAA", speed: "24h" },
-                    verified: true
-                  },
-                  {
-                    id: 3,
-                    text: "L'analyse prédictive de VELNOR nous a permis d'anticiper une cyberattaque majeure. Leur IA quantique a littéralement sauvé notre entreprise. Investissement le plus rentable de l'année.",
-                    author: "Marcus Weber",
-                    position: "CISO",
-                    company: "SecureFlow",
-                    companyType: "Fintech • 50M€ levés",
-                    rating: 5,
-                    avatar: "🛡️",
-                    gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-                    metrics: { threats: "3 avoided", saved: "2.3M€", uptime: "100%" },
-                    verified: true
-                  },
-                  {
-                    id: 4,
-                    text: "Le badge de confiance VELNOR a augmenté notre taux de conversion de 34%. Nos clients font davantage confiance à notre plateforme. ROI immédiat et mesurable.",
-                    author: "Lisa Thompson",
-                    position: "CMO",
-                    company: "GrowthLabs",
-                    companyType: "Agence Marketing Digital",
-                    rating: 5,
-                    avatar: "⭐",
-                    gradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
-                    metrics: { conversion: "+34%", trust: "+89%", revenue: "+125K€" },
-                    verified: true
-                  },
-                  {
-                    id: 5,
-                    text: "Support exceptionnel ! L'équipe VELNOR nous a accompagnés tout au long du processus. Les recommandations sont claires, actionnables et ont transformé notre sécurité.",
-                    author: "David Kim",
-                    position: "DevOps Lead",
-                    company: "CloudTech",
-                    companyType: "Infrastructure Cloud",
-                    rating: 5,
-                    avatar: "☁️",
-                    gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
-                    metrics: { incidents: "-95%", compliance: "100%", efficiency: "+60%" },
-                    verified: true
-                  },
-                  {
-                    id: 6,
-                    text: "VELNOR est devenu notre partenaire sécurité stratégique. Leurs audits réguliers nous maintiennent à la pointe. La technologie quantique fait vraiment la différence.",
-                    author: "Emma Laurent",
-                    position: "CEO",
-                    company: "DataVault",
-                    companyType: "Stockage Sécurisé",
-                    rating: 5,
-                    avatar: "🔐",
-                    gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
-                    metrics: { security: "A++", audits: "12/an", growth: "+200%" },
-                    verified: true
-                  }
-                ].map((testimonial, index) => (
-                  <div
-                    key={testimonial.id}
-                    className="quantum-testimonial-card"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <div className="testimonial-background" style={{ background: testimonial.gradient }}></div>
-                    
-                    <div className="testimonial-header">
-                      <div className="author-avatar">{testimonial.avatar}</div>
-                      <div className="header-content">
-                        <div className="rating-stars">
-                          {[...Array(testimonial.rating)].map((_, i) => (
-                            <FaStar key={i} className="star" />
-                          ))}
-                        </div>
-                        {testimonial.verified && (
-                          <div className="verified-badge">
-                            <FaCheckCircle />
-                            <span>Vérifié</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="testimonial-content">
-                      <div className="quote-mark">"</div>
-                      <p className="testimonial-text">{testimonial.text}</p>
-                    </div>
-
-                    <div className="testimonial-metrics">
-                      {Object.entries(testimonial.metrics).map(([key, value]) => (
-                        <div key={key} className="metric-item">
-                          <span className="metric-value">{value}</span>
-                          <span className="metric-key">{key}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="testimonial-footer">
-                      <div className="author-info">
-                        <h4 className="author-name">{testimonial.author}</h4>
-                        <p className="author-position">{testimonial.position}</p>
-                        <span className="author-company">
-                          {testimonial.company} • <em>{testimonial.companyType}</em>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="testimonial-quantum-effects">
-                      <div className="testimonial-glow"></div>
-                      <div className="testimonial-particles"></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="testimonials-stats-summary">
-              <h3 className="summary-title">Nos Clients en Chiffres</h3>
-              <div className="stats-grid">
-                <div className="summary-stat">
-                  <div className="stat-icon-wrap">
-                    <FaStar className="stat-icon" />
-                  </div>
-                  <span className="stat-number">4.9/5</span>
-                  <span className="stat-label">Note Moyenne</span>
-                </div>
-                <div className="summary-stat">
-                  <div className="stat-icon-wrap">
-                    <FaShieldAlt className="stat-icon" />
-                  </div>
-                  <span className="stat-number">2,847</span>
-                  <span className="stat-label">Clients Protégés</span>
-                </div>
-                <div className="summary-stat">
-                  <div className="stat-icon-wrap">
-                    <BsGraphUp className="stat-icon" />
-                  </div>
-                  <span className="stat-number">99.2%</span>
-                  <span className="stat-label">Taux Satisfaction</span>
-                </div>
-                <div className="summary-stat">
-                  <div className="stat-icon-wrap">
-                    <FaAward className="stat-icon" />
-                  </div>
-                  <span className="stat-number">127</span>
-                  <span className="stat-label">Awards Gagnés</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="testimonials-cta">
-            <p>Rejoignez des milliers d'entreprises qui font confiance à VELNOR</p>
-            <button className="quantum-cta-btn secondary">
-              <span>Voir Plus de Témoignages</span>
-              <FaArrowRight />
-            </button>
-          </div>
-        </section>
-
-        {/* ================= PARTENAIRES ET CERTIFICATIONS ================= */}
-        <section className="quantum-section partners-section" ref={sectionsRefs.partners}>
-          <div className="section-header">
-            <h3 className="partners-title">Ils Nous Font Confiance</h3>
-          </div>
-          
-          <div className="partners-showcase">
-            <div className="partners-marquee">
-              <div className="marquee-content">
-                {[...Array(2)].map((_, groupIndex) => (
-                  <div key={groupIndex} className="marquee-group">
-                    {[
-                      { name: "TechCorp", logo: "🏢" },
-                      { name: "SecureBank", logo: "🏦" },
-                      { name: "DataFlow", logo: "📊" },
-                      { name: "CloudNine", logo: "☁️" },
-                      { name: "CyberShield", logo: "🛡️" },
-                      { name: "QuantumLabs", logo: "⚛️" },
-                      { name: "NeuralNet", logo: "🧠" },
-                      { name: "BlockSecure", logo: "🔐" }
-                    ].map((partner, index) => (
-                      <div key={`${groupIndex}-${index}`} className="partner-item">
-                        <span className="partner-logo">{partner.logo}</span>
-                        <span className="partner-name">{partner.name}</span>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="certifications-grid">
-              {[
-                { name: "ISO 27001", icon: FaCertificate, description: "Sécurité de l'information" },
-                { name: "SOC 2", icon: FaShieldAlt, description: "Conformité et contrôles" },
-                { name: "GDPR", icon: FaLock, description: "Protection des données" },
-                { name: "PCI DSS", icon: BsShieldCheck, description: "Sécurité des paiements" }
-              ].map((cert, index) => (
-                <div key={index} className="certification-badge">
-                  <cert.icon className="cert-icon" />
-                  <h4>{cert.name}</h4>
-                  <p>{cert.description}</p>
-                  <div className="cert-glow"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ================= FAQ QUANTIQUE ================= */}
-        <section id="faq" className="quantum-section faq-section" ref={sectionsRefs.faq}>
-          <div className="section-header">
-            <div className="section-badge">
-              <FaQuoteLeft />
-              <span>FAQ</span>
-            </div>
-            <h2 className="quantum-section-title">
-              <span>Questions</span>
-              <span className="title-accent">Fréquentes</span>
-            </h2>
-            <p className="section-subtitle">
-              Tout ce que vous devez savoir sur notre technologie révolutionnaire
-            </p>
-          </div>
-
-          <div className="quantum-faq-container">
-            <div className="faq-categories">
-              {['Technologie', 'Offres', 'Sécurité', 'Support'].map((category, index) => (
-                <button
-                  key={index}
-                  className={`category-btn ${index === 0 ? 'active' : ''}`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-
-            <div className="faq-items">
-              {[
-                {
-                  id: 1,
-                  question: "Qu'est-ce qui rend votre IA 'quantique' ?",
-                  answer: "Notre IA utilise des algorithmes inspirés de l'informatique quantique pour analyser simultanément des millions de patterns de sécurité. Cette approche révolutionnaire permet une précision de détection de 99.97% et une analyse prédictive des menaces futures. Nous combinons deep learning, réseaux de neurones et principes quantiques pour une protection sans précédent.",
-                  icon: GiArtificialIntelligence,
-                  category: "Technologie",
-                  details: ["Algorithmes quantiques", "Analyse multi-dimensionnelle", "Prédiction temporelle"]
-                },
-                {
-                  id: 2,
-                  question: "Quelle est la différence entre les plans 24h et 48h ?",
-                  answer: "Le plan 24h inclut notre analyse quantique avancée avec IA prédictive, un rapport holographique de 100+ pages, le badge de confiance premium, et un support prioritaire 24/7. Le plan 48h offre un excellent rapport qualité-prix avec toutes les fonctionnalités essentielles. Les deux incluent notre garantie satisfaction.",
-                  icon: FaRocket,
-                  category: "Offres",
-                  comparison: {
-                    "24h": ["IA Quantique Avancée", "Rapport 100+ pages", "Support 24/7", "Badge Premium"],
-                    "48h": ["IA Standard", "Rapport 50+ pages", "Support Email", "Badge Standard"]
-                  }
-                },
-                {
-                  id: 3,
-                  question: "Comment garantissez-vous la sécurité de nos données ?",
-                  answer: "Sécurité zéro-trust avec chiffrement AES-256 de bout en bout. Vos données sont analysées dans des environnements isolés et automatiquement supprimées après livraison. Nous sommes certifiés ISO 27001, SOC 2, et GDPR compliant. Aucune donnée n'est stockée après l'audit.",
-                  icon: FaLock,
-                  category: "Sécurité",
-                  certifications: ["ISO 27001", "SOC 2", "GDPR", "PCI DSS"]
-                },
-                {
-                  id: 4,
-                  question: "Vos audits sont-ils conformes aux standards internationaux ?",
-                  answer: "Absolument. Nos audits respectent et dépassent les standards OWASP Top 10, ISO 27001, NIST Cybersecurity Framework, et CIS Controls. Notre IA est certifiée pour l'analyse de systèmes critiques et utilisée par des entreprises Fortune 500. Chaque rapport inclut une mapping de conformité détaillé.",
-                  icon: FaCertificate,
-                  category: "Sécurité",
-                  standards: ["OWASP", "ISO 27001", "NIST", "CIS", "PCI DSS"]
-                },
-                {
-                  id: 5,
-                  question: "Que se passe-t-il si vous dépassez les délais ?",
-                  answer: "Remboursement intégral automatique + audit gratuit. Notre IA maintient un taux de livraison de 99.8% dans les délais. En cas de retard exceptionnel, vous êtes remboursé ET recevez votre audit gratuitement. C'est notre garantie absolue.",
-                  icon: BsLightning,
-                  category: "Support",
-                  guarantee: ["Remboursement 100%", "Audit offert", "Compensation +50%"]
-                },
-                {
-                  id: 6,
-                  question: "Comment fonctionne le badge de confiance VELNOR ?",
-                  answer: "Le badge VELNOR est une certification dynamique qui affiche en temps réel le niveau de sécurité de votre site. Il inclut un QR code vérifiable, une note de sécurité A-F, et la date du dernier audit. Les visiteurs peuvent cliquer pour voir le rapport détaillé, augmentant ainsi la confiance et les conversions.",
-                  icon: FaAward,
-                  category: "Technologie",
-                  features: ["Mise à jour temps réel", "QR code sécurisé", "Rapport accessible", "API intégrée"]
-                }
-              ].map((faq) => (
-                <div
-                  key={faq.id}
-                  className={`quantum-faq-item ${expandedFAQ === faq.id ? 'expanded' : ''}`}
-                  onClick={() => setExpandedFAQ(expandedFAQ === faq.id ? null : faq.id)}
-                >
-                  <div className="faq-question">
-                    <div className="question-content">
-                      <div className="question-icon">
-                        <faq.icon />
-                      </div>
-                      <div className="question-text">
-                        <span className="question-category">{faq.category}</span>
-                        <h3>{faq.question}</h3>
-                      </div>
-                    </div>
-                    <div className="question-toggle">
-                      {expandedFAQ === faq.id ? <FaMinus /> : <FaPlus />}
-                    </div>
-                  </div>
-                  
-                  <div className="faq-answer">
-                    <p>{faq.answer}</p>
-                    
-                    {faq.details && (
-                      <ul className="answer-details">
-                        {faq.details.map((detail, index) => (
-                          <li key={index}>
-                            <FaCheckCircle className="detail-icon" />
-                            {detail}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    
-                    {faq.comparison && (
-                      <div className="comparison-table">
-                        {Object.entries(faq.comparison).map(([plan, features]) => (
-                          <div key={plan} className="comparison-column">
-                            <h4>Plan {plan}</h4>
-                            {features.map((feature, index) => (
-                              <div key={index} className="comparison-feature">
-                                <FaCheckCircle />
-                                {feature}
-                              </div>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    
-                    {faq.certifications && (
-                      <div className="certifications-list">
-                        {faq.certifications.map((cert, index) => (
-                          <span key={index} className="cert-badge">
-                            <FaCertificate />
-                            {cert}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="faq-glow-effect"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="faq-cta">
-            <div className="faq-cta-content">
-              <h3>Vous avez d'autres questions ?</h3>
-              <p>Notre équipe d'experts est disponible 24/7 pour vous accompagner</p>
-              <div className="cta-buttons">
-                <button className="quantum-support-btn">
-                  <BiPulse className="btn-icon" />
-                  <span>Chat en Direct</span>
-                </button>
-                <button className="quantum-demo-btn">
-                  <GiCrystalBall className="btn-icon" />
-                  <span>Demander une Démo</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ================= CTA FINAL ================= */}
-        <section className="quantum-final-cta">
-          <div className="final-cta-bg">
-            <div className="cta-particles"></div>
-            <div className="cta-waves"></div>
-          </div>
-          
-          <div className="final-cta-content">
-            <h2 className="cta-title">
-              Prêt à Révolutionner Votre Cybersécurité ?
-            </h2>
-            <p className="cta-subtitle">
-              Rejoignez des milliers d'entreprises qui font confiance à VELNOR
-            </p>
-            
-            <div className="cta-features">
-              <div className="cta-feature">
-                <FaRocket />
-                <span>Démarrage Immédiat</span>
-              </div>
-              <div className="cta-feature">
-                <FaShieldAlt />
-                <span>Protection Garantie</span>
-              </div>
-              <div className="cta-feature">
-                <FaLock />
-                <span>Satisfait ou Remboursé</span>
-              </div>
-            </div>
-            
-            <button className="quantum-mega-cta" onClick={handleCTAClick}>
-              <div className="mega-cta-bg"></div>
-              <GiAtom className="mega-icon" />
-              <span>Commencer Mon Audit Quantique</span>
-              <div className="mega-cta-particles"></div>
-            </button>
-            
-            <p className="cta-guarantee">
-              <FaCheckCircle /> Aucune carte de crédit requise • 
-              <FaCheckCircle /> Résultats en 24h • 
-              <FaCheckCircle /> Support expert inclus
-            </p>
-          </div>
-        </section>
+      <Header />
+      <main>
+        <HeroSection />
+        <ProcessSection />
+        <TechSection />
+        <OffersSection />
+        <TestimonialsSection />
+        <FAQSection />
       </main>
-
-      {/* ================= FOOTER QUANTIQUE ================= */}
-      <footer className="quantum-footer" ref={sectionsRefs.footer}>
-        <div className="footer-quantum-bg">
-          <div className="footer-wave wave-1"></div>
-          <div className="footer-wave wave-2"></div>
-          <div className="footer-particles"></div>
-        </div>
-        
-        <div className="footer-content">
-          <div className="footer-main">
-            <div className="footer-brand">
-              <div className="footer-logo">
-                <span className="logo-text">VELNOR</span>
-                <div className="logo-quantum-glow"></div>
-              </div>
-              <p className="footer-tagline">
-                L'avenir de la cybersécurité, alimenté par l'intelligence quantique
-              </p>
-              <div className="footer-stats">
-                <div className="footer-stat">
-                  <span className="stat-number">2.3M+</span>
-                  <span className="stat-label">Menaces Détectées</span>
-                </div>
-                <div className="footer-stat">
-                  <span className="stat-number">99.97%</span>
-                  <span className="stat-label">Précision IA</span>
-                </div>
-                <div className="footer-stat">
-                  <span className="stat-number">24/7</span>
-                  <span className="stat-label">Protection Active</span>
-                </div>
-              </div>
-              
-              <div className="footer-certifications">
-                <div className="cert-badge">
-                  <FaCertificate />
-                  ISO 27001
-                </div>
-                <div className="cert-badge">
-                  <FaShieldAlt />
-                  SOC 2
-                </div>
-                <div className="cert-badge">
-                  <FaLock />
-                  GDPR
-                </div>
-              </div>
-            </div>
-
-            <div className="footer-links">
-              <div className="footer-column">
-                <h4>Produit</h4>
-                <a href="#fonctionnement">
-                  <FaCode /> Fonctionnement
-                </a>
-                <a href="#technologie">
-                  <GiProcessor /> Technologie
-                </a>
-                <a href="#offres">
-                  <FaRocket /> Plans & Tarifs
-                </a>
-                <a href="/demo">
-                  <GiCrystalBall /> Démo Interactive
-                </a>
-                <a href="/api">
-                  <FaDatabase /> API Développeurs
-                </a>
-              </div>
-              
-              <div className="footer-column">
-                <h4>Entreprise</h4>
-                <a href="/about">À Propos</a>
-                <a href="/careers">Carrières <span className="badge-new">On recrute!</span></a>
-                <a href="/partners">Partenaires</a>
-                <a href="/press">Presse</a>
-                <a href="/blog">Blog Tech</a>
-              </div>
-              
-              <div className="footer-column">
-                <h4>Support</h4>
-                <a href="/help">
-                  <BiPulse /> Centre d'Aide
-                </a>
-                <a href="/contact">Contact</a>
-                <a href="/status">
-                  <span className="status-indicator"></span> Statut Système
-                </a>
-                <a href="/changelog">Changelog</a>
-                <a href="/community">Communauté</a>
-              </div>
-              
-              <div className="footer-column">
-                <h4>Légal</h4>
-                <a href="/privacy">Confidentialité</a>
-                <a href="/terms">Conditions</a>
-                <a href="/security">Sécurité</a>
-                <a href="/compliance">Conformité</a>
-                <a href="/cookies">Cookies</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="footer-newsletter">
-            <h3>Restez à la Pointe de la Cybersécurité</h3>
-            <p>Recevez nos analyses et conseils d'experts chaque semaine</p>
-            <form className="newsletter-form">
-              <input 
-                type="email" 
-                placeholder="votre@email.com" 
-                className="newsletter-input"
-              />
-              <button type="submit" className="newsletter-btn">
-                <span>S'inscrire</span>
-                <FaArrowRight />
-              </button>
-            </form>
-          </div>
-
-          <div className="footer-bottom">
-            <div className="footer-copyright">
-              <p>
-                © 2025 VELNOR. Tous droits réservés. 
-                Propulsé par l'IA Quantique • 
-                Fabriqué avec <span className="heart">❤️</span> à Paris
-              </p>
-            </div>
-            
-            <div className="footer-social">
-              <div className="social-links">
-                <a href="#" className="social-link" aria-label="Twitter">
-                  <span className="social-icon">𝕏</span>
-                </a>
-                <a href="#" className="social-link" aria-label="LinkedIn">
-                  <span className="social-icon">in</span>
-                </a>
-                <a href="#" className="social-link" aria-label="GitHub">
-                  <span className="social-icon">⚡</span>
-                </a>
-                <a href="#" className="social-link" aria-label="YouTube">
-                  <span className="social-icon">▶</span>
-                </a>
-              </div>
-            </div>
-            
-            <div className="footer-badges">
-              <img src="/badge-security.svg" alt="Security First" />
-              <img src="/badge-ai.svg" alt="AI Powered" />
-              <img src="/badge-trusted.svg" alt="Trusted by 1000+" />
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* ================= ÉLÉMENTS UI SUPPLÉMENTAIRES ================= */}
-      <div className="quantum-ui-elements">
-        {/* Bouton retour en haut */}
-        <button 
-          className={`scroll-to-top ${scrollProgress > 20 ? 'visible' : ''}`}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        >
-          <FaArrowRight />
-        </button>
-        
-        {/* Indicateur de section active */}
-        <div className="section-indicator">
-          <div className="indicator-track">
-            {['hero', 'fonctionnement', 'technologie', 'offres', 'temoignages', 'faq'].map((section) => (
-              <div 
-                key={section}
-                className={`indicator-dot ${activeSection === section ? 'active' : ''}`}
-                onClick={() => {
-                  const element = document.getElementById(section);
-                  if (element) element.scrollIntoView({ behavior: 'smooth' });
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+      <Footer />
     </>
   );
 };
