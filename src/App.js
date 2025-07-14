@@ -12,6 +12,13 @@ import Paiement48h from "./pages/paiement-48h";
 import Cancel from "./pages/cancel";
 import Success from "./pages/success";
 
+// 🚨 Manquaient :
+import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Help from "./pages/Help";
+import Status from "./pages/Status";
+
 function App() {
   return (
     <Router>
