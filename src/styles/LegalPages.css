@@ -1,0 +1,66 @@
+/* src/styles/LegalPages.css */
+
+.legal-page {
+  min-height: 100vh;
+  background: #010116;
+  color: #ecf2fa;
+  padding: 2rem 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.legal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(5, 5, 40, 0.7);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(51, 202, 255, 0.1);
+}
+
+.legal-container h1 {
+  color: #33caff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(51, 202, 255, 0.3);
+}
+
+.legal-container h2 {
+  color: #b347ff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem 0;
+  border-bottom: 2px solid rgba(179, 71, 255, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.legal-container h3 {
+  color: #00ff88;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+.legal-container p {
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: #cfd8dc;
+}
+
+.legal-container ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.legal-container li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  color: #cfd8dc;
+}
+
+.legal-container a {
+  color: #33caff;
+  text-decoration: none;
+  border-bottom: 1}

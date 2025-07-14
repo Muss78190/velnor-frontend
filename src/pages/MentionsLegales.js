@@ -1,20 +1,99 @@
-import React from "react";
+// src/pages/MentionsLegales.js
+import React from 'react';
+import '../styles/LegalPages.css';
 
 const MentionsLegales = () => {
   return (
-    <div style={{ padding: "60px 40px", maxWidth: "900px", margin: "0 auto", fontFamily: "Segoe UI" }}>
-      <h1 style={{ fontSize: "2rem", marginBottom: "30px" }}>Mentions Légales</h1>
+    <div className="legal-page">
+      <div className="legal-container">
+        <h1>Mentions Légales</h1>
 
-      <p><strong>Nom de l'entreprise :</strong> Velnor</p>
-      <p><strong>Responsable de publication :</strong> Mustapha</p>
-      <p><strong>Adresse e-mail :</strong> assistance.velnor@outlook.fr</p>
-      <p><strong>Hébergement :</strong> Scaleway - 8 rue de la Ville l'Évêque, 75008 Paris</p>
-      <p><strong>Numéro SIRET :</strong> à compléter si besoin</p>
-      <p><strong>Conditions d’utilisation :</strong> L’utilisation du site velnor.fr implique l’acceptation pleine et entière des conditions générales d’utilisation décrites ici. Ces conditions sont susceptibles d’être modifiées ou complétées à tout moment.</p>
-      <p><strong>Propriété intellectuelle :</strong> Tous les contenus présents sur ce site (textes, images, logos, etc.) sont la propriété exclusive de Velnor. Toute reproduction est interdite sans autorisation préalable.</p>
-      <p><strong>Collecte des données :</strong> Les informations recueillies sont utilisées uniquement dans le cadre du service d’audit et ne sont jamais revendues. Conformément à la loi RGPD, vous pouvez demander la suppression de vos données.</p>
+        <section>
+          <h2>1. Éditeur du Site</h2>
+          <p>
+            <strong>Site web :</strong> velnor.fr<br />
+            <strong>Éditeur :</strong> Mustapha Benlahcen<br />
+            <strong>Email :</strong> contact@velnor.fr<br />
+            <strong>Activité :</strong> Audit cybersécurité automatisé
+          </p>
+        </section>
 
-      <p style={{ marginTop: "40px", fontSize: "0.9rem", color: "#666" }}>© {new Date().getFullYear()} Velnor – Tous droits réservés</p>
+        <section>
+          <h2>2. Hébergement</h2>
+          <p>
+            <strong>Site web :</strong><br />
+            Vercel Inc.<br />
+            San Francisco, États-Unis<br />
+            Site : vercel.com
+          </p>
+          
+          <p>
+            <strong>Services backend :</strong><br />
+            Scaleway SAS<br />
+            8 rue de la Ville l'Évêque<br />
+            75008 Paris, France<br />
+            Site : scaleway.com
+          </p>
+        </section>
+
+        <section>
+          <h2>3. Propriété Intellectuelle</h2>
+          <p>
+            Le site velnor.fr et ses contenus sont protégés par le droit d'auteur. 
+            Toute reproduction sans autorisation est interdite.
+          </p>
+        </section>
+
+        <section>
+          <h2>4. Données Personnelles</h2>
+          <p>
+            Le traitement des données est décrit dans notre 
+            <a href="/privacy"> Politique de Confidentialité</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2>5. Responsabilité</h2>
+          <p>
+            <strong>Limitation de responsabilité :</strong> L'éditeur s'efforce 
+            d'assurer l'exactitude des informations mais ne peut garantir 
+            l'absence d'erreurs. L'utilisation du site se fait aux risques 
+            et périls de l'utilisateur.
+          </p>
+        </section>
+
+        <section>
+          <h2>6. Cookies</h2>
+          <p>
+            Ce site utilise uniquement des cookies techniques nécessaires 
+            au fonctionnement. Aucun tracking publicitaire.
+          </p>
+        </section>
+
+        <section>
+          <h2>7. Liens Externes</h2>
+          <p>
+            Le site peut contenir des liens vers d'autres sites. 
+            L'éditeur n'est pas responsable de leur contenu.
+          </p>
+        </section>
+
+        <section>
+          <h2>8. Droit Applicable</h2>
+          <p>
+            Site soumis au droit français. Tribunaux français compétents 
+            pour tout litige.
+          </p>
+        </section>
+
+        <section>
+          <h2>9. Contact</h2>
+          <p>
+            Questions relatives aux mentions légales :<br />
+            Email : <a href="mailto:assistance.velnor@outlook.fr">assistance.velnor@outlook.fr</a>
+          </p>
+        </section>
+      </div>
     </div>
   );
 };
