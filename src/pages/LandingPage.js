@@ -537,7 +537,7 @@ const OffersSection = ({ selectedPlan, setSelectedPlan }) => {
     {
       id: "starter",
       name: "Audit Quantique 48h",
-      price: "499",
+      price: "1499",
       route: "/paiement-48h", // ⭐ AJOUTÉ
       features: [
         { name: "Scan IA Complet", included: true },
@@ -551,7 +551,7 @@ const OffersSection = ({ selectedPlan, setSelectedPlan }) => {
     {
       id: "premium",
       name: "Audit Quantique 24h",
-      price: "699",
+      price: "1999",
       route: "/paiement-24h", // ⭐ AJOUTÉ
       features: [
         { name: "Scan IA Quantique Avancé", included: true },

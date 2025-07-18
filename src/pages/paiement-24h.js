@@ -113,7 +113,7 @@ const Paiement24h = () => {
     <div className="paiement-page">
       <div className="paiement-container">
         <h2>Audit Cybersécurité – 24h</h2>
-        <div className="price-badge">699€ HT</div>
+        <div className="price-badge">1999€ HT</div>
         
         <form onSubmit={handleFormSubmit} className="paiement-form">
           <div className="form-group">
@@ -168,7 +168,7 @@ const Paiement24h = () => {
             className={`btn-payer ${loading ? "loading" : ""}`}
             disabled={loading}
           >
-            {loading ? "Redirection…" : "Payer 699€ HT et Démarrer l'Audit"}
+            {loading ? "Redirection…" : "Payer 1999€ HT et Démarrer l'Audit"}
           </button>
         </form>
 
